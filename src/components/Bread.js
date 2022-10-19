@@ -9,7 +9,8 @@ function Bread() {
           <ul>
             <li>
               <i className="fa fa-home" aria-hidden="true"></i>
-              <a href="index.html">Home</a>
+              {/* <a href="index.html">Home</a> */}
+              <Link to="/">Home</Link>
               <span>|</span>
             </li>
             <li>Bread & Bakery</li>
