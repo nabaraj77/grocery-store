@@ -50,7 +50,7 @@ function Navbarleft() {
 
                       <li>
                         {/* <a href="vegetables.html">Fruits</a> */}
-                        <Link to="vegetables">Fruits</Link>
+                        <Link to="fruits">Fruits</Link>
                       </li>
                     </ul>
                   </div>
@@ -76,7 +76,7 @@ function Navbarleft() {
                         <Link to="drinks">Soft Drinks</Link>
                       </li>
                       <li>
-                        <a href="drinks.html">Juices</a>
+                        {/* <a href="drinks.html">Juices</a> */}
                         <Link to="drinks">Juices</Link>
                       </li>
                     </ul>

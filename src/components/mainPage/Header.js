@@ -8,6 +8,12 @@ import Services from "../Services";
 import Main from "./Main";
 import Household from "../Household";
 import Vegetables from "../Vegetables";
+import Kitchen from "../Kitchen";
+import ShortCodes from "../ShortCodes";
+import Drinks from "../Drinks";
+import Pet from "../Pet";
+import Frozen from "../Frozen";
+import Bread from "../Bread";
 
 function Header() {
   return (
@@ -147,6 +153,13 @@ function Header() {
         <Route path="mailTo" element={<Mail />} />
         <Route path="household" element={<Household />} />
         <Route path="vegetables" element={<Vegetables />} />
+        <Route path="fruits" element={<Vegetables />} />
+        <Route path="kitchen" element={<Kitchen />} />
+        <Route path="short-codes" element={<ShortCodes />} />
+        <Route path="drinks" element={<Drinks />} />
+        <Route path="pet" element={<Pet />} />
+        <Route path="frozen" element={<Frozen />} />
+        <Route path="bread" element={<Bread />} />
       </Routes>
     </div>
   );
