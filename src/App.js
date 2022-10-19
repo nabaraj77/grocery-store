@@ -2,7 +2,7 @@ import Header from "./components/mainPage/Header";
 import Footer from "./components/mainPage/Footer";
 import Main from "./components/mainPage/Main";
 import { BrowserRouter } from "react-router-dom";
-import Navbarleft from "./components/mainPage/Navbarleft";
+import Household from "./components/Household";
 
 function App() {
   return (
@@ -11,6 +11,7 @@ function App() {
         <Header />
         {/* <Navbarleft />
         <Main /> */}
+
         <Footer />
       </BrowserRouter>
     </div>

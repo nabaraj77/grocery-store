@@ -6,6 +6,8 @@ import Mail from "../Mail";
 import Products from "../Products";
 import Services from "../Services";
 import Main from "./Main";
+import Household from "../Household";
+import Vegetables from "../Vegetables";
 
 function Header() {
   return (
@@ -142,8 +144,9 @@ function Header() {
         <Route path="aboutUs" element={<About />} />
         <Route path="products" element={<Products />} />
         <Route path="services" element={<Services />} />
-
         <Route path="mailTo" element={<Mail />} />
+        <Route path="household" element={<Household />} />
+        <Route path="vegetables" element={<Vegetables />} />
       </Routes>
     </div>
   );
