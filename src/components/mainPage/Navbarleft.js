@@ -25,14 +25,14 @@ function Navbarleft() {
             <ul class="nav navbar-nav nav_1">
               {/* <li><a href="products.html">Branded Foods</a></li> */}
               <li>
-                <Link to="products">Branded Foods</Link>
+                <Link to="/products">Branded Foods</Link>
               </li>
               {/* <li>
                 <a href="household.html">Households</a>
 				
               </li> */}
               <li>
-                <Link to="household">Households</Link>
+                <Link to="/household">Households</Link>
               </li>
               <li class="dropdown mega-dropdown active">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -45,12 +45,12 @@ function Navbarleft() {
                         {/* <a href="vegetables.html">Vegetables</a>
 						 
 						 */}
-                        <Link to="vegetables">Vegetables</Link>
+                        <Link to="/vegetables">Vegetables</Link>
                       </li>
 
                       <li>
                         {/* <a href="vegetables.html">Fruits</a> */}
-                        <Link to="fruits">Fruits</Link>
+                        <Link to="/fruits">Fruits</Link>
                       </li>
                     </ul>
                   </div>
@@ -58,11 +58,11 @@ function Navbarleft() {
               </li>
               <li>
                 {/* <a href="kitchen.html">Kitchen</a> */}
-                <Link to="kitchen">Kitchen</Link>
+                <Link to="/kitchen">Kitchen</Link>
               </li>
               <li>
                 {/* <a href="short-codes.html">Short Codes</a> */}
-                <Link to="short-codes">Short Codes</Link>
+                <Link to="/short-codes">Short Codes</Link>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -73,11 +73,11 @@ function Navbarleft() {
                     <ul>
                       <li>
                         {/* <a href="drinks.html">Soft Drinks</a> */}
-                        <Link to="drinks">Soft Drinks</Link>
+                        <Link to="/drinks">Soft Drinks</Link>
                       </li>
                       <li>
                         {/* <a href="drinks.html">Juices</a> */}
-                        <Link to="drinks">Juices</Link>
+                        <Link to="/drinks">Juices</Link>
                       </li>
                     </ul>
                   </div>
@@ -85,7 +85,7 @@ function Navbarleft() {
               </li>
               <li>
                 {/* <a href="pet.html">Pet Food</a> */}
-                <Link to="pet">Pet Food</Link>
+                <Link to="/pet">Pet Food</Link>
               </li>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -96,11 +96,11 @@ function Navbarleft() {
                     <ul>
                       <li>
                         {/* <a href="frozen.html">Frozen Snacks</a> */}
-                        <Link to="frozen">Frozen Snacks</Link>
+                        <Link to="/frozen">Frozen Snacks</Link>
                       </li>
                       <li>
                         {/* <a href="frozen.html">Frozen Nonveg</a> */}
-                        <Link to="frozen">Frozen Nonveg</Link>
+                        <Link to="/frozen">Frozen Nonveg</Link>
                       </li>
                     </ul>
                   </div>
@@ -108,7 +108,7 @@ function Navbarleft() {
               </li>
               <li>
                 {/* <a href="bread.html">Bread & Bakery</a> */}
-                <Link to="bread">Bread $ Bakery</Link>
+                <Link to="/bread">Bread $ Bakery</Link>
               </li>
             </ul>
           </div>

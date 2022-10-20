@@ -1,5 +1,6 @@
 import React from "react";
 import Navbarleft from "./mainPage/Navbarleft";
+import { Link } from "react-router-dom";
 
 function Drinks() {
   return (

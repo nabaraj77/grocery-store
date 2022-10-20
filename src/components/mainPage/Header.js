@@ -1,20 +1,5 @@
 import React from "react";
-import { Link, Routes, Route } from "react-router-dom";
-import About from "../About";
-import Events from "../Events";
-import Mail from "../Mail";
-import Products from "../Products";
-import Services from "../Services";
-import Main from "./Main";
-import Household from "../Household";
-import Vegetables from "../Vegetables";
-import Kitchen from "../Kitchen";
-import ShortCodes from "../ShortCodes";
-import Drinks from "../Drinks";
-import Pet from "../Pet";
-import Frozen from "../Frozen";
-import Bread from "../Bread";
-
+import { Link } from "react-router-dom";
 function Header() {
   return (
     <div>
@@ -144,23 +129,6 @@ function Header() {
           <div className="clearfix"> </div>
         </div>
       </div>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="events" element={<Events />} />
-        <Route path="aboutUs" element={<About />} />
-        <Route path="products" element={<Products />} />
-        <Route path="services" element={<Services />} />
-        <Route path="mailTo" element={<Mail />} />
-        <Route path="household" element={<Household />} />
-        <Route path="vegetables" element={<Vegetables />} />
-        <Route path="fruits" element={<Vegetables />} />
-        <Route path="kitchen" element={<Kitchen />} />
-        <Route path="short-codes" element={<ShortCodes />} />
-        <Route path="drinks" element={<Drinks />} />
-        <Route path="pet" element={<Pet />} />
-        <Route path="frozen" element={<Frozen />} />
-        <Route path="bread" element={<Bread />} />
-      </Routes>
     </div>
   );
 }

@@ -1,14 +1,15 @@
 import React from "react";
 import Navbarleft from "./mainPage/Navbarleft";
+import { Link } from "react-router-dom";
 
 function Vegetables() {
   return (
     <>
-      <div class="products-breadcrumb">
-        <div class="container">
+      <div className="products-breadcrumb">
+        <div className="container">
           <ul>
             <li>
-              <i class="fa fa-home" aria-hidden="true"></i>
+              <i className="fa fa-home" aria-hidden="true"></i>
               {/* <a href="index.html">Home</a> */}
               <Link to="/">Home</Link>
               <span>|</span>
@@ -17,24 +18,24 @@ function Vegetables() {
           </ul>
         </div>
       </div>
-      <div class="banner">
+      <div className="banner">
         <Navbarleft />
       </div>
-      <div class="w3l_banner_nav_right">
-        <div class="w3l_banner_nav_right_banner5">
+      <div className="w3l_banner_nav_right">
+        <div className="w3l_banner_nav_right_banner5">
           <h3>
-            Best Deals For New Products<span class="blink_me"></span>
+            Best Deals For New Products<span className="blink_me"></span>
           </h3>
         </div>
-        <div class="w3l_banner_nav_right_banner3_btm">
-          <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div class="view view-tenth">
+        <div className="w3l_banner_nav_right_banner3_btm">
+          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
+            <div className="view view-tenth">
               <img
                 src="../Assets/images/18.jpg"
                 alt=" "
-                class="img-responsive"
+                className="img-responsive"
               />
-              <div class="mask">
+              <div className="mask">
                 <h4>Grocery Store</h4>
                 <p>
                   Excepteur sint occaecat cupidatat non proident, sunt in culpa
@@ -49,14 +50,14 @@ function Vegetables() {
               <li>sed do eiusmod tempor incididunt</li>
             </ol>
           </div>
-          <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div class="view view-tenth">
+          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
+            <div className="view view-tenth">
               <img
                 src="../Assets/images/19.jpg"
                 alt=" "
-                class="img-responsive"
+                className="img-responsive"
               />
-              <div class="mask">
+              <div className="mask">
                 <h4>Grocery Store</h4>
                 <p>
                   Excepteur sint occaecat cupidatat non proident, sunt in culpa
@@ -71,14 +72,14 @@ function Vegetables() {
               <li>vel eum iure reprehenderit</li>
             </ol>
           </div>
-          <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div class="view view-tenth">
+          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
+            <div className="view view-tenth">
               <img
                 src="../Assets/images/20.jpg"
                 alt=" "
-                class="img-responsive"
+                className="img-responsive"
               />
-              <div class="mask">
+              <div className="mask">
                 <h4>Grocery Store</h4>
                 <p>
                   Excepteur sint occaecat cupidatat non proident, sunt in culpa
@@ -93,30 +94,30 @@ function Vegetables() {
               <li>magnam aliquam quaerat</li>
             </ol>
           </div>
-          <div class="clearfix"> </div>
+          <div className="clearfix"> </div>
         </div>
-        <div class="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_veg">
-          <h3 class="w3l_fruit">Fruits & Vegetables</h3>
-          <div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-            <div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="tag">
+        <div className="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_veg">
+          <h3 className="w3l_fruit">Fruits & Vegetables</h3>
+          <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+            <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="tag">
                     <img
                       src="../Assets/images/tag.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/29.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>Fresh Bananas (1 kg)</p>
@@ -124,7 +125,7 @@ function Vegetables() {
                             $10.00 <span>$12.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -160,7 +161,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -171,25 +172,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+            <div className="col-md-3 w3ls_w3l_banner_left">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/30.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh cauliflower (2 no's)</p>
@@ -197,7 +198,7 @@ function Vegetables() {
                             $5.00 <span>$8.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -229,7 +230,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -240,25 +241,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+            <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/31.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh brinjal bharta (1 kg)</p>
@@ -266,7 +267,7 @@ function Vegetables() {
                             $2.00 <span>$3.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -298,7 +299,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -309,25 +310,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+            <div className="col-md-3 w3ls_w3l_banner_left">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/32.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh sweet lime (500 gm)</p>
@@ -335,7 +336,7 @@ function Vegetables() {
                             $6.00 <span>$7.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -367,7 +368,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -378,28 +379,28 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="clearfix"> </div>
+            <div className="clearfix"> </div>
           </div>
-          <div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-            <div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+          <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+            <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/9.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh spinach (palak)</p>
@@ -407,7 +408,7 @@ function Vegetables() {
                             $2.00 <span>$3.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -439,7 +440,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -450,25 +451,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+            <div className="col-md-3 w3ls_w3l_banner_left">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/10.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh mango dasheri (1 kg)</p>
@@ -476,7 +477,7 @@ function Vegetables() {
                             $5.00 <span>$8.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -508,7 +509,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -519,25 +520,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="tag">
+            <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="tag">
                     <img
                       src="../Assets/images/tag.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/11.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh apple red (1 kg)</p>
@@ -545,7 +546,7 @@ function Vegetables() {
                             $6.00 <span>$8.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -577,7 +578,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -588,25 +589,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+            <div className="col-md-3 w3ls_w3l_banner_left">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/12.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh broccoli (500 gm)</p>
@@ -614,7 +615,7 @@ function Vegetables() {
                             $4.00 <span>$6.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -646,7 +647,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -657,28 +658,28 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="clearfix"> </div>
+            <div className="clearfix"> </div>
           </div>
-          <div class="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-            <div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+          <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+            <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/33.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh basket onion (1 kg)</p>
@@ -686,7 +687,7 @@ function Vegetables() {
                             $5.00 <span>$7.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -718,7 +719,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -729,25 +730,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+            <div className="col-md-3 w3ls_w3l_banner_left">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/34.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh muskmelon (1 kg)</p>
@@ -755,7 +756,7 @@ function Vegetables() {
                             $4.00 <span>$5.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -787,7 +788,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -798,25 +799,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="tag">
+            <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="tag">
                     <img
                       src="../Assets/images/tag.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/35.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh mushroom (500 ml)</p>
@@ -824,7 +825,7 @@ function Vegetables() {
                             $11.00 <span>$15.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -860,7 +861,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -871,25 +872,25 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="col-md-3 w3ls_w3l_banner_left">
-              <div class="hover14 column">
-                <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div class="agile_top_brand_left_grid_pos">
+            <div className="col-md-3 w3ls_w3l_banner_left">
+              <div className="hover14 column">
+                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                  <div className="agile_top_brand_left_grid_pos">
                     <img
                       src="../Assets/images/offer.png"
                       alt=" "
-                      class="img-responsive"
+                      className="img-responsive"
                     />
                   </div>
-                  <div class="agile_top_brand_left_grid1">
+                  <div className="agile_top_brand_left_grid1">
                     <figure>
-                      <div class="snipcart-item block">
-                        <div class="snipcart-thumb">
+                      <div className="snipcart-item block">
+                        <div className="snipcart-thumb">
                           <a href="single.html">
                             <img
                               src="../Assets/images/36.png"
                               alt=" "
-                              class="img-responsive"
+                              className="img-responsive"
                             />
                           </a>
                           <p>fresh strawberry (1 pc)</p>
@@ -897,7 +898,7 @@ function Vegetables() {
                             $7.00 <span>$9.00</span>
                           </h4>
                         </div>
-                        <div class="snipcart-details">
+                        <div className="snipcart-details">
                           <form action="#" method="post">
                             <fieldset>
                               <input type="hidden" name="cmd" value="_cart" />
@@ -929,7 +930,7 @@ function Vegetables() {
                                 type="submit"
                                 name="submit"
                                 value="Add to cart"
-                                class="button"
+                                className="button"
                               />
                             </fieldset>
                           </form>
@@ -940,11 +941,11 @@ function Vegetables() {
                 </div>
               </div>
             </div>
-            <div class="clearfix"> </div>
+            <div className="clearfix"> </div>
           </div>
         </div>
       </div>
-      <div class="clearfix"></div>
+      <div className="clearfix"></div>
     </>
   );
 }
