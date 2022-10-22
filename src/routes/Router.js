@@ -15,6 +15,7 @@ import Drinks from "../../src/components/Drinks";
 import Pet from "../../src/components/Pet";
 import Frozen from "../../src/components/Frozen";
 import Bread from "../../src/components/Bread";
+import Error from "../../src/components/Error";
 
 const Router = () => {
   return (
@@ -35,6 +36,7 @@ const Router = () => {
         <Route path="pet" element={<Pet />} />
         <Route path="frozen" element={<Frozen />} />
         <Route path="bread" element={<Bread />} />
+        <Route path="*" element={<Error />} />
       </Routes>
     </>
   );

@@ -1,8 +1,27 @@
 import React from "react";
 import Navbarleft from "./mainPage/Navbarleft";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import "./Mail.css";
 
 function Mail() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    resetField,
+    formState: { errors },
+  } = useForm({
+    mode: "onTouched",
+  });
+  const onSubmit = (data) => {
+    console.log(data);
+    resetField("fullName");
+    resetField("email");
+    resetField("mobileNo");
+    resetField("subject");
+    resetField("message");
+  };
   return (
     <>
       <div class="products-breadcrumb">
@@ -31,7 +50,7 @@ function Mail() {
                     <i class="fa fa-home" aria-hidden="true"></i>
                   </li>
                   <li>
-                    address<span>868 1st Avenue NYC.</span>
+                    address<span>Kathmandu, Nepal.</span>
                   </li>
                 </ul>
                 <ul>
@@ -50,57 +69,95 @@ function Mail() {
                     <i class="fa fa-phone" aria-hidden="true"></i>
                   </li>
                   <li>
-                    call to us<span>(+123) 233 2362 826</span>
+                    call to us<span>(+977) 9840000000</span>
                   </li>
                 </ul>
               </div>
               <div class="col-md-8 agileinfo_mail_grid_right">
-                <form action="#" method="post">
+                <form
+                  action="#"
+                  method="post"
+                  onSubmit={handleSubmit(onSubmit)}
+                >
                   <div class="col-md-6 wthree_contact_left_grid">
-                    <input
+                    {/* <input
                       type="text"
                       name="Name"
                       value="Name*"
                       onfocus="this.value = '';"
                       onblur="if (this.value == '') {this.value = 'Name*';}"
                       required=""
-                    />
+                    /> */}
                     <input
-                      type="email"
-                      name="Email"
-                      value="Email*"
-                      onfocus="this.value = '';"
-                      onblur="if (this.value == '') {this.value = 'Email*';}"
-                      required=""
+                      {...register("fullName", {
+                        required: "Full Name is required",
+                      })}
+                      placeholder="Full Name"
+                      type="text"
                     />
+                    {errors.fullName && <span>*Full Name is required.</span>}
+                    <input
+                      {...register("email", {
+                        required: "Email is required",
+                        pattern: {
+                          value: /[^@\s]+@[^@\s]+\.[^@\s]{3}/,
+                          message: "Enter a valid Email.",
+                        },
+                      })}
+                      placeholder="Email"
+                      type="email"
+                      defaultValue=""
+                    />
+                    {errors.email?.type === "required" && (
+                      <span>*Email is required.</span>
+                    )}
+                    {errors.email?.type === "pattern" && (
+                      <span>*Enter a valid email.</span>
+                    )}
                   </div>
                   <div class="col-md-6 wthree_contact_left_grid">
                     <input
+                      {...register("mobileNo", {
+                        required: "Mobile Number is required",
+                        maxLength: {
+                          value: 10,
+                          message:
+                            "Mobile number must not be greater than 10 digits.",
+                        },
+                        minLength: {
+                          value: 10,
+                          message:
+                            "Mobile Number must not be less than 10 digits",
+                        },
+                      })}
+                      placeholder="Mobile Number"
+                      defaultValue=""
                       type="text"
-                      name="Telephone"
-                      value="Telephone*"
-                      onfocus="this.value = '';"
-                      onblur="if (this.value == '') {this.value = 'Telephone*';}"
-                      required=""
                     />
+                    {errors.mobileNo?.type === "required" && (
+                      <span>*Mobile No is required.</span>
+                    )}
+
+                    {errors.mobileNo?.type === "minLength" && (
+                      <span>*Mobile No is less than 10 digits.</span>
+                    )}
+                    {errors.mobileNo?.type === "maxLength" && (
+                      <span>*Mobile No is greater than 10 digits.</span>
+                    )}
+
                     <input
+                      {...register("subject", {})}
+                      placeholder="Subject"
                       type="text"
-                      name="Subject"
-                      value="Subject*"
-                      onfocus="this.value = '';"
-                      onblur="if (this.value == '') {this.value = 'Subject*';}"
-                      required=""
                     />
                   </div>
                   <div class="clearfix"> </div>
                   <textarea
-                    name="Message"
-                    onfocus="this.value = '';"
-                    onblur="if (this.value == '') {this.value = 'Message...';}"
-                    required=""
-                  >
-                    Message...
-                  </textarea>
+                    {...register("message", {})}
+                    placeholder="Message"
+                    defaultValue=""
+                  />
+
                   <input type="submit" value="Submit" />
                   <input type="reset" value="Clear" />
                 </form>
