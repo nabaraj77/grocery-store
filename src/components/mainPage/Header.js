@@ -37,24 +37,47 @@ function Header() {
         </div>
         <div className="w3l_header_right">
           <ul>
-            <li className="dropdown profile_details_drop">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+            <li class="dropdown profile_details_drop">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i className="fa fa-user" aria-hidden="true"></i>
-                <span className="caret"></span>
+                <span class="caret"></span>
               </a>
-              <div className="mega-dropdown-menu">
-                <div className="w3ls_vegetables">
-                  <ul className="dropdown-menu drp-mnu">
+              <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                <div class="w3ls_vegetables">
+                  <ul>
                     <li>
-                      <a href="login.html">Login</a>
+                      {/* <a href="vegetables.html">Vegetables</a>
+						 
+						 */}
+                      <Link to="/login">Log In</Link>
                     </li>
-                    <li>
-                      <a href="login.html">Sign Up</a>
-                    </li>
+
+                    {/* <li>
+                      <Link to="/signUp">Sign Up</Link>
+                    </li> */}
                   </ul>
                 </div>
               </div>
             </li>
+            {/* <li className="dropdown profile_details_drop">
+              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+                <i className="fa fa-user" aria-hidden="true"></i>
+                <span className="caret"></span>
+              </a>
+
+              <div className="mega-dropdown-menu">
+                <div className="w3ls_vegetables">
+                  <ul className="dropdown-menu drp-mnu">
+                    <li>
+                      <Link to="login">Login </Link>
+                    </li>
+                    <li>
+                      <Link to="login">Sign Up </Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </li> */}
           </ul>
         </div>
         <div className="w3l_header_right1">

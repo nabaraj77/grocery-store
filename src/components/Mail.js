@@ -2,7 +2,6 @@ import React from "react";
 import Navbarleft from "./mainPage/Navbarleft";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import "./Mail.css";
 
 function Mail() {
   const {
@@ -97,6 +96,7 @@ function Mail() {
                     />
                     {errors.fullName && <span>*Full Name is required.</span>}
                     <input
+                      className="email"
                       {...register("email", {
                         required: "Email is required",
                         pattern: {
@@ -139,17 +139,21 @@ function Mail() {
                     )}
 
                     {errors.mobileNo?.type === "minLength" && (
-                      <span>*Mobile No is less than 10 digits.</span>
+                      <span>*Mobile No less than 10 digits.</span>
                     )}
                     {errors.mobileNo?.type === "maxLength" && (
-                      <span>*Mobile No is greater than 10 digits.</span>
+                      <span>*Mobile No greater than 10 digits. </span>
                     )}
-
                     <input
-                      {...register("subject", {})}
-                      placeholder="Subject"
+                      className="subject"
+                      {...register("subject", {
+                        required: "Subject is required",
+                      })}
                       type="text"
+                      placeholder="Subject"
                     />
+
+                    {errors.subject && <span>*Subject is required.</span>}
                   </div>
                   <div class="clearfix"> </div>
                   <textarea
