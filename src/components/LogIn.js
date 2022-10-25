@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Navbarleft from "./mainPage/Navbarleft";
 import { useForm } from "react-hook-form";
 import "./Mail.css";
+import axios from "axios";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -20,6 +21,20 @@ const LogIn = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
+    axios({
+      method: "post",
+      url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/login",
+      data: {
+        username: data.username,
+        password: data.password,
+        client_id: 2,
+        client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
+        grant_type: "password",
+      },
+    }).then((response) => {
+      console.log(response.data);
+    });
+
     resetField("username");
     resetField("email");
     resetField("phoneNo");

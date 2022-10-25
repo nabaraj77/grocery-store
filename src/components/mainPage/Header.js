@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Header.css";
+
 function Header() {
   return (
     <div>
-      <div className="agileits_header">
+      <div className="agileits_header header">
         <div className="w3l_offers">
           {/* <a href="products.html">Today's special Offers !</a> */}
           <Link to="products">Today's special Offers ! </Link>

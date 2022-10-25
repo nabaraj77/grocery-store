@@ -2,12 +2,13 @@ import React from "react";
 import Navbarleft from "./mainPage/Navbarleft";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 function Mail() {
+  const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/contact-us";
   const {
     register,
     handleSubmit,
-    watch,
     resetField,
     formState: { errors },
   } = useForm({
@@ -15,6 +16,26 @@ function Mail() {
   });
   const onSubmit = (data) => {
     console.log(data);
+
+    axios({
+      method: "post",
+      url: url,
+      data: {
+        message: data.message,
+        subject: data.subject,
+        email: data.email,
+        name: data.fullName,
+        contact: data.mobileNo,
+      },
+      headers: {
+        "Content-Type": "application/json",
+        "Warehouse-Id": 1,
+        "Api-Key": process.env.REACT_APP_API_KEY,
+      },
+    }).then((response) => {
+      console.log(response.data);
+    });
+
     resetField("fullName");
     resetField("email");
     resetField("mobileNo");

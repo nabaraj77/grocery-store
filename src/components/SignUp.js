@@ -2,9 +2,12 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Navbarleft from "./mainPage/Navbarleft";
 import { useForm } from "react-hook-form";
+import axios from "axios";
+
 import "./Mail.css";
 
 const Signup = () => {
+  const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/signup";
   const {
     register,
     handleSubmit,
@@ -16,9 +19,24 @@ const Signup = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
-    resetField("username");
+    axios({
+      method: "post",
+      url: url,
+      data: {
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        password: data.password,
+        mobile_number: data.mobile_number,
+      },
+    }).then((response) => {
+      console.log(response.data);
+    });
+
+    resetField("first_name");
+    resetField("last_name");
     resetField("email");
-    resetField("phoneNo");
+    resetField("mobile_number");
     resetField("password");
   };
   return (
@@ -57,12 +75,20 @@ const Signup = () => {
                   >
                     <input
                       type="text"
-                      {...register("username", {
-                        required: "Username is required",
+                      {...register("first_name", {
+                        required: "First Name is required",
                       })}
-                      placeholder="Username"
+                      placeholder="First Name"
                     />
-                    {errors.username && <span>*Username is required.</span>}
+                    {errors.first_name && <span>*First Name is required.</span>}
+                    <input
+                      type="text"
+                      {...register("last_name", {
+                        required: "Last Name is required",
+                      })}
+                      placeholder="Last Name"
+                    />
+                    {errors.last_name && <span>*Last Name is required.</span>}
                     <input
                       type="password"
                       {...register("password", {
@@ -81,12 +107,15 @@ const Signup = () => {
                     {errors.email && <span>*Email is required.</span>}
                     <input
                       type="text"
-                      {...register("phoneNo", {
-                        required: "Phone No is required",
+                      {...register("mobile_number", {
+                        required: "Mobile No is required",
                       })}
-                      placeholder="Phone Number"
+                      placeholder="Mobile Number"
+                      s
                     />
-                    {errors.phoneNo && <span>*Phone No is required.</span>}
+                    {errors.mobile_number && (
+                      <span>*Phone No is required.</span>
+                    )}
                     <input type="submit" value="Register" />
                   </form>
                 </div>
