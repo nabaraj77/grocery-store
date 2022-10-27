@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbarleft from "./mainPage/Navbarleft";
 import { Link } from "react-router-dom";
-
-function Vegetables() {
+import data from "./Data";
+function Vegetables({ addToCart }) {
   return (
     <>
       <div className="products-breadcrumb">
@@ -99,80 +99,60 @@ function Vegetables() {
         <div className="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_veg">
           <h3 className="w3l_fruit">Fruits & Vegetables</h3>
           <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-            <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
-              <div className="hover14 column">
-                <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                  <div className="tag">
-                    <img
-                      src="../Assets/images/tag.png"
-                      alt=" "
-                      className="img-responsive"
-                    />
-                  </div>
-                  <div className="agile_top_brand_left_grid1">
-                    <figure>
-                      <div className="snipcart-item block">
-                        <div className="snipcart-thumb">
-                          <a href="single.html">
-                            <img
-                              src="../Assets/images/29.png"
-                              alt=" "
-                              className="img-responsive"
-                            />
-                          </a>
-                          <p>Fresh Bananas (1 kg)</p>
-                          <h4>
-                            $10.00 <span>$12.00</span>
-                          </h4>
+            {data.map((item, index) => {
+              return (
+                <>
+                  <div
+                    className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd"
+                    key={index}
+                  >
+                    <div className="hover14 column">
+                      <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
+                        <div className="tag">
+                          <img
+                            src="../Assets/images/tag.png"
+                            alt=" "
+                            className="img-responsive"
+                          />
                         </div>
-                        <div className="snipcart-details">
-                          <form action="#" method="post">
-                            <fieldset>
-                              <input type="hidden" name="cmd" value="_cart" />
-                              <input type="hidden" name="add" value="1" />
-                              <input type="hidden" name="business" value=" " />
-                              <input
-                                type="hidden"
-                                name="item_name"
-                                value="Fresh Bananas"
-                              />
-                              <input
-                                type="hidden"
-                                name="amount"
-                                value="10.00"
-                              />
-                              <input
-                                type="hidden"
-                                name="discount_amount"
-                                value="1.00"
-                              />
-                              <input
-                                type="hidden"
-                                name="currency_code"
-                                value="USD"
-                              />
-                              <input type="hidden" name="return" value=" " />
-                              <input
-                                type="hidden"
-                                name="cancel_return"
-                                value=" "
-                              />
-                              <input
-                                type="submit"
-                                name="submit"
-                                value="Add to cart"
-                                className="button"
-                              />
-                            </fieldset>
-                          </form>
+
+                        <div className="agile_top_brand_left_grid1">
+                          <figure>
+                            <div className="snipcart-item block">
+                              <div className="snipcart-thumb">
+                                <a href="single.html">
+                                  <img
+                                    src={item.image}
+                                    alt=" "
+                                    className="img-responsive"
+                                  />
+                                </a>
+                                <p>{item.name}</p>
+                                <h4>
+                                  {item.newPrice} <span>{item.oldPrice}</span>
+                                </h4>
+                              </div>
+                              <div className="snipcart-details ">
+                                <input
+                                  type="button"
+                                  value="Add to cart"
+                                  className="button addtoCartBtn text-center"
+                                  onClick={() => {
+                                    addToCart(item);
+                                  }}
+                                />
+                              </div>
+                            </div>
+                          </figure>
                         </div>
                       </div>
-                    </figure>
+                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-3 w3ls_w3l_banner_left">
+                </>
+              );
+            })}
+
+            {/* <div className="col-md-3 w3ls_w3l_banner_left">
               <div className="hover14 column">
                 <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
                   <div className="agile_top_brand_left_grid_pos">
@@ -240,8 +220,8 @@ function Vegetables() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
+            </div> */}
+            {/* <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asd">
               <div className="hover14 column">
                 <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
                   <div className="agile_top_brand_left_grid_pos">
@@ -309,8 +289,8 @@ function Vegetables() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="col-md-3 w3ls_w3l_banner_left">
+            </div> */}
+            {/* <div className="col-md-3 w3ls_w3l_banner_left">
               <div className="hover14 column">
                 <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
                   <div className="agile_top_brand_left_grid_pos">
@@ -378,10 +358,10 @@ function Vegetables() {
                   </div>
                 </div>
               </div>
-            </div>
-            <div className="clearfix"> </div>
+            </div> */}
+            {/* <div className="clearfix"> </div> */}
           </div>
-          <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+          {/* <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
             <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
               <div className="hover14 column">
                 <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
@@ -659,8 +639,8 @@ function Vegetables() {
               </div>
             </div>
             <div className="clearfix"> </div>
-          </div>
-          <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
+          </div> */}
+          {/* <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
             <div className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd">
               <div className="hover14 column">
                 <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
@@ -942,7 +922,7 @@ function Vegetables() {
               </div>
             </div>
             <div className="clearfix"> </div>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="clearfix"></div>

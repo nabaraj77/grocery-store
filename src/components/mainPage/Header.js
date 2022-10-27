@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "./Header.css";
 
@@ -28,20 +28,27 @@ function Header() {
             <fieldset>
               <input type="hidden" name="cmd" value="_cart" />
               <input type="hidden" name="display" value="1" />
-              <input
-                type="submit"
-                name="submit"
-                value="View your cart"
-                className="button"
-              />
+              <Link to="/cart">
+                <input
+                  type="submit"
+                  name="submit"
+                  value="View your cart"
+                  className="button"
+                />
+              </Link>
             </fieldset>
           </form>
         </div>
+
         <div className="w3l_header_right">
           <ul>
             <li class="dropdown profile_details_drop">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i className="fa fa-user" aria-hidden="true"></i>
+                <i className="fa fa-user" aria-hidden="true">
+                  <h6>
+                    <span>Guest</span>
+                  </h6>
+                </i>
                 <span class="caret"></span>
               </a>
               <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
@@ -53,33 +60,10 @@ function Header() {
 						 */}
                       <Link to="/login">Log In</Link>
                     </li>
-
-                    {/* <li>
-                      <Link to="/signUp">Sign Up</Link>
-                    </li> */}
                   </ul>
                 </div>
               </div>
             </li>
-            {/* <li className="dropdown profile_details_drop">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown">
-                <i className="fa fa-user" aria-hidden="true"></i>
-                <span className="caret"></span>
-              </a>
-
-              <div className="mega-dropdown-menu">
-                <div className="w3ls_vegetables">
-                  <ul className="dropdown-menu drp-mnu">
-                    <li>
-                      <Link to="login">Login </Link>
-                    </li>
-                    <li>
-                      <Link to="login">Sign Up </Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </li> */}
           </ul>
         </div>
         <div className="w3l_header_right1">

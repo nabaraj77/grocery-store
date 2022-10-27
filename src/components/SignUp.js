@@ -1,12 +1,13 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Navbarleft from "./mainPage/Navbarleft";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-
 import "./Mail.css";
 
 const Signup = () => {
+  const [result, setResult] = useState(0);
+  const navigate = useNavigate();
   const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/signup";
   const {
     register,
@@ -30,7 +31,9 @@ const Signup = () => {
         mobile_number: data.mobile_number,
       },
     }).then((response) => {
-      console.log(response.data);
+      setResult(response.status);
+      console.log(response);
+      console.log(result);
     });
 
     resetField("first_name");
@@ -39,6 +42,7 @@ const Signup = () => {
     resetField("mobile_number");
     resetField("password");
   };
+
   return (
     <>
       <div className="products-breadcrumb">
@@ -58,6 +62,20 @@ const Signup = () => {
       <div className="banner">
         <Navbarleft />
         <div className="w3l_banner_nav_right">
+          {result === 201 && (
+            <div class="alert alert-success alert-dismissible" role="alert">
+              <strong>Account Created Successfully.</strong>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+              {navigate("/login")}
+            </div>
+          )}
           {/* <!-- login --> */}
           <div className="w3_login">
             <h3>Sign Up</h3>
@@ -121,19 +139,6 @@ const Signup = () => {
                 </div>
               </div>
             </div>
-            {/* <script>
-				$('.toggle').click(function(){
-				  // Switches the Icon
-				  $(this).children('i').toggleclassName('fa-pencil');
-				  // Switches the forms  
-				  $('.form').animate({
-					height: "toggle",
-					'padding-top': 'toggle',
-					'padding-bottom': 'toggle',
-					opacity: "toggle"
-				  }, "slow");
-				});
-			</script> */}
           </div>
           {/* <!-- //login --> */}
         </div>
@@ -176,10 +181,7 @@ const Signup = () => {
           <div className="clearfix"> </div>
         </div>
       </div>
-      {/* <!-- //newsletter-top-serv-btm --> */}
-      {/* <Footer/> */}
     </>
   );
 };
-
 export default Signup;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import About from "../../src/components/About";
@@ -18,7 +18,26 @@ import Bread from "../../src/components/Bread";
 import Error from "../../src/components/Error";
 import Signup from "../components/SignUp";
 import LogIn from "../components/LogIn";
+import Forget from "../components/Forget";
+import ForgetPasswordFinal from "../components/ResetPasswordFinal";
+import AddToCart from "../components/AddToCart";
+
 const Router = () => {
+  const [cart, setCart] = useState([]);
+  const addToCart = (data) => {
+    //CHECKS THAT ITEMS EXISTS OR NOT
+    //setCart([...cart, { ...data, quantityOrdered: 1 }]);
+    let exists = cart.find((item) => {
+      return item.name === data.name;
+    });
+    if (exists) {
+      console.log("Data already exists");
+    } else {
+      console.log("Data can be added");
+      setCart([...cart, { ...data, quantityOrdered: 1 }]);
+    }
+  };
+
   return (
     <>
       <Routes>
@@ -29,7 +48,10 @@ const Router = () => {
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
         <Route path="household" element={<Household />} />
-        <Route path="vegetables" element={<Vegetables />} />
+        <Route
+          path="vegetables"
+          element={<Vegetables addToCart={addToCart} />}
+        />
         <Route path="fruits" element={<Vegetables />} />
         <Route path="kitchen" element={<Kitchen />} />
         <Route path="short-codes" element={<ShortCodes />} />
@@ -39,6 +61,13 @@ const Router = () => {
         <Route path="bread" element={<Bread />} />
         <Route path="signUp" element={<Signup />} />
         <Route path="login" element={<LogIn />} />
+        <Route path="forgetPassword" element={<Forget />} />
+        <Route path="forgetPasswordFinal" element={<ForgetPasswordFinal />} />
+        <Route
+          path="cart"
+          element={<AddToCart cart={cart} setCart={setCart} />}
+        />
+
         <Route path="*" element={<Error />} />
       </Routes>
     </>

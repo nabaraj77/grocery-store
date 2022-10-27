@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbarleft from "./mainPage/Navbarleft";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 function Mail() {
+  const [result, setResult] = useState(0);
   const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/contact-us";
   const {
     register,
@@ -33,7 +34,8 @@ function Mail() {
         "Api-Key": process.env.REACT_APP_API_KEY,
       },
     }).then((response) => {
-      console.log(response.data);
+      console.log(response);
+      setResult(response.status);
     });
 
     resetField("fullName");
@@ -59,6 +61,19 @@ function Mail() {
       </div>
       <div class="banner">
         <Navbarleft />
+        {result === 200 && (
+          <div class="alert alert-success alert-dismissible" role="alert">
+            <strong>Query Sent Successfully.</strong>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        )}
         <div class="w3l_banner_nav_right">
           {/* <!-- mail --> */}
           <div class="mail">

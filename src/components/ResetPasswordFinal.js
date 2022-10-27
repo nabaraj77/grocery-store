@@ -1,17 +1,12 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import Navbarleft from "./mainPage/Navbarleft";
 import { useForm } from "react-hook-form";
-import "./Mail.css";
 import axios from "axios";
+import "./Mail.css";
 
-const LogIn = () => {
-  const [result, setResult] = useState(0);
-  const navigate = useNavigate();
-
-  const directToSignUpPage = () => {
-    navigate("/signUp");
-  };
+const ResetPasswordFinal = () => {
+  //const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/signup";
   const {
     register,
     handleSubmit,
@@ -24,23 +19,29 @@ const LogIn = () => {
     console.log(data);
     axios({
       method: "post",
-      url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/login",
+      url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/forgot-password",
       data: {
-        username: data.username,
-        password: data.password,
-        client_id: 2,
-        client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
-        grant_type: "password",
+        email: data.email,
       },
     }).then((response) => {
-      console.log(response);
-      setResult(response.status);
+      console.log(response.data);
     });
+    // axios({
+    //   method: "post",
+    //   url: url,
+    //   data: {
+    //     first_name: data.first_name,
+    //     last_name: data.last_name,
+    //     email: data.email,
+    //     password: data.password,
+    //     mobile_number: data.mobile_number,
+    //   },
+    // }).then((response) => {
+    //   console.log(response.data);
+    // });
 
-    resetField("username");
-    resetField("email");
-    resetField("phoneNo");
     resetField("password");
+    resetField("confirmPassword");
   };
   return (
     <>
@@ -52,7 +53,7 @@ const LogIn = () => {
               <Link to="/">Home</Link>
               <span>|</span>
             </li>
-            <li>Sign In</li>
+            <li>Forget Password</li>
           </ul>
         </div>
       </div>
@@ -60,23 +61,14 @@ const LogIn = () => {
 <!-- banner --> */}
       <div className="banner">
         <Navbarleft />
-        {result === 200 && navigate("/")}
-
         <div className="w3l_banner_nav_right">
           {/* <!-- login --> */}
           <div className="w3_login">
-            <h3>Log In</h3>
-
-            <div className="signUpBtn">
-              <button onClick={directToSignUpPage}>
-                Don't Have an Account? Click here...
-              </button>
-            </div>
-
+            <h3>Forgot Password</h3>
             <div className="w3_login_module">
               <div className="module form-module">
                 <div className="form">
-                  <h2>Log In to your account</h2>
+                  <h2>Password Reset</h2>
                 </div>
                 <div>
                   <form
@@ -86,26 +78,34 @@ const LogIn = () => {
                   >
                     <input
                       type="text"
-                      {...register("username", {
-                        required: "Username is required",
+                      {...register("code", {
+                        required: "Enter Code",
                       })}
-                      placeholder="Username"
+                      placeholder="Enter Code"
                     />
-                    {errors.username && <span>*Username is required.</span>}
+                    {errors.code && <span>*Code is required.</span>}
+
                     <input
                       type="password"
                       {...register("password", {
-                        required: "Password is required",
+                        required: "Password is required.",
                       })}
                       placeholder="Password"
                     />
-                    {errors.password && <span>*Password is required.</span>}
+                    {errors.password && <span>*Email is required.</span>}
 
-                    <input type="submit" value="Sign In" />
+                    <input
+                      type="password"
+                      {...register("confirmPassword", {
+                        required: "Confirm Password is required.",
+                      })}
+                      placeholder="Confirm Password"
+                    />
+                    {errors.confirmPassword && (
+                      <span>*Confirm Password is required.</span>
+                    )}
+                    <input type="submit" value="Register" />
                   </form>
-                  <div class="cta">
-                    <Link to="/forgetPassword">Forgot your password?</Link>
-                  </div>
                 </div>
               </div>
             </div>
@@ -157,4 +157,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default ResetPasswordFinal;

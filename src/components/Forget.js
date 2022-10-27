@@ -1,17 +1,12 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React from "react";
+import { Link } from "react-router-dom";
 import Navbarleft from "./mainPage/Navbarleft";
 import { useForm } from "react-hook-form";
-import "./Mail.css";
 import axios from "axios";
+import "./Mail.css";
 
-const LogIn = () => {
-  const [result, setResult] = useState(0);
-  const navigate = useNavigate();
-
-  const directToSignUpPage = () => {
-    navigate("/signUp");
-  };
+const Forget = () => {
+  //const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/signup";
   const {
     register,
     handleSubmit,
@@ -24,23 +19,31 @@ const LogIn = () => {
     console.log(data);
     axios({
       method: "post",
-      url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/login",
+      url: "https://uat.ordering-farmshop.ekbana.net/reset-password",
       data: {
-        username: data.username,
+        code: data.code,
         password: data.password,
-        client_id: 2,
-        client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
-        grant_type: "password",
+        confirm_password: data.confirmPassword,
+        email: "nabaraj.dhl7@gmail.com",
       },
     }).then((response) => {
-      console.log(response);
-      setResult(response.status);
+      console.log(response.data);
     });
+    // axios({
+    //   method: "post",
+    //   url: url,
+    //   data: {
+    //     first_name: data.first_name,
+    //     last_name: data.last_name,
+    //     email: data.email,
+    //     password: data.password,
+    //     mobile_number: data.mobile_number,
+    //   },
+    // }).then((response) => {
+    //   console.log(response.data);
+    // });
 
-    resetField("username");
     resetField("email");
-    resetField("phoneNo");
-    resetField("password");
   };
   return (
     <>
@@ -52,7 +55,7 @@ const LogIn = () => {
               <Link to="/">Home</Link>
               <span>|</span>
             </li>
-            <li>Sign In</li>
+            <li>Forgrt Password</li>
           </ul>
         </div>
       </div>
@@ -60,23 +63,14 @@ const LogIn = () => {
 <!-- banner --> */}
       <div className="banner">
         <Navbarleft />
-        {result === 200 && navigate("/")}
-
         <div className="w3l_banner_nav_right">
           {/* <!-- login --> */}
           <div className="w3_login">
-            <h3>Log In</h3>
-
-            <div className="signUpBtn">
-              <button onClick={directToSignUpPage}>
-                Don't Have an Account? Click here...
-              </button>
-            </div>
-
+            <h3>Forgot Password</h3>
             <div className="w3_login_module">
               <div className="module form-module">
                 <div className="form">
-                  <h2>Log In to your account</h2>
+                  <h2>Sign Up to your account</h2>
                 </div>
                 <div>
                   <form
@@ -86,26 +80,15 @@ const LogIn = () => {
                   >
                     <input
                       type="text"
-                      {...register("username", {
-                        required: "Username is required",
+                      {...register("email", {
+                        required: "Email is required.",
                       })}
-                      placeholder="Username"
+                      placeholder="Email"
                     />
-                    {errors.username && <span>*Username is required.</span>}
-                    <input
-                      type="password"
-                      {...register("password", {
-                        required: "Password is required",
-                      })}
-                      placeholder="Password"
-                    />
-                    {errors.password && <span>*Password is required.</span>}
+                    {errors.email && <span>*Email is required.</span>}
 
-                    <input type="submit" value="Sign In" />
+                    <input type="submit" value="Register" />
                   </form>
-                  <div class="cta">
-                    <Link to="/forgetPassword">Forgot your password?</Link>
-                  </div>
                 </div>
               </div>
             </div>
@@ -157,4 +140,4 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+export default Forget;

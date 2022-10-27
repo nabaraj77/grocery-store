@@ -61,20 +61,6 @@ function Main() {
               </ul>
             </div>
           </section>
-          {/* <!-- flexSlider --> */}
-          {/* <link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" property="" />
-				<script defer src="js/jquery.flexslider.js"></script>
-				<script type="text/javascript">
-				$(window).load(function(){
-				  $('.flexslider').flexslider({
-					animation: "slide",
-					start: function(slider){
-					  $('body').removeClass('loading');
-					}
-				  });
-				});
-			  </script> */}
-          {/* <!-- //flexSlider --> */}
         </div>
         <div className="clearfix"></div>
       </div>
