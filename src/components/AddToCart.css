@@ -13,7 +13,7 @@
   display: flex;
   justify-content: space-evenly;
 }
-button {
+.cartBtn {
   width: 25px;
 }
 .price {

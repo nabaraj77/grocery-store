@@ -13,7 +13,7 @@ function App() {
         <Router />
         <Footer />
       </BrowserRouter>
-      <Toaster />
+      <Toaster position="top-right" />
     </div>
   );
 }

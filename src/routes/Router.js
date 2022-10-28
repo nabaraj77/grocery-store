@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
+import toast from "react-hot-toast";
 
 import About from "../../src/components/About";
 import Events from "../../src/components/Events";
@@ -22,8 +23,19 @@ import Forget from "../components/Forget";
 import ForgetPasswordFinal from "../components/ResetPasswordFinal";
 import AddToCart from "../components/AddToCart";
 
+//GET CARTITEMS FROM LOCAL STORAGE
+
+const getCartItemsFromLocalStorage = () => {
+  const list = localStorage.getItem("cartItems");
+  console.log(list);
+  if (list) {
+    return JSON.parse(localStorage.getItem("cartItems"));
+  }
+};
+getCartItemsFromLocalStorage();
+
 const Router = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(getCartItemsFromLocalStorage());
   const addToCart = (data) => {
     //CHECKS THAT ITEMS EXISTS OR NOT
     //setCart([...cart, { ...data, quantityOrdered: 1 }]);
@@ -31,12 +43,20 @@ const Router = () => {
       return item.name === data.name;
     });
     if (exists) {
-      console.log("Data already exists");
+      //console.log("Data already exists");
+      toast.error("Item already exists in the cart.");
     } else {
-      console.log("Data can be added");
+      //console.log("Data can be added");
+      toast.success("Successfully added to the cart.");
       setCart([...cart, { ...data, quantityOrdered: 1 }]);
     }
   };
+
+  //ADDING CART DATA TO LOCAL STORAGE
+
+  useEffect(() => {
+    localStorage.setItem("cartItems", JSON.stringify(cart));
+  }, [cart]);
 
   return (
     <>

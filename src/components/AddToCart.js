@@ -85,11 +85,21 @@ const AddToCart = ({ cart, setCart }) => {
                     <span className="itemName">{item.name}</span>
                     <img className="cartImage" src={item.image} alt="" />
                     <div className="quantityBtn">
-                      <button onClick={() => minusHandler(item)}>-</button>
+                      <button
+                        className="cartBtn"
+                        onClick={() => minusHandler(item)}
+                      >
+                        -
+                      </button>
                       <span className="cartQuantity">
                         {item.quantityOrdered}
                       </span>
-                      <button onClick={() => plusHandler(item)}>+</button>
+                      <button
+                        className="cartBtn"
+                        onClick={() => plusHandler(item)}
+                      >
+                        +
+                      </button>
                     </div>
                     <p className="price">
                       {item.newPrice * item.quantityOrdered}
