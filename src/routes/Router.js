@@ -10,18 +10,10 @@ import Services from "../../src/components/Services";
 import Main from "../../src/components/mainPage/Main";
 import Household from "../../src/components/Household";
 import Vegetables from "../../src/components/Vegetables";
-import Kitchen from "../../src/components/Kitchen";
-import ShortCodes from "../../src/components/ShortCodes";
-import Drinks from "../../src/components/Drinks";
-import Pet from "../../src/components/Pet";
-import Frozen from "../../src/components/Frozen";
-import Bread from "../../src/components/Bread";
 import Error from "../../src/components/Error";
-import Signup from "../components/SignUp";
-import LogIn from "../components/LogIn";
-import Forget from "../components/Forget";
-import ForgetPasswordFinal from "../components/ResetPasswordFinal";
 import AddToCart from "../components/AddToCart";
+import Checkout from "../components/Checkout";
+import ItemsFromApi from "../components/ItemsFromApi";
 
 //GET CARTITEMS FROM LOCAL STORAGE
 
@@ -29,18 +21,22 @@ const getCartItemsFromLocalStorage = () => {
   const list = localStorage.getItem("cartItems");
   console.log(list);
   if (list) {
-    return JSON.parse(localStorage.getItem("cartItems"));
+    return JSON.parse(list);
+  } else {
+    return [];
   }
 };
 getCartItemsFromLocalStorage();
 
 const Router = () => {
   const [cart, setCart] = useState(getCartItemsFromLocalStorage());
+
   const addToCart = (data) => {
+    console.log(data);
     //CHECKS THAT ITEMS EXISTS OR NOT
     //setCart([...cart, { ...data, quantityOrdered: 1 }]);
     let exists = cart.find((item) => {
-      return item.name === data.name;
+      return item.title === data.title;
     });
     if (exists) {
       //console.log("Data already exists");
@@ -58,6 +54,48 @@ const Router = () => {
     localStorage.setItem("cartItems", JSON.stringify(cart));
   }, [cart]);
 
+  const minusHandler = (data) => {
+    const updatedCart = cart.map((item) => {
+      if (item.title === data.title && item.quantityOrdered !== 1) {
+        return { ...item, quantityOrdered: item.quantityOrdered - 1 };
+      } else if (item.title === data.title && item.quantityOrdered === 1) {
+        return { ...item, quantityOrdered: 1 };
+      } else {
+        return item;
+      }
+    });
+    setCart(updatedCart);
+  };
+
+  //PLUS HANDLER
+  const plusHandler = (data) => {
+    const updatedCart = cart.map((item) => {
+      if (data.title === item.title) {
+        return { ...item, quantityOrdered: item.quantityOrdered + 1 };
+      } else {
+        return item;
+      }
+    });
+    setCart(updatedCart);
+    //console.log(updatedCart);
+  };
+
+  //DELETING ITEM
+  const deleteItem = (data) => {
+    const remainingItems = cart.filter((item) => {
+      return item.title !== data.title;
+    });
+    if (remainingItems) {
+      setCart(remainingItems);
+    }
+  };
+
+  //CALCULATING TOTAL
+  const total = cart.reduce((acc, val) => {
+    acc += val.quantityOrdered * val.unitPrice[0].newPrice;
+    return acc;
+  }, 0);
+
   return (
     <>
       <Routes>
@@ -67,12 +105,12 @@ const Router = () => {
         <Route path="products" element={<Products />} />
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
-        <Route path="household" element={<Household />} />
+
         <Route
           path="vegetables"
           element={<Vegetables addToCart={addToCart} />}
         />
-        <Route path="fruits" element={<Vegetables />} />
+        {/* <Route path="fruits" element={<Vegetables />} />
         <Route path="kitchen" element={<Kitchen />} />
         <Route path="short-codes" element={<ShortCodes />} />
         <Route path="drinks" element={<Drinks />} />
@@ -82,10 +120,34 @@ const Router = () => {
         <Route path="signUp" element={<Signup />} />
         <Route path="login" element={<LogIn />} />
         <Route path="forgetPassword" element={<Forget />} />
-        <Route path="forgetPasswordFinal" element={<ForgetPasswordFinal />} />
+        <Route path="forgetPasswordFinal" element={<ForgetPasswordFinal />} /> */}
+        <Route
+          path="/:categorySlug"
+          element={<ItemsFromApi addToCart={addToCart} />}
+        />
+        <Route
+          path="checkOut"
+          element={
+            <Checkout
+              cart={cart}
+              plusHandler={plusHandler}
+              minusHandler={minusHandler}
+              deleteItem={deleteItem}
+              total={total}
+            />
+          }
+        />
         <Route
           path="cart"
-          element={<AddToCart cart={cart} setCart={setCart} />}
+          element={
+            <AddToCart
+              cart={cart}
+              plusHandler={plusHandler}
+              minusHandler={minusHandler}
+              deleteItem={deleteItem}
+              total={total}
+            />
+          }
         />
 
         <Route path="*" element={<Error />} />

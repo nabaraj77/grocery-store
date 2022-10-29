@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./routes/Router";
 
 import { Toaster } from "react-hot-toast";
+import AddToCart from "./components/AddToCart";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Router />
         <Footer />
       </BrowserRouter>
+
       <Toaster position="top-right" />
     </div>
   );

@@ -33,7 +33,7 @@ const LogIn = () => {
         grant_type: "password",
       },
     }).then((response) => {
-      console.log(response);
+      console.log(response.data.access_token);
       setResult(response.status);
     });
 

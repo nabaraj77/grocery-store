@@ -192,8 +192,20 @@ function Mail() {
                     {errors.subject && <span>*Subject is required.</span>}
                   </div>
                   <div class="clearfix"> </div>
+                  {errors.message && (
+                    <span>
+                      *Message Length Should be greater than 20 characters.
+                    </span>
+                  )}
                   <textarea
-                    {...register("message", {})}
+                    {...register("message", {
+                      required: "Message is required.",
+                      minLength: {
+                        value: 10,
+                        message:
+                          "Message Length Should be greater than 20 characters.",
+                      },
+                    })}
                     placeholder="Message"
                     defaultValue=""
                   />

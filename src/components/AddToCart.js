@@ -3,50 +3,8 @@ import Navbarleft from "./mainPage/Navbarleft";
 import { Link } from "react-router-dom";
 import "./AddToCart.css";
 
-let addedItems = [
-  {
-    id: 1,
-    name: "Apple",
-    image: "../Assets/images/19.jpg",
-    price: "$120",
-    orderQuantity: 1,
-  },
-  {
-    id: 2,
-    name: "Apple Ipad",
-    image: "../Assets/images/19.jpg",
-    price: "$100",
-    orderQuantity: 1,
-  },
-];
-
-const AddToCart = ({ cart, setCart }) => {
-  const minusHandler = (data) => {
-    const updatedCart = cart.map((item) => {
-      if (item.name === data.name && addedItems.quantityOrdered !== 0) {
-        return { ...item, quantityOrdered: item.quantityOrdered - 1 };
-      } else if (item.name === data.name && item.quantityOrdered === 0) {
-        console.log("Naba");
-        return { ...item, quantityOrdered: 0 };
-      } else {
-        return item;
-      }
-    });
-    setCart(updatedCart);
-  };
-
-  //PLUS HANDLER
-  const plusHandler = (data) => {
-    const updatedCart = cart.map((item) => {
-      if (data.name === item.name) {
-        return { ...item, quantityOrdered: item.quantityOrdered + 1 };
-      } else {
-        return item;
-      }
-    });
-    setCart(updatedCart);
-    //console.log(updatedCart);
-  };
+const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
+  console.log(cart);
   return (
     <>
       <div className="products-breadcrumb">
@@ -70,20 +28,22 @@ const AddToCart = ({ cart, setCart }) => {
             <h3>
               Chec<span>kout</span>
             </h3>
-
             <div class="checkout-right">
               <h4>
-                Your shopping cart contains: <span>1 Products</span>
+                Your shopping cart contains: <span>{cart.length} Products</span>
               </h4>
             </div>
-
             {cart.map((item, index) => {
               return (
                 <>
                   <div className="cartItems" key={index}>
                     <h4>{index + 1}</h4>
-                    <span className="itemName">{item.name}</span>
-                    <img className="cartImage" src={item.image} alt="" />
+                    <span className="itemName">{item.title}</span>
+                    <img
+                      className="cartImage"
+                      src={item.images[0].imageName}
+                      alt=""
+                    />
                     <div className="quantityBtn">
                       <button
                         className="cartBtn"
@@ -102,13 +62,22 @@ const AddToCart = ({ cart, setCart }) => {
                       </button>
                     </div>
                     <p className="price">
-                      {item.newPrice * item.quantityOrdered}
+                      $ {item.unitPrice[0].newPrice * item.quantityOrdered}
                     </p>
+                    <button onClick={() => deleteItem(item)}>
+                      {/* <i class="fa-solid fa-trash-can delBtn"></i> */}
+                      <i class="fa-solid fa-trash delBtn"></i>
+                    </button>
                   </div>
                   <hr />
                 </>
               );
             })}
+            {cart.length > 0 && (
+              <div className="totalAmount">
+                <strong>Total: $ {total}</strong>
+              </div>
+            )}
           </div>
 
           {/* <!-- //about --> */}
