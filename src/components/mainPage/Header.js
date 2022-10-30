@@ -126,8 +126,8 @@ function Header() {
           <div className="w3ls_logo_products_left1">
             <ul className="phone_email">
               <li>
-                <i className="fa fa-phone" aria-hidden="true"></i>(+0123) 234
-                567
+                <i className="fa fa-phone" aria-hidden="true"></i>(+977)
+                014780000{" "}
               </li>
               <li>
                 <i className="fa fa-envelope-o" aria-hidden="true"></i>

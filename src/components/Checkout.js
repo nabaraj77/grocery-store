@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Navbarleft from "./mainPage/Navbarleft";
 import "./Checkout.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
   const {
@@ -47,61 +47,32 @@ function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
   };
   return (
     <>
+      <div className="products-breadcrumb">
+        <div className="container">
+          <ul>
+            <li>
+              <i className="fa fa-home" aria-hidden="true"></i>
+              <Link to="/">Home</Link>
+              <span>|</span>
+            </li>
+            <li>Checkout</li>
+          </ul>
+        </div>
+      </div>
       <div class="banner">
-        <Navbarleft />
         <div class="w3l_banner_nav_right">
           {/* <!-- about --> */}
-          <div class="privacy about">
+          {/* <div class="privacy about">
             <h3>
               Chec<span>kout</span>
             </h3>
             <div class="checkout-right">
               <h4>
-                Your shopping cart contains: <span>{cart.length} Products</span>
+                Your shopping Basket contains:
+                <span>{cart.length} Products</span>
               </h4>
             </div>
-            {cart.map((item, index) => {
-              return (
-                <>
-                  <div className="cartItems" key={index}>
-                    <h4>{index + 1}</h4>
-                    <span className="itemName">{item.name}</span>
-                    <img className="cartImage" src={item.image} alt="" />
-                    <div className="quantityBtn">
-                      <button
-                        className="cartBtn"
-                        onClick={() => minusHandler(item)}
-                      >
-                        -
-                      </button>
-                      <span className="cartQuantity">
-                        {item.quantityOrdered}
-                      </span>
-                      <button
-                        className="cartBtn"
-                        onClick={() => plusHandler(item)}
-                      >
-                        +
-                      </button>
-                    </div>
-                    <p className="price">
-                      $ {item.newPrice * item.quantityOrdered}
-                    </p>
-                    <button onClick={() => deleteItem(item)}>
-                      {/* <i class="fa-solid fa-trash-can delBtn"></i> */}
-                      <i class="fa-solid fa-trash delBtn"></i>
-                    </button>
-                  </div>
-                  <hr />
-                </>
-              );
-            })}
-            {cart.length > 0 && (
-              <div className="totalAmount">
-                <strong>Total: $ {total}</strong>
-              </div>
-            )}
-          </div>
+          </div> */}
 
           <div class="checkout-left">
             <div class="col-md-4 checkout-left-basket">
@@ -111,8 +82,11 @@ function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
                   return (
                     <>
                       <li>
-                        {item.name} <i>-</i>
-                        <span>$ {item.newPrice * item.quantityOrdered} </span>
+                        {item.title} <i>-</i>
+                        {item.quantityOrdered}
+                        <span>
+                          $ {item.unitPrice[0].newPrice * item.quantityOrdered}
+                        </span>
                       </li>
                     </>
                   );
@@ -122,7 +96,11 @@ function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
                   Total Service Charges <i>-</i> <span>$15.00</span>
                 </li>
                 <li>
-                  Total <i>-</i> <span>$ {total + 15}</span>
+                  <strong>
+                    <b>
+                      Total <i>-</i> <span>$ {total + 15}</span>
+                    </b>
+                  </strong>
                 </li>
               </ul>
             </div>
@@ -233,15 +211,6 @@ function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
                   </div>
                 </section>
               </form>
-              <div class="checkout-right-basket">
-                <a href="payment.html">
-                  Make a Payment
-                  <span
-                    class="glyphicon glyphicon-chevron-right"
-                    aria-hidden="true"
-                  ></span>
-                </a>
-              </div>
             </div>
 
             <div class="clearfix"></div>

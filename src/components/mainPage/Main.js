@@ -1,11 +1,9 @@
 import React from "react";
-import Navbarleft from "./Navbarleft";
 
 function Main() {
   return (
     <div>
       <div className="banner">
-        <Navbarleft />
         <div className="w3l_banner_nav_right">
           <section className="slider">
             <div className="flexslider">

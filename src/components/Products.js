@@ -14,14 +14,11 @@ function Products() {
               <Link to="/">Home</Link>
               <span>|</span>
             </li>
-            <li>Branded Foods</li>
+            <li>Products</li>
           </ul>
         </div>
       </div>
 
-      <div class="banner">
-        <Navbarleft />
-      </div>
       <div class="w3l_banner_nav_right">
         <div class="w3l_banner_nav_right_banner3">
           <h3>

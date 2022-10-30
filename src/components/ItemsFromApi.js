@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import Navbarleft from "./mainPage/Navbarleft";
 
 const ItemsFromApi = ({ addToCart }) => {
   const { categorySlug } = useParams();
@@ -12,9 +10,9 @@ const ItemsFromApi = ({ addToCart }) => {
     axios({
       method: "get",
       url: `https://uat.ordering-farmshop.ekbana.net/api/v4/product?allProduct=1`,
-      params: {
-        allProduct: 1,
-      },
+      // params: {
+      //   allProduct: 1,
+      // },
       headers: {
         "Api-key": process.env.REACT_APP_API_KEY,
         "Warehouse-Id": 1,
@@ -38,29 +36,13 @@ const ItemsFromApi = ({ addToCart }) => {
   console.log("Filtered Data", filteredItems);
   return (
     <>
-      <div className="products-breadcrumb">
-        <div className="container">
-          <ul>
-            <li>
-              <i className="fa fa-home" aria-hidden="true"></i>
-              {/* <a href="index.html">Home</a> */}
-              <Link to="/">Home</Link>
-              <span>|</span>
-            </li>
-            <li>{categorySlug}</li>
-          </ul>
-        </div>
-      </div>
-      <div className="banner">
-        <Navbarleft />
-      </div>
       <div className="w3l_banner_nav_right">
         <div className="w3l_banner_nav_right_banner5">
           <h3>
             Best Deals For New Products<span className="blink_me"></span>
           </h3>
         </div>
-        <div className="w3l_banner_nav_right_banner3_btm">
+        {/* <div className="w3l_banner_nav_right_banner3_btm">
           <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
             <div className="view view-tenth">
               <img
@@ -128,7 +110,7 @@ const ItemsFromApi = ({ addToCart }) => {
             </ol>
           </div>
           <div className="clearfix"> </div>
-        </div>
+        </div> */}
         <div className="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_veg">
           <h3 className="w3l_fruit">{categorySlug}</h3>
           <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">

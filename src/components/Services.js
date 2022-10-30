@@ -1,5 +1,5 @@
 import React from "react";
-import Navbarleft from "./mainPage/Navbarleft";
+
 import { Link } from "react-router-dom";
 
 function Services() {
@@ -21,7 +21,6 @@ function Services() {
       {/* <!-- //products-breadcrumb -->
 <!-- banner --> */}
       <div className="banner">
-        <Navbarleft />
         <div className="w3l_banner_nav_right">
           <div className="services">
             <h3>Services</h3>

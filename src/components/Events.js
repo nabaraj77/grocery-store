@@ -1,5 +1,4 @@
 import React from "react";
-import Navbarleft from "./mainPage/Navbarleft";
 import { Link } from "react-router-dom";
 
 const Events = () => {
@@ -17,9 +16,6 @@ const Events = () => {
             <li>Events</li>
           </ul>
         </div>
-      </div>
-      <div className="banner">
-        <Navbarleft />
       </div>
       <div className="w3l_banner_nav_right">
         {/* <!-- events --> */}

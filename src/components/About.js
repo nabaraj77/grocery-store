@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Navbarleft from "./mainPage/Navbarleft";
+import "./About.css";
 
 function About() {
   return (
@@ -18,9 +18,9 @@ function About() {
           </ul>
         </div>
       </div>
-      <div class="banner">
+      {/* <div class="banner">
         <Navbarleft />
-      </div>
+      </div> */}
       <div class="w3l_banner_nav_right">
         {/* <!-- about --> */}
         <div class="privacy about">

@@ -5,16 +5,15 @@ import toast from "react-hot-toast";
 import About from "../../src/components/About";
 import Events from "../../src/components/Events";
 import Mail from "../../src/components/Mail";
-import Products from "../../src/components/Products";
 import Services from "../../src/components/Services";
 import Main from "../../src/components/mainPage/Main";
-import Household from "../../src/components/Household";
-import Vegetables from "../../src/components/Vegetables";
 import Error from "../../src/components/Error";
 import AddToCart from "../components/AddToCart";
 import Checkout from "../components/Checkout";
 import ItemsFromApi from "../components/ItemsFromApi";
-
+import LogIn from "../components/LogIn";
+import Signup from "../components/SignUp";
+import Products from "../components/Products";
 //GET CARTITEMS FROM LOCAL STORAGE
 
 const getCartItemsFromLocalStorage = () => {
@@ -103,28 +102,16 @@ const Router = () => {
         <Route path="events" element={<Events />} />
         <Route path="aboutUs" element={<About />} />
         <Route path="products" element={<Products />} />
+
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
 
         <Route
-          path="vegetables"
-          element={<Vegetables addToCart={addToCart} />}
-        />
-        {/* <Route path="fruits" element={<Vegetables />} />
-        <Route path="kitchen" element={<Kitchen />} />
-        <Route path="short-codes" element={<ShortCodes />} />
-        <Route path="drinks" element={<Drinks />} />
-        <Route path="pet" element={<Pet />} />
-        <Route path="frozen" element={<Frozen />} />
-        <Route path="bread" element={<Bread />} />
-        <Route path="signUp" element={<Signup />} />
-        <Route path="login" element={<LogIn />} />
-        <Route path="forgetPassword" element={<Forget />} />
-        <Route path="forgetPasswordFinal" element={<ForgetPasswordFinal />} /> */}
-        <Route
           path="/:categorySlug"
           element={<ItemsFromApi addToCart={addToCart} />}
         />
+        <Route path="signUp" element={<Signup />} />
+        <Route path="login" element={<LogIn />} />
         <Route
           path="checkOut"
           element={

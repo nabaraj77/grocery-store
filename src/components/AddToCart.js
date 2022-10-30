@@ -1,5 +1,4 @@
 import React from "react";
-import Navbarleft from "./mainPage/Navbarleft";
 import { Link } from "react-router-dom";
 import "./AddToCart.css";
 
@@ -21,7 +20,6 @@ const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
         </div>
       </div>
       <div class="banner">
-        <Navbarleft />
         <div class="w3l_banner_nav_right">
           {/* <!-- about --> */}
           <div class="privacy about">
