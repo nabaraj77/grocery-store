@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navbarleft from "./mainPage/Navbarleft";
 import { useForm } from "react-hook-form";
 import "./Mail.css";
 import axios from "axios";
@@ -59,7 +58,6 @@ const LogIn = () => {
       {/* <!-- //products-breadcrumb -->
 <!-- banner --> */}
       <div className="banner">
-        <Navbarleft />
         {result === 200 && navigate("/")}
 
         <div className="w3l_banner_nav_right">

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Navbarleft from "./mainPage/Navbarleft";
+
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -60,7 +60,6 @@ function Mail() {
         </div>
       </div>
       <div class="banner">
-        <Navbarleft />
         {result === 200 && (
           <div class="alert alert-success alert-dismissible" role="alert">
             <strong>Query Sent Successfully.</strong>

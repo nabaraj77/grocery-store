@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Navbarleft from "./mainPage/Navbarleft";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./Mail.css";
@@ -60,7 +59,6 @@ const Signup = () => {
       {/* <!-- //products-breadcrumb -->
 <!-- banner --> */}
       <div className="banner">
-        <Navbarleft />
         <div className="w3l_banner_nav_right">
           {result === 201 && (
             <div class="alert alert-success alert-dismissible" role="alert">

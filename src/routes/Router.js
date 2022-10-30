@@ -14,6 +14,7 @@ import ItemsFromApi from "../components/ItemsFromApi";
 import LogIn from "../components/LogIn";
 import Signup from "../components/SignUp";
 import Products from "../components/Products";
+
 //GET CARTITEMS FROM LOCAL STORAGE
 
 const getCartItemsFromLocalStorage = () => {
@@ -98,7 +99,7 @@ const Router = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Main addToCart={addToCart} />} />
         <Route path="events" element={<Events />} />
         <Route path="aboutUs" element={<About />} />
         <Route path="products" element={<Products />} />
