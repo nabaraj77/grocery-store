@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 
+import ImageSlider from "../ImageSlider";
+
 function Main({ addToCart }) {
   const [items, setItems] = useState([]);
 
@@ -8,9 +10,7 @@ function Main({ addToCart }) {
     axios({
       method: "get",
       url: `https://uat.ordering-farmshop.ekbana.net/api/v4/product?allProduct=1`,
-      // params: {
-      //   allProduct: 1,
-      // },
+
       headers: {
         "Api-key": process.env.REACT_APP_API_KEY,
         "Warehouse-Id": 1,
@@ -59,7 +59,8 @@ function Main({ addToCart }) {
             <div className="flexslider">
               <ul className="slides">
                 <li>
-                  <div className="w3l_banner_nav_right_banner">
+                  <ImageSlider />
+                  {/* <div className="w3l_banner_nav_right_banner">
                     <h3>
                       Make your <span>food</span> with Spicy.
                     </h3>
@@ -74,8 +75,8 @@ function Main({ addToCart }) {
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="w3l_banner_nav_right_banner1">
+                <li> */}
+                  {/* <div className="w3l_banner_nav_right_banner1">
                     <h3>
                       Make your <span>food</span> with Spicy.
                     </h3>
@@ -90,8 +91,8 @@ function Main({ addToCart }) {
                     </div>
                   </div>
                 </li>
-                <li>
-                  <div className="w3l_banner_nav_right_banner2">
+                <li> */}
+                  {/* <div className="w3l_banner_nav_right_banner2">
                     <h3>
                       upto <i>50%</i> off.
                     </h3>
@@ -104,7 +105,7 @@ function Main({ addToCart }) {
                         Shop now
                       </a>
                     </div>
-                  </div>
+                  </div> */}
                 </li>
               </ul>
             </div>

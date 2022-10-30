@@ -14,6 +14,7 @@ import ItemsFromApi from "../components/ItemsFromApi";
 import LogIn from "../components/LogIn";
 import Signup from "../components/SignUp";
 import Products from "../components/Products";
+import Test from "../components/ImageSlider";
 
 //GET CARTITEMS FROM LOCAL STORAGE
 
@@ -106,7 +107,7 @@ const Router = () => {
 
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
-
+        <Route path="test" element={<Test />} />
         <Route
           path="/:categorySlug"
           element={<ItemsFromApi addToCart={addToCart} />}
