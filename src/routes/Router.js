@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-
 import About from "../../src/components/About";
 import Events from "../../src/components/Events";
 import Mail from "../../src/components/Mail";
@@ -14,7 +13,8 @@ import ItemsFromApi from "../components/ItemsFromApi";
 import LogIn from "../components/LogIn";
 import Signup from "../components/SignUp";
 import Products from "../components/Products";
-import Test from "../components/ImageSlider";
+import Search from "../Search";
+import Single from "../components/Single";
 
 //GET CARTITEMS FROM LOCAL STORAGE
 
@@ -31,6 +31,15 @@ getCartItemsFromLocalStorage();
 
 const Router = () => {
   const [cart, setCart] = useState(getCartItemsFromLocalStorage());
+  const [singleItemProduct, setsingleItemProduct] = useState([]);
+  const navigate = useNavigate();
+
+  //SINGLE ITEM
+  const singleItem = (singleItem) => {
+    console.log("singleItem", singleItem);
+    setsingleItemProduct(singleItem);
+    navigate("single");
+  };
 
   const addToCart = (data) => {
     console.log(data);
@@ -104,16 +113,26 @@ const Router = () => {
         <Route path="events" element={<Events />} />
         <Route path="aboutUs" element={<About />} />
         <Route path="products" element={<Products />} />
-
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
-        <Route path="test" element={<Test />} />
+        <Route path="search" element={<Search />} />
         <Route
           path="/:categorySlug"
-          element={<ItemsFromApi addToCart={addToCart} />}
+          element={
+            <ItemsFromApi addToCart={addToCart} singleItem={singleItem} />
+          }
         />
         <Route path="signUp" element={<Signup />} />
         <Route path="login" element={<LogIn />} />
+        <Route
+          path="single"
+          element={
+            <Single
+              singleItemProduct={singleItemProduct}
+              addToCart={addToCart}
+            />
+          }
+        />
         <Route
           path="checkOut"
           element={
@@ -135,6 +154,7 @@ const Router = () => {
               minusHandler={minusHandler}
               deleteItem={deleteItem}
               total={total}
+              singleItem={singleItem}
             />
           }
         />

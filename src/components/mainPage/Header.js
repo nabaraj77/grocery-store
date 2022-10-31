@@ -1,26 +1,52 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, createContext, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
+import { useForm } from "react-hook-form";
+import { SearchData } from "../../Context/Search";
 
 function Header() {
+  const searchValue = useContext(SearchData);
+  const navigate = useNavigate();
+  // console.log(searchValue);
+  const { register, handleSubmit, resetField } = useForm({
+    mode: "onTouched",
+  });
+  const onSubmit = (data) => {
+    searchValue.setValues(data);
+    resetField("searchValue");
+
+    navigate("/search");
+  };
   return (
     <div>
       <div className="agileits_header header">
         <div className="w3l_offers">
-          {/* <a href="products.html">Today's special Offers !</a> */}
           <Link to="products">Today's special Offers ! </Link>
         </div>
         <div className="w3l_search">
-          <form action="#" method="post">
+          {/* <form action="#" method="post">
             <input
               type="text"
-              name="Product"
-              value="Search a product..."
-              onfocus="this.value = '';"
-              onblur="if (this.value == '') {this.value = 'Search a product...';}"
-              required=""
+              placeholder="Search..."
+              onClick={(e) => {
+                setSearch(e.target.value);
+              }}
+              // name="Product"
+              // value="Search a product..."
+              // onfocus="this.value = '';"
+              // onblur="if (this.value == '') {this.value = 'Search a product...';}"
+              // required=""
             />
-            <input type="submit" value=" " />
+            <input type="submit" value="" />
+          </form> */}
+          <form action="#" method="post" onSubmit={handleSubmit(onSubmit)}>
+            <input
+              type="text"
+              {...register("searchValue", {})}
+              placeholder="Search..."
+            />
+
+            <input type="submit" value="" />
           </form>
         </div>
         <div className="product_list_header">
@@ -55,9 +81,6 @@ function Header() {
                 <div class="w3ls_vegetables">
                   <ul>
                     <li>
-                      {/* <a href="vegetables.html">Vegetables</a>
-						 
-						 */}
                       <Link to="/login">Log In</Link>
                     </li>
                   </ul>
@@ -68,33 +91,16 @@ function Header() {
         </div>
         <div className="w3l_header_right1">
           <h2>
-            {/* <a href="mail.html">Contact Us</a> */}
             <Link to="mailTo">Contact Us</Link>
           </h2>
         </div>
         <div className="clearfix"> </div>
       </div>
-      {/* <script>
-	      $(document).ready(function() {
-		    var navoffeset=$(".agileits_header").offset().top;
-		    $(window).scroll(function(){
-			  var scrollpos=$(window).scrollTop(); 
-			    if(scrollpos >=navoffeset){
-				    $(".agileits_header").addclassName("fixed");
-			    }else{
-				$(".agileits_header").removeclassName("fixed");
-			}
-		  });
-		  });
-      </script> */}
 
       <div className="logo_products">
         <div className="container">
           <div className="w3ls_logo_products_left">
             <h1>
-              {/* <a href="index.html">
-                <span>Grocery</span> Store
-              </a> */}
               <Link to="/">
                 <span>Grocery</span> Store
               </Link>
@@ -127,7 +133,7 @@ function Header() {
             <ul className="phone_email">
               <li>
                 <i className="fa fa-phone" aria-hidden="true"></i>(+977)
-                014780000{" "}
+                014780000
               </li>
               <li>
                 <i className="fa fa-envelope-o" aria-hidden="true"></i>

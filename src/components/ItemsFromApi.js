@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./ItemsFromApi.css";
 
-const ItemsFromApi = ({ addToCart }) => {
+const ItemsFromApi = ({ addToCart, singleItem }) => {
   const { categorySlug } = useParams();
   const [items, setItems] = useState([]);
 
@@ -57,75 +57,7 @@ const ItemsFromApi = ({ addToCart }) => {
             Best Deals For New Products<span className="blink_me"></span>
           </h3>
         </div>
-        {/* <div className="w3l_banner_nav_right_banner3_btm">
-          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div className="view view-tenth">
-              <img
-                src="../Assets/images/18.jpg"
-                alt=" "
-                className="img-responsive"
-              />
-              <div className="mask">
-                <h4>Grocery Store</h4>
-                <p>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt.
-                </p>
-              </div>
-            </div>
-            <h4>Fruits & Vegetables</h4>
-            <ol>
-              <li>sunt in culpa qui officia</li>
-              <li>commodo consequat</li>
-              <li>sed do eiusmod tempor incididunt</li>
-            </ol>
-          </div>
-          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div className="view view-tenth">
-              <img
-                src="../Assets/images/19.jpg"
-                alt=" "
-                className="img-responsive"
-              />
-              <div className="mask">
-                <h4>Grocery Store</h4>
-                <p>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt.
-                </p>
-              </div>
-            </div>
-            <h4>Dry Fruits</h4>
-            <ol>
-              <li>enim ipsam voluptatem officia</li>
-              <li>tempora incidunt ut labore et</li>
-              <li>vel eum iure reprehenderit</li>
-            </ol>
-          </div>
-          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div className="view view-tenth">
-              <img
-                src="../Assets/images/20.jpg"
-                alt=" "
-                className="img-responsive"
-              />
-              <div className="mask">
-                <h4>Grocery Store</h4>
-                <p>
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                  qui officia deserunt.
-                </p>
-              </div>
-            </div>
-            <h4>Vegetables</h4>
-            <ol>
-              <li>dolorem eum fugiat voluptas</li>
-              <li>ut aliquid ex ea commodi</li>
-              <li>magnam aliquam quaerat</li>
-            </ol>
-          </div>
-          <div className="clearfix"> </div>
-        </div> */}
+
         <div className="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_veg">
           <h3 className="w3l_fruit">{categorySlug}</h3>
           <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
@@ -151,13 +83,13 @@ const ItemsFromApi = ({ addToCart }) => {
                             <figure>
                               <div className="snipcart-item block">
                                 <div className="snipcart-thumb">
-                                  <a href="single.html">
+                                  <button onClick={() => singleItem(item)}>
                                     <img
                                       src={item.images[0].imageName}
                                       alt=" "
                                       className="img-responsive"
                                     />
-                                  </a>
+                                  </button>
                                   <p>{item.title}</p>
                                   <h4>
                                     {item.unitPrice[0].newPrice}
