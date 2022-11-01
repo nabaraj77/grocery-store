@@ -15,9 +15,9 @@ import Signup from "../components/SignUp";
 import Products from "../components/Products";
 import Search from "../Search";
 import Single from "../components/Single";
+import axios from "axios";
 
 //GET CARTITEMS FROM LOCAL STORAGE
-
 const getCartItemsFromLocalStorage = () => {
   const list = localStorage.getItem("cartItems");
   console.log(list);
@@ -34,32 +34,49 @@ const Router = () => {
   const [singleItemProduct, setsingleItemProduct] = useState([]);
   const navigate = useNavigate();
 
-  //SINGLE ITEM
+  //API CALL TO GET PRODUCT LIST
+  const [items, setItems] = useState([]);
+
+  const getDataList = () => {
+    axios({
+      method: "get",
+      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/product?allProduct=1`,
+      headers: {
+        "Api-key": process.env.REACT_APP_API_KEY,
+        "Warehouse-Id": 1,
+      },
+    })
+      .then((response) => {
+        setItems(response.data.data);
+      })
+      .catch((error) => console.error(`Error: ${error}`));
+  };
+  useEffect(() => {
+    getDataList();
+  }, []);
+
+  //SINGLE ITEM: ONCLICKING ON THE PRODUCT IMAGE
   const singleItem = (singleItem) => {
     console.log("singleItem", singleItem);
     setsingleItemProduct(singleItem);
     navigate("single");
   };
 
+  //ADDIGN ITEMS ON CART
   const addToCart = (data) => {
     console.log(data);
-    //CHECKS THAT ITEMS EXISTS OR NOT
-    //setCart([...cart, { ...data, quantityOrdered: 1 }]);
     let exists = cart.find((item) => {
       return item.title === data.title;
     });
     if (exists) {
-      //console.log("Data already exists");
       toast.error("Item already exists in the cart.");
     } else {
-      //console.log("Data can be added");
       toast.success("Successfully added to the cart.");
       setCart([...cart, { ...data, quantityOrdered: 1 }]);
     }
   };
 
   //ADDING CART DATA TO LOCAL STORAGE
-
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cart));
   }, [cart]);
@@ -109,17 +126,29 @@ const Router = () => {
   return (
     <>
       <Routes>
-        <Route path="/" element={<Main addToCart={addToCart} />} />
+        <Route
+          path="/"
+          element={
+            <Main addToCart={addToCart} items={items} singleItem={singleItem} />
+          }
+        />
         <Route path="events" element={<Events />} />
         <Route path="aboutUs" element={<About />} />
         <Route path="products" element={<Products />} />
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
-        <Route path="search" element={<Search />} />
+        <Route
+          path="search"
+          element={<Search addToCart={addToCart} items={items} />}
+        />
         <Route
           path="/:categorySlug"
           element={
-            <ItemsFromApi addToCart={addToCart} singleItem={singleItem} />
+            <ItemsFromApi
+              addToCart={addToCart}
+              singleItem={singleItem}
+              items={items}
+            />
           }
         />
         <Route path="signUp" element={<Signup />} />

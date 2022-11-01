@@ -1,35 +1,32 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import "./ItemsFromApi.css";
 
-const ItemsFromApi = ({ addToCart, singleItem }) => {
+const ItemsFromApi = ({ addToCart, singleItem, items }) => {
   const { categorySlug } = useParams();
-  const [items, setItems] = useState([]);
+  // const [items, setItems] = useState([]);
 
-  const getCategoriesList = () => {
-    axios({
-      method: "get",
-      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/product?allProduct=1`,
-      // params: {
-      //   allProduct: 1,
-      // },
-      headers: {
-        "Api-key": process.env.REACT_APP_API_KEY,
-        "Warehouse-Id": 1,
-      },
-    })
-      .then((response) => {
-        setItems(response.data.data);
-      })
-      .catch((error) => console.error(`Error: ${error}`));
-  };
-  useEffect(() => {
-    getCategoriesList();
-  }, []);
-  //   console.log("Items", items);
-  //   console.log(categorySlug);
+  // const getCategoriesList = () => {
+  //   axios({
+  //     method: "get",
+  //     url: `https://uat.ordering-farmshop.ekbana.net/api/v4/product?allProduct=1`,
+  //     // params: {
+  //     //   allProduct: 1,
+  //     // },
+  //     headers: {
+  //       "Api-key": process.env.REACT_APP_API_KEY,
+  //       "Warehouse-Id": 1,
+  //     },
+  //   })
+  //     .then((response) => {
+  //       setItems(response.data.data);
+  //     })
+  //     .catch((error) => console.error(`Error: ${error}`));
+  // };
+  // useEffect(() => {
+  //   getCategoriesList();
+  // }, []);
   const filteredItems = items.filter((item) => {
     let itemList = item.categorySlug === categorySlug;
     return itemList;
@@ -124,56 +121,6 @@ const ItemsFromApi = ({ addToCart, singleItem }) => {
         </div>
       </div>
       <div className="clearfix"></div>
-      {/* <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-        {filteredItems.map((item, index) => {
-          return (
-            <>
-              <div
-                className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd"
-                key={index}
-              >
-                <div className="hover14 column">
-                  <div className="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                    <div className="tag">
-                      <img
-                        src="../Assets/images/tag.png"
-                        alt=" "
-                        className="img-responsive"
-                      />
-                    </div>
-
-                    <div className="agile_top_brand_left_grid1">
-                      <figure>
-                        <div className="snipcart-item block">
-                          <div className="snipcart-thumb">
-                            <a href="single.html">
-                              <img src="" alt=" " className="img-responsive" />
-                            </a>
-                            <p>Name</p>
-                            <h4>
-                              4 <span>5</span>
-                            </h4>
-                          </div>
-                          <div className="snipcart-details ">
-                            <input
-                              type="button"
-                              value="Add to cart"
-                              className="button addtoCartBtn text-center"
-                              //   onClick={() => {
-                              //     addToCart(item);
-                              //   }}
-                            />
-                          </div>
-                        </div>
-                      </figure>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </>
-          );
-        })}
-      </div> */}
     </>
   );
 };

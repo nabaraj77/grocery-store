@@ -1,31 +1,8 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React from "react";
 
 import ImageSlider from "../ImageSlider";
 
-function Main({ addToCart }) {
-  const [items, setItems] = useState([]);
-
-  const getCategoriesList = () => {
-    axios({
-      method: "get",
-      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/product?allProduct=1`,
-
-      headers: {
-        "Api-key": process.env.REACT_APP_API_KEY,
-        "Warehouse-Id": 1,
-      },
-    })
-      .then((response) => {
-        setItems(response.data.data);
-      })
-      .catch((error) => console.error(`Error: ${error}`));
-  };
-  useEffect(() => {
-    getCategoriesList();
-  }, []);
-  console.log(items);
-
+function Main({ addToCart, items, singleItem }) {
   //FILTERING DATA ON THE BASIS OF CATEGORY
   const dairyItems = items.filter((item) => {
     let itemList =
@@ -144,13 +121,14 @@ function Main({ addToCart }) {
                             <figure>
                               <div className="snipcart-item block">
                                 <div className="snipcart-thumb">
-                                  <a href="single.html">
+                                  <button onClick={() => singleItem(item)}>
                                     <img
                                       src={item.images[0].imageName}
                                       alt=" "
                                       className="img-responsive"
                                     />
-                                  </a>
+                                  </button>
+
                                   <p>{item.title}</p>
                                   <h4>
                                     {item.unitPrice[0].newPrice}
