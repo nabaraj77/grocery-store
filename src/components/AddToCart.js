@@ -4,6 +4,10 @@ import "./AddToCart.css";
 
 const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
   console.log(cart);
+
+  const proceedToCheckout = () => {
+    console.log("Proceed to Checkout");
+  };
   return (
     <>
       <div className="products-breadcrumb">
@@ -63,7 +67,6 @@ const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
                       $ {item.unitPrice[0].newPrice * item.quantityOrdered}
                     </p>
                     <button onClick={() => deleteItem(item)}>
-                      {/* <i class="fa-solid fa-trash-can delBtn"></i> */}
                       <i class="fa-solid fa-trash delBtn"></i>
                     </button>
                   </div>
@@ -76,6 +79,11 @@ const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
                 <strong>Total: $ {total}</strong>
               </div>
             )}
+            <div className="checkoutBtn">
+              <button onClick={proceedToCheckout} className="proceedToCheckout">
+                Proceed To Checkout
+              </button>
+            </div>
           </div>
 
           {/* <!-- //about --> */}

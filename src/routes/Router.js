@@ -20,14 +20,12 @@ import axios from "axios";
 //GET CARTITEMS FROM LOCAL STORAGE
 const getCartItemsFromLocalStorage = () => {
   const list = localStorage.getItem("cartItems");
-  console.log(list);
   if (list) {
     return JSON.parse(list);
   } else {
     return [];
   }
 };
-getCartItemsFromLocalStorage();
 
 const Router = () => {
   const [cart, setCart] = useState(getCartItemsFromLocalStorage());
@@ -36,6 +34,7 @@ const Router = () => {
 
   //API CALL TO GET PRODUCT LIST
   const [items, setItems] = useState([]);
+  const [accessToken, setAccessToken] = useState("");
 
   const getDataList = () => {
     axios({
@@ -51,9 +50,6 @@ const Router = () => {
       })
       .catch((error) => console.error(`Error: ${error}`));
   };
-  useEffect(() => {
-    getDataList();
-  }, []);
 
   //SINGLE ITEM: ONCLICKING ON THE PRODUCT IMAGE
   const singleItem = (singleItem) => {
@@ -62,17 +58,28 @@ const Router = () => {
     navigate("single");
   };
 
+  //GETTING ACCESS TOKEN
+  useEffect(() => {
+    setAccessToken(localStorage.getItem("accessToken"));
+  });
+
   //ADDIGN ITEMS ON CART
   const addToCart = (data) => {
-    console.log(data);
+    //console.log(data);
     let exists = cart.find((item) => {
       return item.title === data.title;
     });
-    if (exists) {
-      toast.error("Item already exists in the cart.");
+    if (accessToken) {
+      if (exists) {
+        console.log(accessToken.length, "Exists");
+        toast.error("Item already exists in the cart.");
+      } else {
+        console.log(accessToken.length, "NOT Exists");
+        toast.success("Successfully added to the cart.");
+        setCart([...cart, { ...data, quantityOrdered: 1 }]);
+      }
     } else {
-      toast.success("Successfully added to the cart.");
-      setCart([...cart, { ...data, quantityOrdered: 1 }]);
+      navigate("/login");
     }
   };
 
@@ -80,6 +87,11 @@ const Router = () => {
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cart));
   }, [cart]);
+
+  useEffect(() => {
+    getDataList();
+    getCartItemsFromLocalStorage();
+  }, []);
 
   const minusHandler = (data) => {
     const updatedCart = cart.map((item) => {
@@ -139,7 +151,13 @@ const Router = () => {
         <Route path="mailTo" element={<Mail />} />
         <Route
           path="search"
-          element={<Search addToCart={addToCart} items={items} />}
+          element={
+            <Search
+              addToCart={addToCart}
+              items={items}
+              singleItem={singleItem}
+            />
+          }
         />
         <Route
           path="/:categorySlug"

@@ -7,7 +7,6 @@ import axios from "axios";
 const LogIn = () => {
   const [result, setResult] = useState(0);
   const navigate = useNavigate();
-
   const directToSignUpPage = () => {
     navigate("/signUp");
   };
@@ -33,6 +32,7 @@ const LogIn = () => {
       },
     }).then((response) => {
       console.log(response.data.access_token);
+      localStorage.setItem("accessToken", response.data.access_token);
       setResult(response.status);
     });
 
@@ -55,10 +55,15 @@ const LogIn = () => {
           </ul>
         </div>
       </div>
-      {/* <!-- //products-breadcrumb -->
-<!-- banner --> */}
       <div className="banner">
         {result === 200 && navigate("/")}
+        {/* {result === 200 ? (
+          <div>
+            {navigate("/")} {toast.success("Successfully Signed In.")}
+          </div>
+        ) : (
+          toast.error("SignIn Failed.")
+        )} */}
 
         <div className="w3l_banner_nav_right">
           {/* <!-- login --> */}
@@ -87,9 +92,9 @@ const LogIn = () => {
                       {...register("username", {
                         required: "Username is required",
                       })}
-                      placeholder="Username"
+                      placeholder="Email"
                     />
-                    {errors.username && <span>*Username is required.</span>}
+                    {errors.username && <span>*Email is required.</span>}
                     <input
                       type="password"
                       {...register("password", {
@@ -149,8 +154,6 @@ const LogIn = () => {
           <div className="clearfix"> </div>
         </div>
       </div>
-      {/* <!-- //newsletter-top-serv-btm --> */}
-      {/* <Footer/> */}
     </>
   );
 };

@@ -44,3 +44,23 @@
   justify-content: flex-end;
   margin-right: 1rem;
 }
+
+/* PROCEED TO CHECKOUT */
+.proceedToCheckout {
+  color: green;
+  border: none;
+  background-color: aquamarine;
+  font-weight: bold;
+  height: 3rem;
+}
+
+.proceedToCheckout:hover {
+  color: aquamarine;
+  background-color: green;
+  font-weight: bold;
+}
+.checkoutBtn {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}

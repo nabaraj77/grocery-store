@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { SearchData } from "./Context/Search";
 import { Link } from "react-router-dom";
 
-const Search = ({ addToCart, items }) => {
+const Search = ({ addToCart, items, singleItem }) => {
   //   const [apiData, setApiData] = useState([]);
 
   //RECEIVING DATA :CONTEXTAPI
@@ -64,11 +64,17 @@ const Search = ({ addToCart, items }) => {
                             <figure>
                               <div className="snipcart-item block">
                                 <div className="snipcart-thumb">
-                                  <img
-                                    src={item.images[0].imageName}
-                                    alt=" "
-                                    className="img-responsive"
-                                  />
+                                  <button
+                                    onClick={() => {
+                                      singleItem(item);
+                                    }}
+                                  >
+                                    <img
+                                      src={item.images[0].imageName}
+                                      alt=" "
+                                      className="img-responsive"
+                                    />
+                                  </button>
 
                                   <p>{item.title}</p>
                                   <h4>
