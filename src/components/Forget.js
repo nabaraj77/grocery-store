@@ -134,8 +134,6 @@ const Forget = () => {
           <div className="clearfix"> </div>
         </div>
       </div>
-      {/* <!-- //newsletter-top-serv-btm --> */}
-      {/* <Footer/> */}
     </>
   );
 };

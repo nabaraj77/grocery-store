@@ -1,12 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./AddToCart.css";
 
 const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
+  const navigate = useNavigate();
   console.log(cart);
 
   const proceedToCheckout = () => {
-    console.log("Proceed to Checkout");
+    navigate("/checkout");
   };
   return (
     <>

@@ -4,3 +4,8 @@
 h6 span {
   color: white;
 }
+
+.signoutBtn {
+  border: none;
+  background-color: white;
+}

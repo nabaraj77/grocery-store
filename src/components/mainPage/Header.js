@@ -1,13 +1,27 @@
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useForm } from "react-hook-form";
 import { SearchData } from "../../Context/Search";
+import { toast } from "react-toastify";
 
 function Header() {
+  const [accessToken, setAccessToken] = useState([]);
   const searchValue = useContext(SearchData);
   const navigate = useNavigate();
   // console.log(searchValue);
+
+  const signoutButton = () => {
+    localStorage.clear("accessToken");
+    toast.success("Signed Out");
+    navigate("/");
+  };
+
+  //ACCESS TOKEN FETCHING
+  useEffect(() => {
+    setAccessToken(localStorage.getItem("accessToken"));
+  });
+
   const { register, handleSubmit, resetField } = useForm({
     mode: "onTouched",
   });
@@ -71,18 +85,40 @@ function Header() {
             <li class="dropdown profile_details_drop">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                 <i className="fa fa-user" aria-hidden="true">
-                  <h6>
+                  {/* <h6>
                     <span>Guest</span>
-                  </h6>
+                  </h6> */}
                 </i>
                 <span class="caret"></span>
               </a>
               <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
                 <div class="w3ls_vegetables">
                   <ul>
-                    <li>
-                      <Link to="/login">Log In</Link>
-                    </li>
+                    {!accessToken && (
+                      <div>
+                        <li>
+                          <Link to="/login">Log In</Link>
+                        </li>
+                        <li>
+                          <Link to="/signUp">Sign Up</Link>
+                        </li>
+                      </div>
+                    )}
+                    {accessToken && (
+                      <div>
+                        <li>
+                          <Link to="/user">Profile</Link>
+                        </li>
+                        <li>
+                          <button
+                            onClick={signoutButton}
+                            className="signoutBtn"
+                          >
+                            Sign Out
+                          </button>
+                        </li>
+                      </div>
+                    )}
                   </ul>
                 </div>
               </div>

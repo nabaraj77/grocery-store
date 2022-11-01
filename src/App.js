@@ -4,7 +4,6 @@ import { BrowserRouter } from "react-router-dom";
 import Router from "./routes/Router";
 import { Toaster } from "react-hot-toast";
 import Navbarleft from "./components/mainPage/Navbarleft";
-import { SearchProvider } from "./Context/Search";
 
 function App() {
   return (
@@ -15,7 +14,6 @@ function App() {
         <Router />
         <Footer />
       </BrowserRouter>
-
       <Toaster position="top-right" />
     </div>
   );

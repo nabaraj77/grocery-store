@@ -16,6 +16,8 @@ import Products from "../components/Products";
 import Search from "../Search";
 import Single from "../components/Single";
 import axios from "axios";
+import Header from "../components/mainPage/Header";
+import UserPage from "../components/UserPage";
 
 //GET CARTITEMS FROM LOCAL STORAGE
 const getCartItemsFromLocalStorage = () => {
@@ -134,7 +136,6 @@ const Router = () => {
     acc += val.quantityOrdered * val.unitPrice[0].newPrice;
     return acc;
   }, 0);
-
   return (
     <>
       <Routes>
@@ -149,6 +150,8 @@ const Router = () => {
         <Route path="products" element={<Products />} />
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
+        <Route path="user" element={<UserPage accessToken={accessToken} />} />
+
         <Route
           path="search"
           element={
