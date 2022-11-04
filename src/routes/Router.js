@@ -16,7 +16,6 @@ import Products from "../components/Products";
 import Search from "../Search";
 import Single from "../components/Single";
 import axios from "axios";
-import Header from "../components/mainPage/Header";
 import UserPage from "../components/UserPage";
 
 //GET CARTITEMS FROM LOCAL STORAGE
@@ -32,12 +31,50 @@ const getCartItemsFromLocalStorage = () => {
 const Router = () => {
   const [cart, setCart] = useState(getCartItemsFromLocalStorage());
   const [singleItemProduct, setsingleItemProduct] = useState([]);
+  const [addToCartStatus, setAddToCartStatus] = useState();
+  const [cartItemsFromApi, setCartItemsFromAPi] = useState([]);
+  const [cartTotal, setCartTotal] = useState();
   const navigate = useNavigate();
+
+  //DELETING ITEMS FROM CART API
+  const deleteCartDataFromApi = async (data) => {
+    let config = {
+      method: "delete",
+      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/cart-product/${data.id}`,
+
+      headers: {
+        "Api-key": process.env.REACT_APP_API_KEY,
+        "Warehouse-Id": 1,
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+    let res = await axios(config);
+    console.log(res, "Delete");
+  };
+
+  //GET CART DATA
+  const getCartDataFromApi = async () => {
+    let config = {
+      method: "get",
+      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/cart`,
+
+      headers: {
+        "Api-key": process.env.REACT_APP_API_KEY,
+        "Warehouse-Id": 1,
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+    let res = await axios(config);
+    //console.log(res, "CARTDATA");
+    setCartItemsFromAPi(res.data.data.cartProducts);
+    setCartTotal(res.data.data.total);
+  };
 
   //API CALL TO GET PRODUCT LIST
   const [items, setItems] = useState([]);
   const [accessToken, setAccessToken] = useState("");
-
   const getDataList = () => {
     axios({
       method: "get",
@@ -53,11 +90,56 @@ const Router = () => {
       .catch((error) => console.error(`Error: ${error}`));
   };
 
+  //POST SINGLE ITEM TO API
+  const postSingleItemToCart = async (data) => {
+    let config = {
+      method: "post",
+      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/cart-product`,
+      data: {
+        productId: data.id,
+        priceId: data.unitPrice[0].id,
+        quantity: data.quantity,
+        note: "testing",
+      },
+
+      headers: {
+        "Api-key": process.env.REACT_APP_API_KEY,
+        "Warehouse-Id": 1,
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+    let res = await axios(config);
+    console.log("SingleItem", res);
+    setAddToCartStatus(res.status);
+  };
+
+  //UPDATING THE ORDERED QUANTITY
+  const patchItemToCartApi = async (data, quanPlusMinus) => {
+    let config = {
+      method: "patch",
+      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/cart-product/${data.id}`,
+      data: {
+        quantity: data.quantity + quanPlusMinus,
+        note: "hello",
+      },
+
+      headers: {
+        "Api-key": process.env.REACT_APP_API_KEY,
+        "Warehouse-Id": 1,
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+    };
+    let res = await axios(config);
+    console.log("Data Patched", res);
+  };
+
   //SINGLE ITEM: ONCLICKING ON THE PRODUCT IMAGE
   const singleItem = (singleItem) => {
     console.log("singleItem", singleItem);
     setsingleItemProduct(singleItem);
-    navigate("single");
+    navigate("/single");
   };
 
   //GETTING ACCESS TOKEN
@@ -65,77 +147,83 @@ const Router = () => {
     setAccessToken(localStorage.getItem("accessToken"));
   });
 
-  //ADDIGN ITEMS ON CART
+  //ADDING ITEMS ON CART
   const addToCart = (data) => {
     //console.log(data);
-    let exists = cart.find((item) => {
-      return item.title === data.title;
+    //console.log(cartItemsFromApi);
+    let exists = cartItemsFromApi.find((item) => {
+      return item.product.id === data.id;
     });
     if (accessToken) {
       if (exists) {
-        console.log(accessToken.length, "Exists");
         toast.error("Item already exists in the cart.");
       } else {
-        console.log(accessToken.length, "NOT Exists");
         toast.success("Successfully added to the cart.");
-        setCart([...cart, { ...data, quantityOrdered: 1 }]);
+        const dataToAddToApi = { ...data, quantity: 1 };
+        console.log(dataToAddToApi);
+        setCart([...cart, dataToAddToApi]);
+        postSingleItemToCart(dataToAddToApi);
+
+        getCartDataFromApi();
       }
     } else {
       navigate("/login");
     }
   };
+  useEffect(() => {
+    getCartDataFromApi();
+  }, [accessToken, cartItemsFromApi]);
 
   //ADDING CART DATA TO LOCAL STORAGE
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(cart));
-  }, [cart]);
-
-  useEffect(() => {
+    // localStorage.setItem("cartItems", JSON.stringify(cart));
     getDataList();
-    getCartItemsFromLocalStorage();
   }, []);
 
-  const minusHandler = (data) => {
-    const updatedCart = cart.map((item) => {
-      if (item.title === data.title && item.quantityOrdered !== 1) {
-        return { ...item, quantityOrdered: item.quantityOrdered - 1 };
-      } else if (item.title === data.title && item.quantityOrdered === 1) {
-        return { ...item, quantityOrdered: 1 };
-      } else {
-        return item;
+  // useEffect(() => {
+  //   getCartItemsFromLocalStorage();
+  // }, []);
+
+  const minusHandler = (data, quanPlusMinus) => {
+    //console.log(data);
+    cartItemsFromApi.map((item) => {
+      if (item.id === data.id && item.quantity !== 1) {
+        patchItemToCartApi(item, quanPlusMinus);
+        // return { ...item, quantityOrdered: item.quantityOrdered - 1 };
+        // } else if (item.id === data.id && item.quantityOrdered === 1) {
+        //   return { ...item, quantityOrdered: 1 };
+        // } else {
+        //   return item;
+        // }
       }
     });
-    setCart(updatedCart);
   };
 
   //PLUS HANDLER
-  const plusHandler = (data) => {
-    const updatedCart = cart.map((item) => {
-      if (data.title === item.title) {
-        return { ...item, quantityOrdered: item.quantityOrdered + 1 };
-      } else {
+  const plusHandler = (data, quanPlusMinus) => {
+    console.log(data);
+    cartItemsFromApi.map((item) => {
+      if (data.id === item.id) {
+        console.log("Found");
+        patchItemToCartApi(item, quanPlusMinus);
         return item;
+        //API CALLING TO UPDATE QUANTITY//PATCH
       }
     });
-    setCart(updatedCart);
+    // setCart(updatedCart);
     //console.log(updatedCart);
   };
 
   //DELETING ITEM
   const deleteItem = (data) => {
-    const remainingItems = cart.filter((item) => {
-      return item.title !== data.title;
-    });
-    if (remainingItems) {
-      setCart(remainingItems);
-    }
+    deleteCartDataFromApi(data);
   };
 
   //CALCULATING TOTAL
-  const total = cart.reduce((acc, val) => {
-    acc += val.quantityOrdered * val.unitPrice[0].newPrice;
-    return acc;
-  }, 0);
+  // const total = cart.reduce((acc, val) => {
+  //   acc += val.quantityOrdered * val.unitPrice[0].newPrice;
+  //   return acc;
+  // }, 0);
   return (
     <>
       <Routes>
@@ -150,7 +238,15 @@ const Router = () => {
         <Route path="products" element={<Products />} />
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
-        <Route path="user" element={<UserPage accessToken={accessToken} />} />
+        <Route
+          path="user"
+          element={
+            <UserPage
+              accessToken={accessToken}
+              cartItemsFromApi={cartItemsFromApi}
+            />
+          }
+        />
 
         <Route
           path="search"
@@ -159,6 +255,7 @@ const Router = () => {
               addToCart={addToCart}
               items={items}
               singleItem={singleItem}
+              accessToken={accessToken}
             />
           }
         />
@@ -187,11 +284,11 @@ const Router = () => {
           path="checkOut"
           element={
             <Checkout
-              cart={cart}
               plusHandler={plusHandler}
               minusHandler={minusHandler}
               deleteItem={deleteItem}
-              total={total}
+              cartItemsFromApi={cartItemsFromApi}
+              cartTotal={cartTotal}
             />
           }
         />
@@ -203,8 +300,11 @@ const Router = () => {
               plusHandler={plusHandler}
               minusHandler={minusHandler}
               deleteItem={deleteItem}
-              total={total}
+              // total={total}
               singleItem={singleItem}
+              accessToken={accessToken}
+              cartItemsFromApi={cartItemsFromApi}
+              cartTotal={cartTotal}
             />
           }
         />

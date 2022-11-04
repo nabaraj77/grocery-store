@@ -2,9 +2,16 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./AddToCart.css";
 
-const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
+const AddToCart = ({
+  cart,
+  minusHandler,
+  plusHandler,
+  deleteItem,
+  cartItemsFromApi,
+  cartTotal,
+}) => {
   const navigate = useNavigate();
-  console.log(cart);
+  //console.log(cartItemsFromApi);
 
   const proceedToCheckout = () => {
     navigate("/checkout");
@@ -33,41 +40,38 @@ const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
             </h3>
             <div class="checkout-right">
               <h4>
-                Your shopping cart contains: <span>{cart.length} Products</span>
+                Your shopping cart contains:{" "}
+                <span>{cartItemsFromApi.length} Products</span>
               </h4>
             </div>
-            {cart.map((item, index) => {
+            {cartItemsFromApi.map((item, index) => {
               return (
                 <>
                   <div className="cartItems" key={index}>
                     <h4>{index + 1}</h4>
-                    <span className="itemName">{item.title}</span>
+                    <span className="itemName">{item.product.title}</span>
                     <img
                       className="cartImage"
-                      src={item.images[0].imageName}
+                      src={item.product.images[0].imageName}
                       alt=""
                     />
                     <div className="quantityBtn">
                       <button
-                        className="cartBtn"
-                        onClick={() => minusHandler(item)}
+                        className="cartBtn cartBtnMinus"
+                        onClick={() => minusHandler(item, -1)}
                       >
                         -
                       </button>
-                      <span className="cartQuantity">
-                        {item.quantityOrdered}
-                      </span>
+                      <span className="cartQuantity">{item.quantity}</span>
                       <button
-                        className="cartBtn"
-                        onClick={() => plusHandler(item)}
+                        className="cartBtn cartBtnPlus"
+                        onClick={() => plusHandler(item, 1)}
                       >
                         +
                       </button>
                     </div>
-                    <p className="price">
-                      $ {item.unitPrice[0].newPrice * item.quantityOrdered}
-                    </p>
-                    <button onClick={() => deleteItem(item)}>
+                    <p className="price">$ {item.price * item.quantity}</p>
+                    <button className="delete" onClick={() => deleteItem(item)}>
                       <i class="fa-solid fa-trash delBtn"></i>
                     </button>
                   </div>
@@ -75,11 +79,12 @@ const AddToCart = ({ cart, minusHandler, plusHandler, deleteItem, total }) => {
                 </>
               );
             })}
-            {cart.length > 0 && (
+            {cartItemsFromApi.length > 0 && (
               <div className="totalAmount">
-                <strong>Total: $ {total}</strong>
+                <strong>Total: $ {cartTotal}</strong>
               </div>
             )}
+
             <div className="checkoutBtn">
               <button onClick={proceedToCheckout} className="proceedToCheckout">
                 Proceed To Checkout

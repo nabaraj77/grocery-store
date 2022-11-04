@@ -29,7 +29,6 @@ function Navbarleft() {
     <div>
       <div class="w3l_banner_nav_left">
         <nav class="navbar nav_bottom">
-          {/* <!-- Brand and toggle get grouped for better mobile display --> */}
           <div class="navbar-header nav_2">
             <button
               type="button"
@@ -43,12 +42,11 @@ function Navbarleft() {
               <span class="icon-bar"></span>
             </button>
           </div>
-          {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
+
           <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
             <ul class="nav navbar-nav nav_1">
               {/* CATEGORIES LISTING FROM API CALL DATA */}
               {categories.map((categoryList) => {
-                //console.log(categoryList);
                 return (
                   <>
                     {categoryList.subcategories.length === 0 ? (
@@ -71,19 +69,18 @@ function Navbarleft() {
                           <div class="w3ls_vegetables">
                             <ul>
                               <li>
-                                {categoryList.subcategories.map((subItem) => {
-                                  //console.log(subItem.title);
-                                  return (
-                                    <>
-                                      <Link to={`/${subItem.slug}`}>
-                                        {subItem.title}
-                                      </Link>
-                                    </>
-                                  );
-                                })}
-                                {/* <Link to={`/${categoryList.subcategories}`}>
-                                  {categoryList.title}
-                                </Link> */}
+                                {categoryList.subcategories.map(
+                                  (subItem, index) => {
+                                    //console.log(subItem.title);
+                                    return (
+                                      <div key={index}>
+                                        <Link to={`/${subItem.slug}`}>
+                                          {subItem.title}
+                                        </Link>
+                                      </div>
+                                    );
+                                  }
+                                )}
                               </li>
                             </ul>
                           </div>

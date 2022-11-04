@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import "./Checkout.css";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
-function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
+function Checkout({ cartTotal, cartItemsFromApi }) {
+  const [accessToken, setAccessToken] = useState();
+
+  useEffect(() => {
+    setAccessToken(localStorage.getItem("accessToken"));
+  });
   const {
     register,
     handleSubmit,
@@ -15,36 +21,43 @@ function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
   });
 
   const onSubmit = (data) => {
-    const url =
-      "https://uat.ordering-farmshop.ekbana.net/api/v4/delivery-address";
-    console.log(data);
-    axios({
-      method: "post",
-      url: url,
-      data: {
-        title: data.addressType,
-        latitude: data.latitude,
-        longitude: data.longitude,
-        customer: data.fullName,
-        contact: data.mobileNo,
-        isDefault: true,
-      },
-      headers: {
-        "Content-Type": "application/json",
-        Authorization:
-          "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjRlODBmY2ZiOGZiMjdhMWEwNDE1ODQzNmVlZjcwNzc1YTIyMmNmMzAwODkwNjkxODhkZGI2Nzk1MGYwMDczNGExMmYzNTdjYTAyNWE5ZGZhIn0.eyJhdWQiOiIyIiwianRpIjoiNGU4MGZjZmI4ZmIyN2ExYTA0MTU4NDM2ZWVmNzA3NzVhMjIyY2YzMDA4OTA2OTE4OGRkYjY3OTUwZjAwNzM0YTEyZjM1N2NhMDI1YTlkZmEiLCJpYXQiOjE2NjY5Nzg4OTIsIm5iZiI6MTY2Njk3ODg5MiwiZXhwIjoxNjc0OTI3NjkyLCJzdWIiOiI4MjMiLCJzY29wZXMiOltdfQ.BFNR_VSPokHzh7tOHvQ_1MKL3eMa24cuHHIALwQt6q6T4P7VUwOuAj3w2B7yQPSXyaNfBtsQm6WIlxUJ5SUY9ZKmwp-E7GnrHWwL25Vacbl03oZR0_q7mc4SJKflXTahbTtXlnhLMadn_3qyD7JoiMPatFmNJtXnLC5YWG5gAOgKCrHeXJ3Vg9KES_d0BQJktbR2sXHKKXhwkKySiIhabr-lNoHeAbkMsp1JFQffjzs7XCDExNQJX7crIimACTqLkn9bYh4fvplh-FY-8ndJfkgaBGH4YB7aMmQwTMMUsjcmCqnqtZDRTiWpPfDY3ozy9C8PZRyxXlku7RLT-aGliWU1uk2X53cyU3BGqeSBs0N4Dr1d4R3Ru8H8iTiyGhQEgaNfQFvCDrXwyIUo1nVSqStbWMF90kv0eK3L3mBY8mpVeSWQ1Al7b--zGr5OSt5zjWVdmirLrJjq_TTlAMu4r79VwdmQwul41HGdKAsrP9jxcCncgCpqpkdrLoYtSTjciEjb0b4b2f2GdIbsgaJMpRNcTHCPVVEob-Q3nmi5spMUAdp39ufDB5o4Ut-WtpSGt_qlNOyYtsmhPQPclfLEWvpHAehYSo4FdAjXJQn_6am9NzpLicdSyybJasuXL9BLoHUqi4_rO9zc0ep8Zoxa66tcQqvPvTPjEaN_CtScYBY",
-        "Api-Key": process.env.REACT_APP_API_KEY,
-      },
-    }).then((response) => {
-      console.log(response);
-    });
+    //DELIVERY ADDRESS API
+    const setDeliveryAddress = async () => {
+      let config = {
+        method: "get",
+        url: `https://uat.ordering-farmshop.ekbana.net/api/v4/profile/show`,
+        data: {
+          title: data.cityTown,
+          latitude: data.latitude,
+          longitude: data.longitude,
+          customer: data.fullName,
+          contact: data.mobileNo,
+          isDefault: true,
+        },
+        headers: {
+          "Api-key": process.env.REACT_APP_API_KEY,
+          "Warehouse-Id": 1,
+          Authorization: `Bearer ${accessToken}`,
+        },
+      };
+      let res = await axios(config);
+
+      console.log(res, "Address");
+      if (res.status === 200) {
+        toast.success("Ordered Confirmed.");
+      }
+    };
+
+    setDeliveryAddress();
 
     resetField("fullName");
     resetField("latitude");
     resetField("mobileNo");
     resetField("longitude");
     resetField("addressType");
+    resetField("cityTown");
   };
+
   return (
     <>
       <div className="products-breadcrumb">
@@ -78,27 +91,23 @@ function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
             <div class="col-md-4 checkout-left-basket">
               <h4>Basket List</h4>
               <ul>
-                {cart.map((item) => {
+                {cartItemsFromApi.map((item, index) => {
                   return (
                     <>
                       <li>
-                        {item.title} <i>-</i>
-                        {item.quantityOrdered}
-                        <span>
-                          $ {item.unitPrice[0].newPrice * item.quantityOrdered}
-                        </span>
+                        {`${index + 1}. `}
+                        {item.product.title} <i>-</i>
+                        {item.quantity}
+                        <span>{item.price * item.quantity}</span>
                       </li>
                     </>
                   );
                 })}
 
                 <li>
-                  Total Service Charges <i>-</i> <span>$15.00</span>
-                </li>
-                <li>
                   <strong>
                     <b>
-                      Total <i>-</i> <span>$ {total + 15}</span>
+                      Total <i>-</i> <span>$ {cartTotal}</span>
                     </b>
                   </strong>
                 </li>
@@ -193,20 +202,9 @@ function Checkout({ cart, minusHandler, plusHandler, deleteItem, total }) {
                           <span>*Town / City is required.</span>
                         )}
                       </div>
-                      <div class="controls">
-                        <label class="control-label">Address type: </label>
-                        <select
-                          class="form-control  addressType"
-                          {...register("addressType")}
-                        >
-                          <option>Office</option>
-                          <option>Home</option>
-                          <option>Commercial</option>
-                        </select>
-                      </div>
                     </div>
                     <button class="submit check_out">
-                      Delivery to this Address
+                      Deliver to this Address
                     </button>
                   </div>
                 </section>

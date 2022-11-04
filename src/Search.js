@@ -42,7 +42,7 @@ const Search = ({ addToCart, items, singleItem }) => {
         <div className="w3ls_w3l_banner_nav_right_grid w3ls_w3l_banner_nav_right_grid_veg">
           <h3 className="w3l_fruit">{search}</h3>
           <div className="w3ls_w3l_banner_nav_right_grid1 w3ls_w3l_banner_nav_right_grid1_veg">
-            {searchArray.length > 0 ? (
+            {searchArray.length > 0 && search != "" ? (
               searchArray.map((item, index) => {
                 return (
                   <>

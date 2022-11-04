@@ -3,18 +3,18 @@ import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useForm } from "react-hook-form";
 import { SearchData } from "../../Context/Search";
-import { toast } from "react-toastify";
-
+import toast from "react-hot-toast";
 function Header() {
   const [accessToken, setAccessToken] = useState([]);
   const searchValue = useContext(SearchData);
   const navigate = useNavigate();
+
   // console.log(searchValue);
 
   const signoutButton = () => {
-    localStorage.clear("accessToken");
-    toast.success("Signed Out");
     navigate("/");
+    localStorage.clear("accessToken");
+    toast.success("Signed out Successfully.");
   };
 
   //ACCESS TOKEN FETCHING
@@ -38,21 +38,6 @@ function Header() {
           <Link to="products">Today's special Offers ! </Link>
         </div>
         <div className="w3l_search">
-          {/* <form action="#" method="post">
-            <input
-              type="text"
-              placeholder="Search..."
-              onClick={(e) => {
-                setSearch(e.target.value);
-              }}
-              // name="Product"
-              // value="Search a product..."
-              // onfocus="this.value = '';"
-              // onblur="if (this.value == '') {this.value = 'Search a product...';}"
-              // required=""
-            />
-            <input type="submit" value="" />
-          </form> */}
           <form action="#" method="post" onSubmit={handleSubmit(onSubmit)}>
             <input
               type="text"
@@ -83,45 +68,63 @@ function Header() {
         <div className="w3l_header_right">
           <ul>
             <li class="dropdown profile_details_drop">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <i className="fa fa-user" aria-hidden="true">
-                  {/* <h6>
-                    <span>Guest</span>
-                  </h6> */}
-                </i>
-                <span class="caret"></span>
-              </a>
-              <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-                <div class="w3ls_vegetables">
-                  <ul>
-                    {!accessToken && (
-                      <div>
-                        <li>
-                          <Link to="/login">Log In</Link>
-                        </li>
-                        <li>
-                          <Link to="/signUp">Sign Up</Link>
-                        </li>
-                      </div>
-                    )}
-                    {accessToken && (
-                      <div>
-                        <li>
-                          <Link to="/user">Profile</Link>
-                        </li>
-                        <li>
-                          <button
-                            onClick={signoutButton}
-                            className="signoutBtn"
-                          >
-                            Sign Out
-                          </button>
-                        </li>
-                      </div>
-                    )}
-                  </ul>
+              {!accessToken && (
+                <div>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i className="fa fa-user" aria-hidden="true">
+                      <h6>
+                        <span>Guest</span>
+                      </h6>
+                    </i>
+                    <span class="caret"></span>
+                  </a>
+                  <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                    <div class="w3ls_vegetables">
+                      <ul>
+                        <div>
+                          <li>
+                            <Link to="/login">Log In</Link>
+                          </li>
+                          <li>
+                            <Link to="/signUp">Sign Up</Link>
+                          </li>
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              )}
+              {accessToken && (
+                <div>
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    <i className="fa fa-user" aria-hidden="true">
+                      <h6>
+                        <span>User</span>
+                      </h6>
+                    </i>
+                    <span class="caret"></span>
+                  </a>
+                  <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                    <div class="w3ls_vegetables">
+                      <ul>
+                        <div>
+                          <li>
+                            <Link to="/user">Profile</Link>
+                          </li>
+                          <li>
+                            <button
+                              onClick={signoutButton}
+                              className="signoutBtn"
+                            >
+                              Sign Out
+                            </button>
+                          </li>
+                        </div>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              )}
             </li>
           </ul>
         </div>

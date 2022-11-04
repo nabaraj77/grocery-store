@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import "./Mail.css";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const [result, setResult] = useState(0);
@@ -19,21 +20,45 @@ const Signup = () => {
   });
   const onSubmit = (data) => {
     console.log(data);
-    axios({
-      method: "post",
-      url: url,
-      data: {
-        first_name: data.first_name,
-        last_name: data.last_name,
-        email: data.email,
-        password: data.password,
-        mobile_number: data.mobile_number,
-      },
-    }).then((response) => {
-      setResult(response.status);
-      console.log(response);
-      console.log(result);
-    });
+    const signUpApiCall = async () => {
+      try {
+        const response = await axios({
+          method: "post",
+          url: url,
+          data: {
+            first_name: data.first_name,
+            last_name: data.last_name,
+            email: data.email,
+            password: data.password,
+            mobile_number: data.mobile_number,
+          },
+        });
+        // console.log(response);
+        if (response.status === 201) {
+          toast.success("Account Created Successfully");
+          navigate("/login");
+        }
+      } catch (err) {
+        console.log(err.response.data.errors[0].message);
+        toast.error(`Error: ${err.response.data.errors[0].message}`);
+      }
+    };
+    signUpApiCall();
+    // axios({
+    //   method: "post",
+    //   url: url,
+    //   data: {
+    //     first_name: data.first_name,
+    //     last_name: data.last_name,
+    //     email: data.email,
+    //     password: data.password,
+    //     mobile_number: data.mobile_number,
+    //   },
+    // }).then((response) => {
+    //   setResult(response.status);
+    //   console.log(response);
+    //   console.log(result);
+    // });
 
     resetField("first_name");
     resetField("last_name");

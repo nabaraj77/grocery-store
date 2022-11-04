@@ -114,14 +114,6 @@ function Mail() {
                   onSubmit={handleSubmit(onSubmit)}
                 >
                   <div class="col-md-6 wthree_contact_left_grid">
-                    {/* <input
-                      type="text"
-                      name="Name"
-                      value="Name*"
-                      onfocus="this.value = '';"
-                      onblur="if (this.value == '') {this.value = 'Name*';}"
-                      required=""
-                    /> */}
                     <input
                       {...register("fullName", {
                         required: "Full Name is required",

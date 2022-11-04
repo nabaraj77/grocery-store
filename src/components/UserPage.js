@@ -1,10 +1,16 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-const UserPage = ({ accessToken }) => {
-  const [userProfile, setUserProfile] = useState([]);
-  console.log(userProfile);
+import "./UserPage.css";
 
+const UserPage = ({ accessToken, cartItemsFromApi }) => {
+  const [userProfile, setUserProfile] = useState([]);
+
+  //console.log(userProfile);
+  //console.log(accessToken, "user");
+  // console.log(cartItems, "UserPage");
+
+  //USER INFO API
   const getUserInfo = async () => {
     let config = {
       method: "get",
@@ -22,14 +28,39 @@ const UserPage = ({ accessToken }) => {
   useEffect(() => {
     getUserInfo();
   }, [accessToken]);
+  const { firstName, lastName, email, mobileNumber, image } = userProfile;
 
   return (
     <div>
-      <div className="userInfo">
-        <h6>{userProfile.email}</h6>
-        <h6>{userProfile.firstName}</h6>
-        <h6>{userProfile.lastName}</h6>
-        <h6>{userProfile.mobileNumber}</h6>
+      <div className="wrapper">
+        <div className="userInfo">
+          <img className="userImage" src={image} alt="" />
+          <div className="info">
+            <h4>
+              <i>{`${firstName} ${lastName}`}</i>
+            </h4>
+            <h4>
+              <i>{mobileNumber}</i>
+            </h4>
+
+            <h4>
+              <i>{email}</i>
+            </h4>
+          </div>
+        </div>
+        <div className="cartInfo">
+          <h4>Cart has {cartItemsFromApi.length} items.</h4>
+          {cartItemsFromApi.map((item, index) => {
+            return (
+              <div key={index}>
+                <h5>
+                  {index + 1}-- {item.product.title} --{item.quantity}
+                </h5>
+                <hr />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

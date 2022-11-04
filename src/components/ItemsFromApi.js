@@ -31,8 +31,6 @@ const ItemsFromApi = ({ addToCart, singleItem, items }) => {
     let itemList = item.categorySlug === categorySlug;
     return itemList;
   });
-
-  console.log("Filtered Data", filteredItems);
   return (
     <>
       <div class="products-breadcrumb">
@@ -61,7 +59,7 @@ const ItemsFromApi = ({ addToCart, singleItem, items }) => {
             {filteredItems.length > 0 ? (
               filteredItems.map((item, index) => {
                 return (
-                  <>
+                  <div key={index}>
                     <div
                       className="col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd"
                       key={index}
@@ -109,7 +107,7 @@ const ItemsFromApi = ({ addToCart, singleItem, items }) => {
                         </div>
                       </div>
                     </div>
-                  </>
+                  </div>
                 );
               })
             ) : (

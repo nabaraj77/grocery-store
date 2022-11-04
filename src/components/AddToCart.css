@@ -9,6 +9,7 @@
 }
 .quantityBtn {
   width: 100px;
+  max-height: 45px;
 
   display: flex;
   justify-content: space-evenly;
@@ -33,10 +34,14 @@
   justify-content: center;
 }
 .itemName {
-  min-width: 150px;
+  min-width: 100px;
+  max-width: 101px;
 }
 .delBtn {
   color: red;
+}
+.delete:hover {
+  scale: 1.1;
 }
 .totalAmount {
   display: flex;
@@ -63,4 +68,16 @@
   display: flex;
   justify-content: center;
   margin-top: 1rem;
+}
+
+.addressType {
+  height: 50px;
+}
+.cartBtnPlus:hover {
+  background-color: red;
+  scale: 1.1;
+}
+.cartBtnMinus:hover {
+  background-color: aquamarine;
+  scale: 1.1;
 }

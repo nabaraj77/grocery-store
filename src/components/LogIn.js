@@ -3,9 +3,9 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Mail.css";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const LogIn = () => {
-  const [result, setResult] = useState(0);
   const navigate = useNavigate();
   const directToSignUpPage = () => {
     navigate("/signUp");
@@ -19,28 +19,71 @@ const LogIn = () => {
     mode: "onTouched",
   });
   const onSubmit = (data) => {
-    console.log(data);
-    axios({
-      method: "post",
-      url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/login",
-      data: {
-        username: data.username,
-        password: data.password,
-        client_id: 2,
-        client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
-        grant_type: "password",
-      },
-    }).then((response) => {
-      console.log(response.data.access_token);
-      localStorage.setItem("accessToken", response.data.access_token);
-      setResult(response.status);
-    });
+    const postLogin = async () => {
+      try {
+        const response = await axios({
+          method: "post",
+          url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/login",
+          data: {
+            username: data.username,
+            password: data.password,
+            client_id: 2,
+            client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
+            grant_type: "password",
+          },
+        });
+
+        if (response.status === 200) {
+          localStorage.setItem("accessToken", response.data.access_token);
+          toast.success("Login Successful");
+          navigate("/");
+        }
+      } catch (err) {
+        console.log(err.response.data.errors[0].message);
+        toast.error(`Error: ${err.response.data.errors[0].message}`);
+        // ,
+        // {
+        //   // style: {
+        //   //   border: "1px solid #713200",
+        //   //   padding: "16px",
+        //   //   color: "Red",
+        //   // },
+        //   // iconTheme: {
+        //   //   primary: "#713200",
+        //   //   secondary: "#FFFAEE",
+        //   // },
+        // });
+      }
+    };
+    postLogin();
+    //console.log(data);
+    // axios({
+    //   method: "post",
+    //   url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/login",
+    //   data: {
+    //     username: data.username,
+    //     password: data.password,
+    //     client_id: 2,
+    //     client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
+    //     grant_type: "password",
+    //   },
+    // }).then((response) => {
+    //   localStorage.setItem("accessToken", response.data.access_token);
+    //   setResult(response.status);
+    //   if (response.status === 200) {
+    //     toast.success("Login Success.");
+    //     navigate("/");
+    //   }
+    // });
 
     resetField("username");
     resetField("email");
     resetField("phoneNo");
     resetField("password");
   };
+  // if (result === 200) {
+  //   navigate("/");
+  // }
   return (
     <>
       <div className="products-breadcrumb">
@@ -56,15 +99,6 @@ const LogIn = () => {
         </div>
       </div>
       <div className="banner">
-        {result === 200 && navigate("/")}
-        {/* {result === 200 ? (
-          <div>
-            {navigate("/")} {toast.success("Successfully Signed In.")}
-          </div>
-        ) : (
-          toast.error("SignIn Failed.")
-        )} */}
-
         <div className="w3l_banner_nav_right">
           {/* <!-- login --> */}
           <div className="w3_login">
