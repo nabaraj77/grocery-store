@@ -87,8 +87,8 @@ const ItemsFromApi = ({ addToCart, singleItem, items }) => {
                                   </button>
                                   <p>{item.title}</p>
                                   <h4>
-                                    {item.unitPrice[0].newPrice}
-                                    <span>{item.unitPrice[0].oldPrice}</span>
+                                    Rs. {item.unitPrice[0].sellingPrice}
+                                    {/* <span>{item.unitPrice[0].oldPrice}</span> */}
                                   </h4>
                                 </div>
                                 <div className="snipcart-details ">

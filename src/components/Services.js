@@ -112,7 +112,6 @@ function Services() {
                     odio dignissimos ducimus qui blanditiis
                   </li>
                 </ul>
-                <a href="single.html">Shop Now</a>
               </div>
               <div className="clearfix"> </div>
             </div>

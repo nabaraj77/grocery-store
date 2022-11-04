@@ -1,6 +1,7 @@
 import React from "react";
 
 import ImageSlider from "../ImageSlider";
+import "./Main.css";
 
 function Main({ addToCart, items, singleItem }) {
   //FILTERING DATA ON THE BASIS OF CATEGORY
@@ -131,8 +132,8 @@ function Main({ addToCart, items, singleItem }) {
 
                                   <p>{item.title}</p>
                                   <h4>
-                                    {item.unitPrice[0].newPrice}
-                                    <span>{item.unitPrice[0].oldPrice}</span>
+                                    Rs. {item.unitPrice[0].sellingPrice}
+                                    {/* <span>{item.unitPrice[0].oldPrice}</span> */}
                                   </h4>
                                 </div>
                                 <div className="snipcart-details ">
@@ -169,7 +170,7 @@ function Main({ addToCart, items, singleItem }) {
           <h3>Top Products</h3>
           <div className="w3l_fresh_vegetables_grids">
             <div className="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
-              <div className="w3l_fresh_vegetables_grid2">
+              {/* <div className="w3l_fresh_vegetables_grid2">
                 <ul>
                   <li>
                     <i className="fa fa-check" aria-hidden="true"></i>
@@ -212,7 +213,14 @@ function Main({ addToCart, items, singleItem }) {
                     <a href="products.html">Dairy Products</a>
                   </li>
                 </ul>
-              </div>
+              </div> */}
+              <p className="infoAboutSite">
+                Grocery Store is an online delivery business that connects local
+                farmers and producers with consumers by building meaningful and
+                sustainable relationships. We aim to provide healthy food
+                options and encourage healthy living by building a community of
+                conscious and passionate stakeholders.
+              </p>
             </div>
             <div className="col-md-9 w3l_fresh_vegetables_grid_right">
               <div className="col-md-4 w3l_fresh_vegetables_grid">

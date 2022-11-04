@@ -65,11 +65,11 @@ function About() {
           <div class="agileits_team_grids">
             <div class="col-md-3 agileits_team_grid">
               <img
-                src="../Assets/images/32.jpg"
+                src="../Assets/images/avatar.png"
                 alt=" "
                 class="img-responsive"
               />
-              <h4>Martin Paul</h4>
+              <h4>Nabaraj Dahal</h4>
               <p>Manager</p>
               <ul class="agileits_social_icons agileits_social_icons_team">
                 <li>
@@ -91,11 +91,11 @@ function About() {
             </div>
             <div class="col-md-3 agileits_team_grid">
               <img
-                src="../Assets/images/33.jpg"
+                src="../Assets/images/avatar.png"
                 alt=" "
                 class="img-responsive"
               />
-              <h4>Michael Rick</h4>
+              <h4>Nabaraj Dahal</h4>
               <p>Supervisor</p>
               <ul class="agileits_social_icons agileits_social_icons_team">
                 <li>
@@ -117,11 +117,11 @@ function About() {
             </div>
             <div class="col-md-3 agileits_team_grid">
               <img
-                src="../Assets/images/34.jpg"
+                src="../Assets/images/avatar.png"
                 alt=" "
                 class="img-responsive"
               />
-              <h4>Thomas Carl</h4>
+              <h4>Nabaraj Dahal</h4>
               <p>Supervisor</p>
               <ul class="agileits_social_icons agileits_social_icons_team">
                 <li>
@@ -143,11 +143,11 @@ function About() {
             </div>
             <div class="col-md-3 agileits_team_grid">
               <img
-                src="../Assets/images/35.jpg"
+                src="../Assets/images/avatar.png"
                 alt=" "
                 class="img-responsive"
               />
-              <h4>Laura Lee</h4>
+              <h4>Nabaraj Dahal</h4>
               <p>CEO</p>
               <ul class="agileits_social_icons agileits_social_icons_team">
                 <li>

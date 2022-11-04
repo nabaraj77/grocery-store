@@ -8,7 +8,7 @@ const AddToCart = ({
   plusHandler,
   deleteItem,
   cartItemsFromApi,
-  cartTotal,
+  total,
 }) => {
   const navigate = useNavigate();
   //console.log(cartItemsFromApi);
@@ -81,7 +81,7 @@ const AddToCart = ({
             })}
             {cartItemsFromApi.length > 0 && (
               <div className="totalAmount">
-                <strong>Total: $ {cartTotal}</strong>
+                <strong>Total: $ {total}</strong>
               </div>
             )}
 

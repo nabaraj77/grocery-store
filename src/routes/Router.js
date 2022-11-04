@@ -33,7 +33,7 @@ const Router = () => {
   const [singleItemProduct, setsingleItemProduct] = useState([]);
   const [addToCartStatus, setAddToCartStatus] = useState();
   const [cartItemsFromApi, setCartItemsFromAPi] = useState([]);
-  const [cartTotal, setCartTotal] = useState();
+
   const navigate = useNavigate();
 
   //DELETING ITEMS FROM CART API
@@ -69,7 +69,6 @@ const Router = () => {
     let res = await axios(config);
     //console.log(res, "CARTDATA");
     setCartItemsFromAPi(res.data.data.cartProducts);
-    setCartTotal(res.data.data.total);
   };
 
   //API CALL TO GET PRODUCT LIST
@@ -183,7 +182,6 @@ const Router = () => {
   // useEffect(() => {
   //   getCartItemsFromLocalStorage();
   // }, []);
-
   const minusHandler = (data, quanPlusMinus) => {
     //console.log(data);
     cartItemsFromApi.map((item) => {
@@ -218,12 +216,12 @@ const Router = () => {
   const deleteItem = (data) => {
     deleteCartDataFromApi(data);
   };
-
-  //CALCULATING TOTAL
-  // const total = cart.reduce((acc, val) => {
-  //   acc += val.quantityOrdered * val.unitPrice[0].newPrice;
-  //   return acc;
-  // }, 0);
+  // CALCULATING TOTAL
+  const total = cartItemsFromApi.reduce((acc, val) => {
+    acc += val.quantity * val.product.unitPrice[0].sellingPrice;
+    return acc;
+  }, 0);
+  // console.log(total, "Tot");
   return (
     <>
       <Routes>
@@ -235,7 +233,16 @@ const Router = () => {
         />
         <Route path="events" element={<Events />} />
         <Route path="aboutUs" element={<About />} />
-        <Route path="products" element={<Products />} />
+        <Route
+          path="products"
+          element={
+            <Products
+              items={items}
+              addToCart={addToCart}
+              singleItem={singleItem}
+            />
+          }
+        />
         <Route path="services" element={<Services />} />
         <Route path="mailTo" element={<Mail />} />
         <Route
@@ -288,7 +295,7 @@ const Router = () => {
               minusHandler={minusHandler}
               deleteItem={deleteItem}
               cartItemsFromApi={cartItemsFromApi}
-              cartTotal={cartTotal}
+              total={total}
             />
           }
         />
@@ -300,11 +307,10 @@ const Router = () => {
               plusHandler={plusHandler}
               minusHandler={minusHandler}
               deleteItem={deleteItem}
-              // total={total}
               singleItem={singleItem}
               accessToken={accessToken}
               cartItemsFromApi={cartItemsFromApi}
-              cartTotal={cartTotal}
+              total={total}
             />
           }
         />
