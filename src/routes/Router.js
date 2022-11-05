@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import About from "../../src/components/About";
-import Events from "../../src/components/Events";
+import About from "../components/Static Pages/About";
+import Events from "../components/Static Pages/Events";
 import Mail from "../../src/components/Mail";
-import Services from "../../src/components/Services";
+import Services from "../components/Static Pages/Services";
 import Main from "../../src/components/mainPage/Main";
-import Error from "../../src/components/Error";
+import Error from "../components/Static Pages/Error";
 import AddToCart from "../components/AddToCart";
 import Checkout from "../components/Checkout";
 import ItemsFromApi from "../components/ItemsFromApi";
@@ -17,6 +17,10 @@ import Search from "../Search";
 import Single from "../components/Single";
 import axios from "axios";
 import UserPage from "../components/UserPage";
+import ResetPassword from "../components/ResetPassword";
+import ResetPasswordEmail from "../components/ResetPasswordEmail";
+import Faq from "../components/Static Pages/Faq";
+import PrivacyPolicy from "../components/Static Pages/PrivacyPolicy";
 
 //GET CARTITEMS FROM LOCAL STORAGE
 const getCartItemsFromLocalStorage = () => {
@@ -233,6 +237,11 @@ const Router = () => {
         />
         <Route path="events" element={<Events />} />
         <Route path="aboutUs" element={<About />} />
+        <Route path="resetPassword" element={<ResetPassword />} />
+        <Route path="resetPasswordEmail" element={<ResetPasswordEmail />} />
+        <Route path="faq" element={<Faq />} />
+        <Route path="privacyPolicy" element={<PrivacyPolicy />} />
+
         <Route
           path="products"
           element={

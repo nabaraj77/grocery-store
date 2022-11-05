@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
-function Checkout({ cartTotal, cartItemsFromApi }) {
+function Checkout({ total, cartItemsFromApi }) {
   const [accessToken, setAccessToken] = useState();
 
   useEffect(() => {
@@ -107,7 +107,7 @@ function Checkout({ cartTotal, cartItemsFromApi }) {
                 <li>
                   <strong>
                     <b>
-                      Total <i>-</i> <span>$ {cartTotal}</span>
+                      Total <i>-</i> <span>$ {total}</span>
                     </b>
                   </strong>
                 </li>

@@ -1,7 +1,22 @@
 import React from "react";
 import "react-router-dom";
-// import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import "./Footer.css";
+
 function Footer() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    resetField,
+  } = useForm({
+    mode: "onTouched",
+  });
+  const handleRegistration = (data) => {
+    console.log(data);
+    resetField("email");
+  };
   return (
     <div>
       <div class="newsletter">
@@ -10,14 +25,15 @@ function Footer() {
             <h3>sign up for our newsletter</h3>
           </div>
           <div class="w3agile_newsletter_right">
-            <form action="#" method="post">
+            <form
+              action="#"
+              method="post"
+              onSubmit={handleSubmit(handleRegistration)}
+            >
               <input
                 type="email"
-                name="Email"
-                value="Email"
-                onfocus="this.value = '';"
-                onblur="if (this.value == '') {this.value = 'Email';}"
-                required=""
+                {...register("email", {})}
+                placeholder="Email Address"
               />
               <input type="submit" value="subscribe now" />
             </form>
@@ -31,53 +47,54 @@ function Footer() {
             <h3>information</h3>
             <ul className="w3_footer_grid_list">
               <li>
-                <a href="events.html">Events</a>
+                <Link to="/events">Events</Link>
               </li>
               <li>
-                <a href="about.html">About Us</a>
+                {/* <a href="about.html">About Us</a> */}
+                <Link to="/aboutUs">About Us</Link>
               </li>
               <li>
-                <a href="products.html">Best Deals</a>
+                {/* <a href="products.html">Best Deals</a> */}
+                <Link to="/products">Best Deals</Link>
               </li>
               <li>
-                <a href="services.html">Services</a>
+                {/* <a href="services.html">Services</a> */}
+                <Link to="/services">Services</Link>
               </li>
-              <li>
-                <a href="short-codes.html">Short Codes</a>
-              </li>
+              <li></li>
             </ul>
           </div>
           <div className="col-md-3 w3_footer_grid">
             <h3>policy info</h3>
             <ul className="w3_footer_grid_list">
               <li>
-                <a href="faqs.html">FAQ</a>
+                <Link to="/faq">FAQ</Link>
               </li>
               <li>
-                <a href="privacy.html">privacy policy</a>
+                <Link to="/privacyPolicy">Privacy Policy</Link>
               </li>
               <li>
-                <a href="privacy.html">terms of use</a>
+                <Link to="/privacyPolicy">terms of use</Link>
               </li>
             </ul>
           </div>
           <div className="col-md-3 w3_footer_grid">
-            <h3>what in stores</h3>
+            <h3>Partners</h3>
             <ul className="w3_footer_grid_list">
               <li>
-                <a href="pet.html">Pet Food</a>
+                <Link to="">NMB Bank</Link>
               </li>
               <li>
-                <a href="frozen.html">Frozen Snacks</a>
+                <Link to="">Sanima Bank</Link>
               </li>
               <li>
-                <a href="kitchen.html">Kitchen</a>
+                <Link to="">Daraz Nepal</Link>
               </li>
               <li>
-                <a href="products.html">Branded Foods</a>
+                <Link to="">OnineKhabar.com</Link>
               </li>
               <li>
-                <a href="household.html">Households</a>
+                <Link to="">Ratopati.com</Link>
               </li>
             </ul>
           </div>

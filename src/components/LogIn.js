@@ -19,7 +19,7 @@ const LogIn = () => {
     mode: "onTouched",
   });
   const onSubmit = (data) => {
-    const postLogin = async () => {
+    const loginAPI = async () => {
       try {
         const response = await axios({
           method: "post",
@@ -41,40 +41,9 @@ const LogIn = () => {
       } catch (err) {
         console.log(err.response.data.errors[0].message);
         toast.error(`Error: ${err.response.data.errors[0].message}`);
-        // ,
-        // {
-        //   // style: {
-        //   //   border: "1px solid #713200",
-        //   //   padding: "16px",
-        //   //   color: "Red",
-        //   // },
-        //   // iconTheme: {
-        //   //   primary: "#713200",
-        //   //   secondary: "#FFFAEE",
-        //   // },
-        // });
       }
     };
-    postLogin();
-    //console.log(data);
-    // axios({
-    //   method: "post",
-    //   url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/login",
-    //   data: {
-    //     username: data.username,
-    //     password: data.password,
-    //     client_id: 2,
-    //     client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
-    //     grant_type: "password",
-    //   },
-    // }).then((response) => {
-    //   localStorage.setItem("accessToken", response.data.access_token);
-    //   setResult(response.status);
-    //   if (response.status === 200) {
-    //     toast.success("Login Success.");
-    //     navigate("/");
-    //   }
-    // });
+    loginAPI();
 
     resetField("username");
     resetField("email");
@@ -104,9 +73,10 @@ const LogIn = () => {
           <div className="w3_login">
             <h3>Log In</h3>
 
-            <div className="signUpBtn">
-              <button onClick={directToSignUpPage}>
-                Don't Have an Account? Click here...
+            <div className="signUp">
+              Don't Have an Account?
+              <button className="signUpBtn" onClick={directToSignUpPage}>
+                Click here...
               </button>
             </div>
 
@@ -141,7 +111,7 @@ const LogIn = () => {
                     <input type="submit" value="Sign In" />
                   </form>
                   <div class="cta">
-                    <Link to="/forgetPassword">Forgot your password?</Link>
+                    <Link to="/resetPasswordEmail">Forgot your password?</Link>
                   </div>
                 </div>
               </div>

@@ -10,6 +10,14 @@ function Header() {
   const navigate = useNavigate();
 
   // console.log(searchValue);
+  const viewYourCart = () => {
+    console.log("clicked");
+    if (accessToken) {
+      navigate("/cart");
+    } else {
+      navigate("/login");
+    }
+  };
 
   const signoutButton = () => {
     navigate("/");
@@ -56,6 +64,7 @@ function Header() {
               <Link to="/cart">
                 <input
                   type="submit"
+                  onClick={viewYourCart}
                   name="submit"
                   value="View your cart"
                   className="button"

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -6,18 +6,20 @@ import "./Mail.css";
 import toast from "react-hot-toast";
 
 const Signup = () => {
-  const [result, setResult] = useState(0);
   const navigate = useNavigate();
   const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/signup";
   const {
     register,
     handleSubmit,
-    watch,
     resetField,
     formState: { errors },
   } = useForm({
     mode: "onTouched",
   });
+
+  const directToSignInPage = () => {
+    navigate("/login");
+  };
   const onSubmit = (data) => {
     console.log(data);
     const signUpApiCall = async () => {
@@ -85,7 +87,7 @@ const Signup = () => {
 <!-- banner --> */}
       <div className="banner">
         <div className="w3l_banner_nav_right">
-          {result === 201 && (
+          {/* {result === 201 && (
             <div class="alert alert-success alert-dismissible" role="alert">
               <strong>Account Created Successfully.</strong>
               <button
@@ -98,15 +100,18 @@ const Signup = () => {
               </button>
               {navigate("/login")}
             </div>
-          )}
+          )} */}
           {/* <!-- login --> */}
           <div className="w3_login">
             <h3>Sign Up</h3>
+            <div className="signIn">
+              Back to Login?
+              <button className="signInBtn" onClick={directToSignInPage}>
+                Click here...
+              </button>
+            </div>
             <div className="w3_login_module">
               <div className="module form-module">
-                <div className="form">
-                  <h2>Sign Up to your account</h2>
-                </div>
                 <div>
                   <h2>Create an account</h2>
                   <form
@@ -118,26 +123,51 @@ const Signup = () => {
                       type="text"
                       {...register("first_name", {
                         required: "First Name is required",
+                        pattern: {
+                          value: /^[a-zA-Z ]*$/,
+                        },
                       })}
                       placeholder="First Name"
                     />
-                    {errors.first_name && <span>*First Name is required.</span>}
+                    {errors.first_name?.type === "required" && (
+                      <span>*First Name is required.</span>
+                    )}
+                    {errors.first_name?.type === "pattern" && (
+                      <span>*Enter Alphabets only.</span>
+                    )}
                     <input
                       type="text"
                       {...register("last_name", {
                         required: "Last Name is required",
+                        pattern: {
+                          value: /^[a-zA-Z ]*$/,
+                        },
                       })}
                       placeholder="Last Name"
                     />
-                    {errors.last_name && <span>*Last Name is required.</span>}
+                    {errors.last_name?.type === "required" && (
+                      <span>*Last Name is required.</span>
+                    )}
+                    {errors.last_name?.type === "pattern" && (
+                      <span>*Enter Alphabets only.</span>
+                    )}
                     <input
                       type="password"
                       {...register("password", {
                         required: "Password is required",
+                        pattern: {
+                          value:
+                            /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/gm,
+                        },
                       })}
                       placeholder="Password"
                     />
-                    {errors.password && <span>*Password is required.</span>}
+                    {errors.password?.type === "required" && (
+                      <span>*Password is required.</span>
+                    )}
+                    {errors.password?.type === "pattern" && (
+                      <span>*Enter a valid Password.</span>
+                    )}
                     <input
                       type="email"
                       {...register("email", {
@@ -147,15 +177,37 @@ const Signup = () => {
                     />
                     {errors.email && <span>*Email is required.</span>}
                     <input
-                      type="text"
-                      {...register("mobile_number", {
-                        required: "Mobile No is required",
+                      {...register("mobileNo", {
+                        required: "Mobile Number is required",
+                        pattern: {
+                          value: /^\d+$/,
+                          message: "Enter a valid Mobile Number.",
+                        },
+                        maxLength: {
+                          value: 10,
+                          message: "Enter a valid Mobile Number.",
+                        },
+                        minLength: {
+                          value: 10,
+                          message: "Enter a valid Mobile Number.",
+                        },
                       })}
                       placeholder="Mobile Number"
-                      s
+                      defaultValue=""
+                      type="text"
                     />
-                    {errors.mobile_number && (
-                      <span>*Phone No is required.</span>
+                    {errors.mobileNo?.type === "required" && (
+                      <span>*Mobile No is required.</span>
+                    )}
+                    {errors.mobileNo?.type === "pattern" && (
+                      <span>*Enter a valid Mobile Number. </span>
+                    )}
+
+                    {errors.mobileNo?.type === "minLength" && (
+                      <span>*Enter a valid Mobile Number.</span>
+                    )}
+                    {errors.mobileNo?.type === "maxLength" && (
+                      <span>*Enter a valid Mobile Number. </span>
                     )}
                     <input type="submit" value="Register" />
                   </form>

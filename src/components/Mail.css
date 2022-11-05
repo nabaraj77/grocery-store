@@ -11,13 +11,21 @@ span {
 }
 
 .signUpBtn {
-  margin-top: 1rem;
-  display: flex;
-  justify-content: center;
-  color: red;
-  cursor: pointer;
+  border: none;
+  border-radius: none;
+  background-color: inherit;
+  color: blue;
 }
-.signUpBtn:hover {
-  color: red;
-  scale: 1.1;
+.signUp {
+  text-align: center;
+}
+
+.signInBtn {
+  border: none;
+  border-radius: none;
+  background-color: inherit;
+  color: blue;
+}
+.signIn {
+  text-align: center;
 }

@@ -148,15 +148,6 @@ function Services() {
           {/* <!-- Stats-Number-Scroller-Animation-JavaScript --> */}
           <script src="../Assets/js/waypoints.min.js"></script>
           <script src="../Assets/js/counterup.min.js"></script>
-          {/* <script>
-					jQuery(document).ready(function( $ ) {
-						$('.counter').counterUp({
-							delay: 10,
-							time: 1000
-						});
-					});
-				</script> */}
-          {/* <!-- //Stats-Number-Scroller-Animation-JavaScript --> */}
         </div>
       </div>
       <div className="newsletter-top-serv-btm">

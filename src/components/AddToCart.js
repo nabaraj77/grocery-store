@@ -3,12 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import "./AddToCart.css";
 
 const AddToCart = ({
-  cart,
   minusHandler,
   plusHandler,
   deleteItem,
   cartItemsFromApi,
   total,
+  accessToken,
 }) => {
   const navigate = useNavigate();
   //console.log(cartItemsFromApi);
@@ -35,15 +35,20 @@ const AddToCart = ({
         <div class="w3l_banner_nav_right">
           {/* <!-- about --> */}
           <div class="privacy about">
-            <h3>
-              Chec<span>kout</span>
-            </h3>
-            <div class="checkout-right">
-              <h4>
-                Your shopping cart contains:{" "}
-                <span>{cartItemsFromApi.length} Products</span>
-              </h4>
-            </div>
+            {accessToken ? (
+              <div class="checkout-right">
+                <h4>
+                  Your shopping cart contains:
+                  <span>{cartItemsFromApi.length} Products</span>
+                </h4>
+              </div>
+            ) : (
+              <div class="checkout-right">
+                <h3>
+                  Please Login to view your <span>Cart</span>
+                </h3>
+              </div>
+            )}
             {cartItemsFromApi.map((item, index) => {
               return (
                 <>
@@ -84,12 +89,16 @@ const AddToCart = ({
                 <strong>Total: $ {total}</strong>
               </div>
             )}
-
-            <div className="checkoutBtn">
-              <button onClick={proceedToCheckout} className="proceedToCheckout">
-                Proceed To Checkout
-              </button>
-            </div>
+            {cartItemsFromApi.length > 0 && (
+              <div className="checkoutBtn">
+                <button
+                  onClick={proceedToCheckout}
+                  className="proceedToCheckout"
+                >
+                  Proceed To Checkout
+                </button>
+              </div>
+            )}
           </div>
 
           {/* <!-- //about --> */}

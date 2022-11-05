@@ -22,12 +22,13 @@ const UserPage = ({ accessToken, cartItemsFromApi }) => {
       },
     };
     let res = await axios(config);
-    console.log(res.data.data);
+    //console.log(res.data.data);
     setUserProfile(res.data.data);
   };
   useEffect(() => {
     getUserInfo();
   }, [accessToken]);
+
   const { firstName, lastName, email, mobileNumber, image } = userProfile;
 
   return (

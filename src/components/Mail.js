@@ -1,12 +1,10 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function Mail() {
-  const [result, setResult] = useState(0);
-  const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/contact-us";
   const {
     register,
     handleSubmit,
@@ -16,27 +14,57 @@ function Mail() {
     mode: "onTouched",
   });
   const onSubmit = (data) => {
-    console.log(data);
+    //console.log(data);
 
-    axios({
-      method: "post",
-      url: url,
-      data: {
-        message: data.message,
-        subject: data.subject,
-        email: data.email,
-        name: data.fullName,
-        contact: data.mobileNo,
-      },
-      headers: {
-        "Content-Type": "application/json",
-        "Warehouse-Id": 1,
-        "Api-Key": process.env.REACT_APP_API_KEY,
-      },
-    }).then((response) => {
-      console.log(response);
-      setResult(response.status);
-    });
+    const contactUsApiCall = async () => {
+      try {
+        const response = await axios({
+          method: "post",
+          url: "https://uat.ordering-farmshop.ekbana.net/api/v4/contact-us",
+          data: {
+            message: data.message,
+            subject: data.subject,
+            email: data.email,
+            name: data.fullName,
+            contact: data.mobileNo,
+          },
+          headers: {
+            "Content-Type": "application/json",
+            "Warehouse-Id": 1,
+            "Api-Key": process.env.REACT_APP_API_KEY,
+          },
+        });
+        console.log(response);
+        if (response.status === 200) {
+          toast.success("Query Sent Successfully.");
+        }
+      } catch (err) {
+        toast.error(`Error: ${err.response.data.errors[0].message}`);
+      }
+    };
+    contactUsApiCall();
+
+    // axios({
+    //   method: "post",
+    //   url: "https://uat.ordering-farmshop.ekbana.net/api/v4/contact-us",
+    //   data: {
+    //     message: data.message,
+    //     subject: data.subject,
+    //     email: data.email,
+    //     name: data.fullName,
+    //     contact: data.mobileNo,
+    //   },
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Warehouse-Id": 1,
+    //     "Api-Key": process.env.REACT_APP_API_KEY,
+    //   },
+    // }).then((response) => {
+    //   console.log(response);
+    //   if (response.status === 200) {
+    //     toast.success("Query sent Successfully.");
+    //   }
+    // });
 
     resetField("fullName");
     resetField("email");
@@ -60,7 +88,7 @@ function Mail() {
         </div>
       </div>
       <div class="banner">
-        {result === 200 && (
+        {/* {result === 200 && (
           <div class="alert alert-success alert-dismissible" role="alert">
             <strong>Query Sent Successfully.</strong>
             <button
@@ -72,7 +100,7 @@ function Mail() {
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-        )}
+        )} */}
         <div class="w3l_banner_nav_right">
           {/* <!-- mail --> */}
           <div class="mail">
@@ -117,11 +145,21 @@ function Mail() {
                     <input
                       {...register("fullName", {
                         required: "Full Name is required",
+                        pattern: {
+                          value: /^[a-zA-Z ]*$/,
+                        },
+                        message: "Enter alphabets only.",
                       })}
                       placeholder="Full Name"
                       type="text"
                     />
-                    {errors.fullName && <span>*Full Name is required.</span>}
+                    {errors.fullName?.type === "required" && (
+                      <span>*Full Name is required.</span>
+                    )}
+                    {errors.fullName?.type === "pattern" && (
+                      <span>*Enter alphabets only.</span>
+                    )}
+
                     <input
                       className="email"
                       {...register("email", {
@@ -146,15 +184,17 @@ function Mail() {
                     <input
                       {...register("mobileNo", {
                         required: "Mobile Number is required",
+                        pattern: {
+                          value: /^\d+$/,
+                          message: "Enter a valid Mobile Number.",
+                        },
                         maxLength: {
                           value: 10,
-                          message:
-                            "Mobile number must not be greater than 10 digits.",
+                          message: "Enter a valid Mobile Number.",
                         },
                         minLength: {
                           value: 10,
-                          message:
-                            "Mobile Number must not be less than 10 digits",
+                          message: "Enter a valid Mobile Number.",
                         },
                       })}
                       placeholder="Mobile Number"
@@ -164,13 +204,17 @@ function Mail() {
                     {errors.mobileNo?.type === "required" && (
                       <span>*Mobile No is required.</span>
                     )}
+                    {errors.mobileNo?.type === "pattern" && (
+                      <span>*Enter a valid Mobile Number. </span>
+                    )}
 
                     {errors.mobileNo?.type === "minLength" && (
-                      <span>*Mobile No less than 10 digits.</span>
+                      <span>*Enter a valid Mobile Number.</span>
                     )}
                     {errors.mobileNo?.type === "maxLength" && (
-                      <span>*Mobile No greater than 10 digits. </span>
+                      <span>*Enter a valid Mobile Number. </span>
                     )}
+
                     <input
                       className="subject"
                       {...register("subject", {
