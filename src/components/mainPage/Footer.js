@@ -3,6 +3,7 @@ import "react-router-dom";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Footer.css";
+import toast from "react-hot-toast";
 
 function Footer() {
   const {
@@ -15,6 +16,7 @@ function Footer() {
   });
   const handleRegistration = (data) => {
     console.log(data);
+    toast.success("Successfully Subscribed.");
     resetField("email");
   };
   return (
@@ -25,17 +27,17 @@ function Footer() {
             <h3>sign up for our newsletter</h3>
           </div>
           <div className="w3agile_newsletter_right">
-            <form
-              action="#"
-              method="post"
-              onSubmit={handleSubmit(handleRegistration)}
-            >
+            <form action="#" onSubmit={handleSubmit(handleRegistration)}>
               <input
                 type="email"
-                {...register("email", {})}
+                {...register("email", {
+                  required: "Email is required.",
+                })}
                 placeholder="Email Address"
               />
+
               <input type="submit" value="subscribe now" />
+              {errors.email && <p>*Email is required.</p>}
             </form>
           </div>
           <div className="clearfix"> </div>

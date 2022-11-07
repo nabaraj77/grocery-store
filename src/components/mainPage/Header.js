@@ -1,4 +1,4 @@
-import React, { useState, createContext, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Header.css";
 import { useForm } from "react-hook-form";
@@ -11,7 +11,6 @@ function Header() {
 
   // console.log(searchValue);
   const viewYourCart = () => {
-    console.log("clicked");
     if (accessToken) {
       navigate("/cart");
     } else {
@@ -20,9 +19,9 @@ function Header() {
   };
 
   const signoutButton = () => {
-    navigate("/");
     localStorage.clear("accessToken");
     toast.success("Signed out Successfully.");
+    navigate("/");
   };
 
   //ACCESS TOKEN FETCHING
@@ -36,7 +35,6 @@ function Header() {
   const onSubmit = (data) => {
     searchValue.setValues(data);
     resetField("searchValue");
-
     navigate("/search");
   };
   return (

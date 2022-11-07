@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Mail.css";
 import toast from "react-hot-toast";
-import { axiosData } from "./api/axios";
+import { axiosData } from "../api/axios";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -20,7 +20,7 @@ const Signup = () => {
     navigate("/login");
   };
   const onSubmit = (data) => {
-    console.log(data);
+    //console.log(data);
     const signUpApiCall = async () => {
       try {
         const response = await axiosData.post("api/v4/auth/signup", data);
@@ -123,7 +123,7 @@ const Signup = () => {
                     )}
                     {errors.password?.type === "pattern" && (
                       <span>
-                        *8 characters long: 1 upper case and 1 special
+                        *Min 8 characters long: 1 upper case and 1 special
                         character.
                       </span>
                     )}

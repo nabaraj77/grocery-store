@@ -1,12 +1,8 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
 
-import { axiosData } from "./api/axios";
-
-const ResetPasswordEmail = () => {
-  const navigate = useNavigate();
+const ResetPassword = () => {
   const {
     register,
     handleSubmit,
@@ -16,21 +12,7 @@ const ResetPasswordEmail = () => {
   });
 
   const handleRegistration = (data) => {
-    // console.log(data);
-    const resetCodeApi = async () => {
-      const emailToSend = {
-        email: data.email,
-      };
-      try {
-        await axiosData.post("api/v4/auth/forgot-password", emailToSend);
-        toast.success("Code Sent Successfully to registered Email.");
-        navigate("/resetPassword");
-      } catch (err) {
-        toast.error(`Error: ${err.response.data.errors[0].message}`);
-        console.log(err);
-      }
-    };
-    resetCodeApi();
+    console.log(data);
   };
   return (
     <div>
@@ -55,19 +37,34 @@ const ResetPasswordEmail = () => {
               <div className="module form-module">
                 <div>
                   <h2 className="text-center mt-2">Reset Password</h2>
-                  <form
-                    onSubmit={handleSubmit(handleRegistration)}
-                    action="#"
-                    method="post"
-                  >
+                  <form onSubmit={handleSubmit(handleRegistration)} action="#">
                     <input
-                      type="email"
-                      {...register("email", {
-                        required: "Email is required",
+                      type="text"
+                      placeholder="Enter Reset Code"
+                      {...register("resetCode", {
+                        required: "Code is required.",
                       })}
-                      placeholder="Email Address"
                     />
-                    {errors.email && <span>*Email is required.</span>}
+                    {errors.resetCode && <span>*Code is required.</span>}
+                    <input
+                      type="password"
+                      placeholder="Enter New Password"
+                      {...register("password", {
+                        required: "Password is required.",
+                      })}
+                    />
+                    {errors.password && <span>*Password is required.</span>}
+
+                    <input
+                      type="password"
+                      placeholder="Re Password."
+                      {...register("rePassword", {
+                        required: "Re password is required.",
+                      })}
+                    />
+                    {errors.rePassword && (
+                      <span>*Re Password is required.</span>
+                    )}
 
                     <input type="submit" value="Submit" />
                   </form>
@@ -82,4 +79,4 @@ const ResetPasswordEmail = () => {
   );
 };
 
-export default ResetPasswordEmail;
+export default ResetPassword;

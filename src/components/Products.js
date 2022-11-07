@@ -5,11 +5,11 @@ import "./Product.css";
 function Products({ items, addToCart, singleItem }) {
   return (
     <>
-      <div class="products-breadcrumb">
-        <div class="container">
+      <div className="products-breadcrumb">
+        <div className="container">
           <ul>
             <li>
-              <i class="fa fa-home" aria-hidden="true"></i>
+              <i className="fa fa-home" aria-hidden="true"></i>
 
               <Link to="/">Home</Link>
               <span>|</span>
@@ -19,21 +19,21 @@ function Products({ items, addToCart, singleItem }) {
         </div>
       </div>
 
-      <div class="w3l_banner_nav_right">
-        <div class="w3l_banner_nav_right_banner3">
+      <div className="w3l_banner_nav_right">
+        <div className="w3l_banner_nav_right_banner3">
           <h3>
-            Best Deals For New Products<span class="blink_me"></span>
+            Best Deals For New Products<span className="blink_me"></span>
           </h3>
         </div>
-        <div class="w3l_banner_nav_right_banner3_btm">
-          <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div class="view view-tenth">
+        <div className="w3l_banner_nav_right_banner3_btm">
+          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
+            <div className="view view-tenth">
               <img
                 src="../Assets/images/13.jpg"
                 alt=" "
-                class="img-responsive"
+                className="img-responsive"
               />
-              <div class="mask">
+              <div className="mask">
                 <h4>Grocery Store</h4>
                 <p>
                   Excepteur sint occaecat cupidatat non proident, sunt in culpa
@@ -48,14 +48,14 @@ function Products({ items, addToCart, singleItem }) {
               <li>sed do eiusmod tempor incididunt</li>
             </ol>
           </div>
-          <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div class="view view-tenth">
+          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
+            <div className="view view-tenth">
               <img
                 src="../Assets/images/14.jpg"
                 alt=" "
-                class="img-responsive"
+                className="img-responsive"
               />
-              <div class="mask">
+              <div className="mask">
                 <h4>Grocery Store</h4>
                 <p>
                   Excepteur sint occaecat cupidatat non proident, sunt in culpa
@@ -70,14 +70,14 @@ function Products({ items, addToCart, singleItem }) {
               <li>vel eum iure reprehenderit</li>
             </ol>
           </div>
-          <div class="col-md-4 w3l_banner_nav_right_banner3_btml">
-            <div class="view view-tenth">
+          <div className="col-md-4 w3l_banner_nav_right_banner3_btml">
+            <div className="view view-tenth">
               <img
                 src="../Assets/images/15.jpg"
                 alt=" "
-                class="img-responsive"
+                className="img-responsive"
               />
-              <div class="mask">
+              <div className="mask">
                 <h4>Grocery Store</h4>
                 <p>
                   Excepteur sint occaecat cupidatat non proident, sunt in culpa
@@ -92,11 +92,11 @@ function Products({ items, addToCart, singleItem }) {
               <li>magnam aliquam quaerat</li>
             </ol>
           </div>
-          <div class="clearfix"> </div>
+          <div className="clearfix"> </div>
         </div>
-        <div class="w3ls_w3l_banner_nav_right_grid">
+        <div className="w3ls_w3l_banner_nav_right_grid">
           <h3>All Products</h3>
-          <div class="w3ls_w3l_banner_nav_right_grid1">
+          <div className="w3ls_w3l_banner_nav_right_grid1">
             {items.map((item, index) => {
               return (
                 <div key={index}>

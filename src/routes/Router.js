@@ -3,37 +3,26 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import About from "../components/Static Pages/About";
 import Events from "../components/Static Pages/Events";
-import Mail from "../../src/components/Mail";
+import Mail from "../../src/components/user/Mail";
 import Services from "../components/Static Pages/Services";
 import Main from "../../src/components/mainPage/Main";
 import Error from "../components/Static Pages/Error";
 import AddToCart from "../components/AddToCart";
-import Checkout from "../components/Checkout";
+import Checkout from "../components/user/Checkout";
 import ItemsFromApi from "../components/ItemsFromApi";
-import LogIn from "../components/LogIn";
-import Signup from "../components/SignUp";
+import LogIn from "../components/user/LogIn";
+import Signup from "../components/user/SignUp";
 import Products from "../components/Products";
 import Search from "../Search";
 import Single from "../components/Single";
-import UserPage from "../components/UserPage";
-import ResetPassword from "../components/ResetPassword";
-import ResetPasswordEmail from "../components/ResetPasswordEmail";
+import UserPage from "../components/user/UserPage";
+import ResetPassword from "../components/user/ResetPassword";
+import ResetPasswordEmail from "../components/user/ResetPasswordEmail";
 import Faq from "../components/Static Pages/Faq";
 import PrivacyPolicy from "../components/Static Pages/PrivacyPolicy";
 import { axiosData } from "../components/api/axios";
 
-//GET CARTITEMS FROM LOCAL STORAGE
-const getCartItemsFromLocalStorage = () => {
-  const list = localStorage.getItem("cartItems");
-  if (list) {
-    return JSON.parse(list);
-  } else {
-    return [];
-  }
-};
-
 const Router = () => {
-  const [cart, setCart] = useState(getCartItemsFromLocalStorage());
   const [singleItemProduct, setsingleItemProduct] = useState([]);
   const [cartItemsFromApi, setCartItemsFromAPi] = useState([]);
   const [boolean, setBoolean] = useState(false);
@@ -74,8 +63,8 @@ const Router = () => {
   const [accessToken, setAccessToken] = useState("");
   const getDataList = async () => {
     try {
-      let res = await axiosData.get("api/v4/product?allProduct=1");
-      // console.log(res);
+      let res = await axiosData.get("/api/v4/product?allProduct=1");
+      //console.log(res, "Response");
       setItems(res.data.data);
     } catch (err) {
       console.log(err);
@@ -142,7 +131,7 @@ const Router = () => {
       } else {
         const dataToAddToApi = { ...data, quantity: 1 };
         console.log(dataToAddToApi);
-        setCart([...cart, dataToAddToApi]);
+
         postSingleItemToCart(dataToAddToApi);
       }
     } else {
@@ -181,6 +170,7 @@ const Router = () => {
         return item;
       }
     });
+    // setCart(updatedCart);
     //console.log(updatedCart);
   };
 
@@ -280,7 +270,6 @@ const Router = () => {
           path="cart"
           element={
             <AddToCart
-              cart={cart}
               plusHandler={plusHandler}
               minusHandler={minusHandler}
               deleteItem={deleteItem}
@@ -292,7 +281,7 @@ const Router = () => {
           }
         />
 
-        <Route path="*" element={<Error />} />
+        <Route path="/*" element={<Error />} />
       </Routes>
     </>
   );

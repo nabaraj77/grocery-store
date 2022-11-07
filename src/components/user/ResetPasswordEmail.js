@@ -1,14 +1,36 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
-const ResetPassword = () => {
-  const { register, handleSubmit } = useForm({
+import { axiosData } from "../api/axios";
+
+const ResetPasswordEmail = () => {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     mode: "onTouched",
   });
 
   const handleRegistration = (data) => {
-    console.log(data);
+    // console.log(data);
+    const resetCodeApi = async () => {
+      const emailToSend = {
+        email: data.email,
+      };
+      try {
+        await axiosData.post("api/v4/auth/forgot-password", emailToSend);
+        toast.success("Code Sent Successfully to registered Email.");
+        navigate("/resetPassword");
+      } catch (err) {
+        toast.error(err?.response?.data?.errors[0]?.message);
+        // console.log(err);
+      }
+    };
+    resetCodeApi();
   };
   return (
     <div>
@@ -39,20 +61,13 @@ const ResetPassword = () => {
                     method="post"
                   >
                     <input
-                      type="text"
-                      placeholder="Enter Reset Code"
-                      {...register("Reset Code")}
+                      type="email"
+                      {...register("email", {
+                        required: "Email is required",
+                      })}
+                      placeholder="Email Address"
                     />
-                    <input
-                      type="password"
-                      placeholder="Enter New Password"
-                      {...register("Password")}
-                    />
-                    <input
-                      type="password"
-                      placeholder="Confirm Password"
-                      {...register("Confirm Password")}
-                    />
+                    {errors.email && <span>*Email is required.</span>}
 
                     <input type="submit" value="Submit" />
                   </form>
@@ -67,4 +82,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordEmail;

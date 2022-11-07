@@ -2,9 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import "./Mail.css";
-import axios from "axios";
 import toast from "react-hot-toast";
-import { axiosData } from "./api/axios";
+import { axiosData } from "../api/axios";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -34,7 +33,7 @@ const LogIn = () => {
         toast.success("Login Successful");
         navigate("/");
       } catch (err) {
-        toast.error(`Error: ${err.response.data.errors[0].message}`);
+        toast.error(`Error: ${err?.response?.data?.errors[0]?.message}`);
       }
     };
     loginAPI();
@@ -44,9 +43,6 @@ const LogIn = () => {
     resetField("phoneNo");
     resetField("password");
   };
-  // if (result === 200) {
-  //   navigate("/");
-  // }
   return (
     <>
       <div className="products-breadcrumb">
@@ -104,19 +100,17 @@ const LogIn = () => {
 
                     <input type="submit" value="Sign In" />
                   </form>
-                  <div class="cta">
+                  <div className="cta">
                     <Link to="/resetPasswordEmail">Forgot your password?</Link>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* <!-- //login --> */}
         </div>
         <div className="clearfix"></div>
       </div>
-      {/* <!-- //banner -->
-<!-- newsletter-top-serv-btm --> */}
+
       <div className="newsletter-top-serv-btm">
         <div className="container">
           <div className="col-md-4 wthree_news_top_serv_btm_grid">

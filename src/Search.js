@@ -25,11 +25,11 @@ const Search = ({ addToCart, items, singleItem }) => {
   console.log(searchArray, "searchArray");
   return (
     <>
-      <div class="products-breadcrumb">
-        <div class="container">
+      <div className="products-breadcrumb">
+        <div className="container">
           <ul>
             <li>
-              <i class="fa fa-home" aria-hidden="true"></i>
+              <i className="fa fa-home" aria-hidden="true"></i>
               {/* <a href="index.html">Home</a> */}
               <Link to="/">Home</Link>
               <span>|</span>

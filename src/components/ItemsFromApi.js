@@ -5,39 +5,19 @@ import "./ItemsFromApi.css";
 
 const ItemsFromApi = ({ addToCart, singleItem, items }) => {
   const { categorySlug } = useParams();
-  // const [items, setItems] = useState([]);
 
-  // const getCategoriesList = () => {
-  //   axios({
-  //     method: "get",
-  //     url: `https://uat.ordering-farmshop.ekbana.net/api/v4/product?allProduct=1`,
-  //     // params: {
-  //     //   allProduct: 1,
-  //     // },
-  //     headers: {
-  //       "Api-key": process.env.REACT_APP_API_KEY,
-  //       "Warehouse-Id": 1,
-  //     },
-  //   })
-  //     .then((response) => {
-  //       setItems(response.data.data);
-  //     })
-  //     .catch((error) => console.error(`Error: ${error}`));
-  // };
-  // useEffect(() => {
-  //   getCategoriesList();
-  // }, []);
   const filteredItems = items.filter((item) => {
     let itemList = item.categorySlug === categorySlug;
     return itemList;
   });
+  //console.log(items);
   return (
     <>
-      <div class="products-breadcrumb">
-        <div class="container">
+      <div className="products-breadcrumb">
+        <div className="container">
           <ul>
             <li>
-              <i class="fa fa-home" aria-hidden="true"></i>
+              <i className="fa fa-home" aria-hidden="true"></i>
               {/* <a href="index.html">Home</a> */}
               <Link to="/">Home</Link>
               <span>|</span>

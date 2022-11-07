@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import toast from "react-hot-toast";
+import { axiosData } from "../api/axios";
 
 function Mail() {
   const {
@@ -17,54 +17,21 @@ function Mail() {
     //console.log(data);
 
     const contactUsApiCall = async () => {
+      const datas = {
+        message: data.message,
+        subject: data.subject,
+        email: data.email,
+        name: data.fullName,
+        contact: data.mobileNo,
+      };
       try {
-        const response = await axios({
-          method: "post",
-          url: "https://uat.ordering-farmshop.ekbana.net/api/v4/contact-us",
-          data: {
-            message: data.message,
-            subject: data.subject,
-            email: data.email,
-            name: data.fullName,
-            contact: data.mobileNo,
-          },
-          headers: {
-            "Content-Type": "application/json",
-            "Warehouse-Id": 1,
-            "Api-Key": process.env.REACT_APP_API_KEY,
-          },
-        });
-        console.log(response);
-        if (response.status === 200) {
-          toast.success("Query Sent Successfully.");
-        }
+        await axiosData.post("/api/v4/contact-us", datas);
+        toast.success("Query Sent Successfully.");
       } catch (err) {
         toast.error(`Error: ${err.response.data.errors[0].message}`);
       }
     };
     contactUsApiCall();
-
-    // axios({
-    //   method: "post",
-    //   url: "https://uat.ordering-farmshop.ekbana.net/api/v4/contact-us",
-    //   data: {
-    //     message: data.message,
-    //     subject: data.subject,
-    //     email: data.email,
-    //     name: data.fullName,
-    //     contact: data.mobileNo,
-    //   },
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //     "Warehouse-Id": 1,
-    //     "Api-Key": process.env.REACT_APP_API_KEY,
-    //   },
-    // }).then((response) => {
-    //   console.log(response);
-    //   if (response.status === 200) {
-    //     toast.success("Query sent Successfully.");
-    //   }
-    // });
 
     resetField("fullName");
     resetField("email");
@@ -74,11 +41,11 @@ function Mail() {
   };
   return (
     <>
-      <div class="products-breadcrumb">
-        <div class="container">
+      <div className="products-breadcrumb">
+        <div className="container">
           <ul>
             <li>
-              <i class="fa fa-home" aria-hidden="true"></i>
+              <i className="fa fa-home" aria-hidden="true"></i>
               {/* <a href="index.html">Home</a> */}
               <Link to="/">Home</Link>
               <span>|</span>
@@ -87,7 +54,7 @@ function Mail() {
           </ul>
         </div>
       </div>
-      <div class="banner">
+      <div className="banner">
         {/* {result === 200 && (
           <div class="alert alert-success alert-dismissible" role="alert">
             <strong>Query Sent Successfully.</strong>
@@ -101,15 +68,15 @@ function Mail() {
             </button>
           </div>
         )} */}
-        <div class="w3l_banner_nav_right">
+        <div className="w3l_banner_nav_right">
           {/* <!-- mail --> */}
-          <div class="mail">
+          <div className="mail">
             <h3>Mail Us</h3>
-            <div class="agileinfo_mail_grids">
-              <div class="col-md-4 agileinfo_mail_grid_left">
+            <div className="agileinfo_mail_grids">
+              <div className="col-md-4 agileinfo_mail_grid_left">
                 <ul>
                   <li>
-                    <i class="fa fa-home" aria-hidden="true"></i>
+                    <i className="fa fa-home" aria-hidden="true"></i>
                   </li>
                   <li>
                     address<span>Kathmandu, Nepal.</span>
@@ -117,7 +84,7 @@ function Mail() {
                 </ul>
                 <ul>
                   <li>
-                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                    <i className="fa fa-envelope" aria-hidden="true"></i>
                   </li>
                   <li>
                     email
@@ -128,20 +95,20 @@ function Mail() {
                 </ul>
                 <ul>
                   <li>
-                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    <i className="fa fa-phone" aria-hidden="true"></i>
                   </li>
                   <li>
                     call to us<span>(+977) 9840000000</span>
                   </li>
                 </ul>
               </div>
-              <div class="col-md-8 agileinfo_mail_grid_right">
+              <div className="col-md-8 agileinfo_mail_grid_right">
                 <form
                   action="#"
                   method="post"
                   onSubmit={handleSubmit(onSubmit)}
                 >
-                  <div class="col-md-6 wthree_contact_left_grid">
+                  <div className="col-md-6 wthree_contact_left_grid">
                     <input
                       {...register("fullName", {
                         required: "Full Name is required",
@@ -180,7 +147,7 @@ function Mail() {
                       <span>*Enter a valid email.</span>
                     )}
                   </div>
-                  <div class="col-md-6 wthree_contact_left_grid">
+                  <div className="col-md-6 wthree_contact_left_grid">
                     <input
                       {...register("mobileNo", {
                         required: "Mobile Number is required",
@@ -226,7 +193,7 @@ function Mail() {
 
                     {errors.subject && <span>*Subject is required.</span>}
                   </div>
-                  <div class="clearfix"> </div>
+                  <div className="clearfix"> </div>
                   {errors.message && (
                     <span>
                       *Message Length Should be greater than 20 characters.
@@ -249,12 +216,12 @@ function Mail() {
                   <input type="reset" value="Clear" />
                 </form>
               </div>
-              <div class="clearfix"> </div>
+              <div className="clearfix"> </div>
             </div>
           </div>
           {/* <!-- //mail --> */}
         </div>
-        <div class="clearfix"></div>
+        <div className="clearfix"></div>
         <div className="map">
           <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14131.036667732067!2d85.32395955!3d27.69383745!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19b163529399%3A0x522e7f4734ac0fb9!2sNorvic%20International%20Hospital!5e0!3m2!1sen!2snp!4v1666173307148!5m2!1sen!2snp"></iframe>
         </div>

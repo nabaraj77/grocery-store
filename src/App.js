@@ -1,8 +1,10 @@
+import React, { useEffect } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
+
 import Header from "./components/mainPage/Header";
 import Footer from "./components/mainPage/Footer";
-import { BrowserRouter } from "react-router-dom";
 import Router from "./routes/Router";
-import { Toaster } from "react-hot-toast";
 import Navbarleft from "./components/mainPage/Navbarleft";
 
 function App() {

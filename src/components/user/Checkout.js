@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 import "./Checkout.css";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
-import { axiosData } from "./api/axios";
-
+import { axiosData } from "../api/axios";
 function Checkout({ total, cartItemsFromApi }) {
   const [accessToken, setAccessToken] = useState();
 
@@ -39,7 +38,7 @@ function Checkout({ total, cartItemsFromApi }) {
     setDeliveryAddress();
     resetField("latitude");
     resetField("longitude");
-    resetField("cityTown");
+    resetField("title");
   };
 
   return (
@@ -56,10 +55,10 @@ function Checkout({ total, cartItemsFromApi }) {
           </ul>
         </div>
       </div>
-      <div class="banner">
-        <div class="w3l_banner_nav_right">
-          <div class="checkout-left">
-            <div class="col-md-4 checkout-left-basket">
+      <div className="banner">
+        <div className="w3l_banner_nav_right">
+          <div className="checkout-left">
+            <div className="col-md-4 checkout-left-basket">
               <h4>Basket List</h4>
               <ul>
                 {cartItemsFromApi.map((item, index) => {
@@ -84,21 +83,21 @@ function Checkout({ total, cartItemsFromApi }) {
                 </li>
               </ul>
             </div>
-            <div class="col-md-8 address_form_agile">
+            <div className="col-md-8 address_form_agile">
               <h4>Add a new Details</h4>
               <form
                 action="payment.html"
                 method="post"
-                class="creditly-card-form agileinfo_form"
+                className="creditly-card-form agileinfo_form"
                 onSubmit={handleSubmit(onSubmit)}
               >
-                <section class="creditly-wrapper wthree, w3_agileits_wrapper">
-                  <div class="information-wrapper">
-                    <div class="first-row form-group">
-                      <div class="w3_agileits_card_number_grids">
-                        <div class="w3_agileits_card_number_grid_right">
-                          <div class="controls">
-                            <label class="control-label">Latitude </label>
+                <section className="creditly-wrapper wthree, w3_agileits_wrapper">
+                  <div className="information-wrapper">
+                    <div className="first-row form-group">
+                      <div className="w3_agileits_card_number_grids">
+                        <div className="w3_agileits_card_number_grid_right">
+                          <div className="controls">
+                            <label className="control-label">Latitude </label>
                             <input
                               {...register("latitude", {
                                 required: "Latitude is required",
@@ -110,7 +109,7 @@ function Checkout({ total, cartItemsFromApi }) {
                               <span>*Latitude is required.</span>
                             )}
                             <br />
-                            <label class="control-label">Longitude </label>
+                            <label className="control-label">Longitude </label>
                             <input
                               {...register("longitude", {
                                 required: "Longitude is required",
@@ -123,10 +122,10 @@ function Checkout({ total, cartItemsFromApi }) {
                             )}
                           </div>
                         </div>
-                        <div class="clear"></div>
+                        <div className="clear"></div>
                       </div>
-                      <div class="controls">
-                        <label class="control-label">Town/City: </label>
+                      <div className="controls">
+                        <label className="control-label">Town/City: </label>
                         <input
                           {...register("title", {
                             required: "Town/City is required",
@@ -137,7 +136,7 @@ function Checkout({ total, cartItemsFromApi }) {
                         {errors.title && <span>*Town / City is required.</span>}
                       </div>
                     </div>
-                    <button class="submit check_out">
+                    <button className="submit check_out">
                       Deliver to this Address
                     </button>
                   </div>
@@ -145,12 +144,12 @@ function Checkout({ total, cartItemsFromApi }) {
               </form>
             </div>
 
-            <div class="clearfix"></div>
+            <div className="clearfix"></div>
           </div>
         </div>
         {/* <!-- //about --> */}
       </div>
-      <div class="clearfix"></div>
+      <div className="clearfix"></div>
     </>
   );
 }

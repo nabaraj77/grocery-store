@@ -103,7 +103,7 @@ const AddToCart = ({
 
           {/* <!-- //about --> */}
         </div>
-        <div class="clearfix"></div>
+        <div className="clearfix"></div>
       </div>
       {/* <!-- //banner --> */}
     </>
