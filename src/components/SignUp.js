@@ -1,13 +1,12 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import "./Mail.css";
 import toast from "react-hot-toast";
+import { axiosData } from "./api/axios";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const url = "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/signup";
   const {
     register,
     handleSubmit,
@@ -24,43 +23,16 @@ const Signup = () => {
     console.log(data);
     const signUpApiCall = async () => {
       try {
-        const response = await axios({
-          method: "post",
-          url: url,
-          data: {
-            first_name: data.first_name,
-            last_name: data.last_name,
-            email: data.email,
-            password: data.password,
-            mobile_number: data.mobile_number,
-          },
-        });
-        // console.log(response);
-        if (response.status === 201) {
-          toast.success("Account Created Successfully");
-          navigate("/login");
-        }
+        const response = await axiosData.post("api/v4/auth/signup", data);
+        console.log(response, "SignUp");
+        toast.success("Account Created Successfully");
+        navigate("/login");
       } catch (err) {
-        console.log(err.response.data.errors[0].message);
-        toast.error(`Error: ${err.response.data.errors[0].message}`);
+        //console.log(err);
+        toast.error(`Error: ${err?.response?.data?.errors[0]?.message}`);
       }
     };
     signUpApiCall();
-    // axios({
-    //   method: "post",
-    //   url: url,
-    //   data: {
-    //     first_name: data.first_name,
-    //     last_name: data.last_name,
-    //     email: data.email,
-    //     password: data.password,
-    //     mobile_number: data.mobile_number,
-    //   },
-    // }).then((response) => {
-    //   setResult(response.status);
-    //   console.log(response);
-    //   console.log(result);
-    // });
 
     resetField("first_name");
     resetField("last_name");
@@ -83,25 +55,9 @@ const Signup = () => {
           </ul>
         </div>
       </div>
-      {/* <!-- //products-breadcrumb -->
-<!-- banner --> */}
+
       <div className="banner">
         <div className="w3l_banner_nav_right">
-          {/* {result === 201 && (
-            <div class="alert alert-success alert-dismissible" role="alert">
-              <strong>Account Created Successfully.</strong>
-              <button
-                type="button"
-                class="close"
-                data-dismiss="alert"
-                aria-label="Close"
-              >
-                <span aria-hidden="true">&times;</span>
-              </button>
-              {navigate("/login")}
-            </div>
-          )} */}
-          {/* <!-- login --> */}
           <div className="w3_login">
             <h3>Sign Up</h3>
             <div className="signIn">
@@ -166,7 +122,10 @@ const Signup = () => {
                       <span>*Password is required.</span>
                     )}
                     {errors.password?.type === "pattern" && (
-                      <span>*Enter a valid Password.</span>
+                      <span>
+                        *8 characters long: 1 upper case and 1 special
+                        character.
+                      </span>
                     )}
                     <input
                       type="email"
@@ -177,7 +136,7 @@ const Signup = () => {
                     />
                     {errors.email && <span>*Email is required.</span>}
                     <input
-                      {...register("mobileNo", {
+                      {...register("mobile_number", {
                         required: "Mobile Number is required",
                         pattern: {
                           value: /^\d+$/,
@@ -215,12 +174,10 @@ const Signup = () => {
               </div>
             </div>
           </div>
-          {/* <!-- //login --> */}
         </div>
         <div className="clearfix"></div>
       </div>
-      {/* <!-- //banner -->
-<!-- newsletter-top-serv-btm --> */}
+
       <div className="newsletter-top-serv-btm">
         <div className="container">
           <div className="col-md-4 wthree_news_top_serv_btm_grid">

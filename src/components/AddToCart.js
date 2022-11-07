@@ -75,7 +75,7 @@ const AddToCart = ({
                         +
                       </button>
                     </div>
-                    <p className="price">$ {item.price * item.quantity}</p>
+                    <p className="price">$ {item.price}</p>
                     <button className="delete" onClick={() => deleteItem(item)}>
                       <i class="fa-solid fa-trash delBtn"></i>
                     </button>

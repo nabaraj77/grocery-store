@@ -99,92 +99,7 @@ function Products({ items, addToCart, singleItem }) {
           <div class="w3ls_w3l_banner_nav_right_grid1">
             {items.map((item, index) => {
               return (
-                <>
-                  {/* <div class="col-md-3 w3ls_w3l_banner_left">
-                    <div class="hover14 column">
-                      <div class="agile_top_brand_left_grid w3l_agile_top_brand_left_grid">
-                        <div class="agile_top_brand_left_grid_pos">
-                          <img
-                            src="../Assets/images/offer.png"
-                            alt=" "
-                            class="img-responsive"
-                          />
-                        </div>
-                        <div class="agile_top_brand_left_grid1">
-                          <figure>
-                            <div class="snipcart-item block">
-                              <div class="snipcart-thumb">
-                                <a href="single.html">
-                                  <img
-                                    src="../Assets/images/5.png"
-                                    alt=" "
-                                    class="img-responsive"
-                                  />
-                                </a>
-                                <p>knorr instant soup (100 gm)</p>
-                                <h4>
-                                  $3.00 <span>$5.00</span>
-                                </h4>
-                              </div>
-                              <div class="snipcart-details">
-                                <form action="#" method="post">
-                                  <fieldset>
-                                    <input
-                                      type="hidden"
-                                      name="cmd"
-                                      value="_cart"
-                                    />
-                                    <input type="hidden" name="add" value="1" />
-                                    <input
-                                      type="hidden"
-                                      name="business"
-                                      value=" "
-                                    />
-                                    <input
-                                      type="hidden"
-                                      name="item_name"
-                                      value="knorr instant soup"
-                                    />
-                                    <input
-                                      type="hidden"
-                                      name="amount"
-                                      value="3.00"
-                                    />
-                                    <input
-                                      type="hidden"
-                                      name="discount_amount"
-                                      value="1.00"
-                                    />
-                                    <input
-                                      type="hidden"
-                                      name="currency_code"
-                                      value="USD"
-                                    />
-                                    <input
-                                      type="hidden"
-                                      name="return"
-                                      value=" "
-                                    />
-                                    <input
-                                      type="hidden"
-                                      name="cancel_return"
-                                      value=" "
-                                    />
-                                    <input
-                                      type="submit"
-                                      name="submit"
-                                      value="Add to cart"
-                                      class="button"
-                                    />
-                                  </fieldset>
-                                </form>
-                              </div>
-                            </div>
-                          </figure>
-                        </div>
-                      </div>
-                    </div>
-                  </div> */}
+                <div key={index}>
                   <div key={index}>
                     <div
                       className="displayItem col-md-3 w3ls_w3l_banner_left w3ls_w3l_banner_left_asdfdfd"
@@ -212,10 +127,7 @@ function Products({ items, addToCart, singleItem }) {
                                     />
                                   </button>
                                   <p>{item.title}</p>
-                                  <h4>
-                                    Rs. {item.unitPrice[0].sellingPrice}
-                                    {/* <span>{item.unitPrice[0].oldPrice}</span> */}
-                                  </h4>
+                                  <h4>Rs. {item.unitPrice[0].sellingPrice}</h4>
                                 </div>
                                 <div className="snipcart-details ">
                                   <input
@@ -234,7 +146,7 @@ function Products({ items, addToCart, singleItem }) {
                       </div>
                     </div>
                   </div>
-                </>
+                </div>
               );
             })}
 

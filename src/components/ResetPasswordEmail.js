@@ -2,7 +2,8 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import axios from "axios";
+
+import { axiosData } from "./api/axios";
 
 const ResetPasswordEmail = () => {
   const navigate = useNavigate();
@@ -15,24 +16,18 @@ const ResetPasswordEmail = () => {
   });
 
   const handleRegistration = (data) => {
-    console.log(data);
+    // console.log(data);
     const resetCodeApi = async () => {
+      const emailToSend = {
+        email: data.email,
+      };
       try {
-        const response = await axios({
-          method: "post",
-          url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/forgot-password",
-          data: {
-            email: data.email,
-          },
-        });
-        console.log(response);
-
-        if (response.status === 200) {
-          toast.success("Code Sent Successfully to registered Email.");
-          navigate("/resetPassword");
-        }
+        await axiosData.post("api/v4/auth/forgot-password", emailToSend);
+        toast.success("Code Sent Successfully to registered Email.");
+        navigate("/resetPassword");
       } catch (err) {
         toast.error(`Error: ${err.response.data.errors[0].message}`);
+        console.log(err);
       }
     };
     resetCodeApi();
@@ -80,7 +75,6 @@ const ResetPasswordEmail = () => {
               </div>
             </div>
           </div>
-          {/* <!-- //login --> */}
         </div>
         <div className="clearfix"></div>
       </div>

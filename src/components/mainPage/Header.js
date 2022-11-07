@@ -76,19 +76,23 @@ function Header() {
 
         <div className="w3l_header_right">
           <ul>
-            <li class="dropdown profile_details_drop">
+            <li className="dropdown profile_details_drop">
               {!accessToken && (
                 <div>
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <a
+                    href="#"
+                    className="dropdown-toggle"
+                    data-toggle="dropdown"
+                  >
                     <i className="fa fa-user" aria-hidden="true">
                       <h6>
                         <span>Guest</span>
                       </h6>
                     </i>
-                    <span class="caret"></span>
+                    <span className="caret"></span>
                   </a>
-                  <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-                    <div class="w3ls_vegetables">
+                  <div className="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                    <div className="w3ls_vegetables">
                       <ul>
                         <div>
                           <li>
@@ -105,16 +109,20 @@ function Header() {
               )}
               {accessToken && (
                 <div>
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <a
+                    href="#"
+                    className="dropdown-toggle"
+                    data-toggle="dropdown"
+                  >
                     <i className="fa fa-user" aria-hidden="true">
                       <h6>
                         <span>User</span>
                       </h6>
                     </i>
-                    <span class="caret"></span>
+                    <span className="caret"></span>
                   </a>
-                  <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-                    <div class="w3ls_vegetables">
+                  <div className="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                    <div className="w3ls_vegetables">
                       <ul>
                         <div>
                           <li>

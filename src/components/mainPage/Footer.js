@@ -19,12 +19,12 @@ function Footer() {
   };
   return (
     <div>
-      <div class="newsletter">
-        <div class="container">
-          <div class="w3agile_newsletter_left">
+      <div className="newsletter">
+        <div className="container">
+          <div className="w3agile_newsletter_left">
             <h3>sign up for our newsletter</h3>
           </div>
-          <div class="w3agile_newsletter_right">
+          <div className="w3agile_newsletter_right">
             <form
               action="#"
               method="post"
@@ -38,7 +38,7 @@ function Footer() {
               <input type="submit" value="subscribe now" />
             </form>
           </div>
-          <div class="clearfix"> </div>
+          <div className="clearfix"> </div>
         </div>
       </div>
       <div className="footer">
@@ -133,8 +133,8 @@ function Footer() {
                 />
               </div>
             </div>
-            <div class="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
-              <div class="w3_footer_grid_bottom">
+            <div className="col-md-3 w3_footer_grid agile_footer_grids_w3_footer">
+              <div className="w3_footer_grid_bottom">
                 <h5>connect with us</h5>
                 <ul className="agileits_social_icons">
                   <li>

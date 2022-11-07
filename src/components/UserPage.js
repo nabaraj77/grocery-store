@@ -6,10 +6,6 @@ import "./UserPage.css";
 const UserPage = ({ accessToken, cartItemsFromApi }) => {
   const [userProfile, setUserProfile] = useState([]);
 
-  //console.log(userProfile);
-  //console.log(accessToken, "user");
-  // console.log(cartItems, "UserPage");
-
   //USER INFO API
   const getUserInfo = async () => {
     let config = {

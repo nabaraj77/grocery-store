@@ -15,12 +15,12 @@ import Signup from "../components/SignUp";
 import Products from "../components/Products";
 import Search from "../Search";
 import Single from "../components/Single";
-import axios from "axios";
 import UserPage from "../components/UserPage";
 import ResetPassword from "../components/ResetPassword";
 import ResetPasswordEmail from "../components/ResetPasswordEmail";
 import Faq from "../components/Static Pages/Faq";
 import PrivacyPolicy from "../components/Static Pages/PrivacyPolicy";
+import { axiosData } from "../components/api/axios";
 
 //GET CARTITEMS FROM LOCAL STORAGE
 const getCartItemsFromLocalStorage = () => {
@@ -35,107 +35,91 @@ const getCartItemsFromLocalStorage = () => {
 const Router = () => {
   const [cart, setCart] = useState(getCartItemsFromLocalStorage());
   const [singleItemProduct, setsingleItemProduct] = useState([]);
-  const [addToCartStatus, setAddToCartStatus] = useState();
   const [cartItemsFromApi, setCartItemsFromAPi] = useState([]);
+  const [boolean, setBoolean] = useState(false);
 
   const navigate = useNavigate();
-
+  //GETTING ACCESS TOKEN
+  useEffect(() => {
+    setAccessToken(localStorage.getItem("accessToken"));
+  });
   //DELETING ITEMS FROM CART API
   const deleteCartDataFromApi = async (data) => {
-    let config = {
-      method: "delete",
-      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/cart-product/${data.id}`,
-
-      headers: {
-        "Api-key": process.env.REACT_APP_API_KEY,
-        "Warehouse-Id": 1,
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    };
-    let res = await axios(config);
-    console.log(res, "Delete");
+    try {
+      const res = await axiosData.delete(`api/v4/cart-product/${data.id}`, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+    setBoolean(!boolean);
   };
 
   //GET CART DATA
   const getCartDataFromApi = async () => {
-    let config = {
-      method: "get",
-      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/cart`,
-
-      headers: {
-        "Api-key": process.env.REACT_APP_API_KEY,
-        "Warehouse-Id": 1,
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-    };
-    let res = await axios(config);
-    //console.log(res, "CARTDATA");
-    setCartItemsFromAPi(res.data.data.cartProducts);
+    try {
+      const response = await axiosData.get("api/v4/cart", {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      //console.log("cart", response);
+      setCartItemsFromAPi(response.data.data.cartProducts);
+    } catch (error) {
+      // console.log(error);
+    }
   };
 
   //API CALL TO GET PRODUCT LIST
   const [items, setItems] = useState([]);
   const [accessToken, setAccessToken] = useState("");
-  const getDataList = () => {
-    axios({
-      method: "get",
-      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/product?allProduct=1`,
-      headers: {
-        "Api-key": process.env.REACT_APP_API_KEY,
-        "Warehouse-Id": 1,
-      },
-    })
-      .then((response) => {
-        setItems(response.data.data);
-      })
-      .catch((error) => console.error(`Error: ${error}`));
+  const getDataList = async () => {
+    try {
+      let res = await axiosData.get("api/v4/product?allProduct=1");
+      // console.log(res);
+      setItems(res.data.data);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   //POST SINGLE ITEM TO API
   const postSingleItemToCart = async (data) => {
-    let config = {
-      method: "post",
-      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/cart-product`,
-      data: {
-        productId: data.id,
-        priceId: data.unitPrice[0].id,
-        quantity: data.quantity,
-        note: "testing",
-      },
-
-      headers: {
-        "Api-key": process.env.REACT_APP_API_KEY,
-        "Warehouse-Id": 1,
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
+    //console.log(data);
+    const itemToAdd = {
+      productId: data.id,
+      priceId: data.unitPrice[0].id,
+      quantity: data.quantity,
+      note: "testing",
     };
-    let res = await axios(config);
-    console.log("SingleItem", res);
-    setAddToCartStatus(res.status);
+    try {
+      const res = await axiosData.post("api/v4/cart-product", itemToAdd, {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      });
+      console.log(res);
+      toast.success("Successfully Added to the cart");
+    } catch (err) {
+      console.log(err);
+    }
+    setBoolean(!boolean);
   };
 
   //UPDATING THE ORDERED QUANTITY
   const patchItemToCartApi = async (data, quanPlusMinus) => {
-    let config = {
-      method: "patch",
-      url: `https://uat.ordering-farmshop.ekbana.net/api/v4/cart-product/${data.id}`,
-      data: {
-        quantity: data.quantity + quanPlusMinus,
-        note: "hello",
-      },
-
-      headers: {
-        "Api-key": process.env.REACT_APP_API_KEY,
-        "Warehouse-Id": 1,
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
+    let itemToAdd = {
+      quantity: data.quantity + quanPlusMinus,
+      note: "hello",
     };
-    let res = await axios(config);
-    console.log("Data Patched", res);
+    try {
+      const res = await axiosData.patch(
+        `api/v4/cart-product/${data.id}`,
+        itemToAdd,
+        { headers: { Authorization: `Bearer ${accessToken}` } }
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+    setBoolean(!boolean);
   };
 
   //SINGLE ITEM: ONCLICKING ON THE PRODUCT IMAGE
@@ -144,11 +128,6 @@ const Router = () => {
     setsingleItemProduct(singleItem);
     navigate("/single");
   };
-
-  //GETTING ACCESS TOKEN
-  useEffect(() => {
-    setAccessToken(localStorage.getItem("accessToken"));
-  });
 
   //ADDING ITEMS ON CART
   const addToCart = (data) => {
@@ -161,13 +140,10 @@ const Router = () => {
       if (exists) {
         toast.error("Item already exists in the cart.");
       } else {
-        toast.success("Successfully added to the cart.");
         const dataToAddToApi = { ...data, quantity: 1 };
         console.log(dataToAddToApi);
         setCart([...cart, dataToAddToApi]);
         postSingleItemToCart(dataToAddToApi);
-
-        getCartDataFromApi();
       }
     } else {
       navigate("/login");
@@ -175,28 +151,20 @@ const Router = () => {
   };
   useEffect(() => {
     getCartDataFromApi();
-  }, [accessToken, cartItemsFromApi]);
+  }, [accessToken, boolean]);
 
-  //ADDING CART DATA TO LOCAL STORAGE
   useEffect(() => {
-    // localStorage.setItem("cartItems", JSON.stringify(cart));
     getDataList();
-  }, []);
+  }, [accessToken]);
 
-  // useEffect(() => {
-  //   getCartItemsFromLocalStorage();
-  // }, []);
   const minusHandler = (data, quanPlusMinus) => {
     //console.log(data);
     cartItemsFromApi.map((item) => {
       if (item.id === data.id && item.quantity !== 1) {
         patchItemToCartApi(item, quanPlusMinus);
-        // return { ...item, quantityOrdered: item.quantityOrdered - 1 };
-        // } else if (item.id === data.id && item.quantityOrdered === 1) {
-        //   return { ...item, quantityOrdered: 1 };
-        // } else {
-        //   return item;
-        // }
+        return item;
+      } else {
+        return item;
       }
     });
   };
@@ -209,10 +177,10 @@ const Router = () => {
         console.log("Found");
         patchItemToCartApi(item, quanPlusMinus);
         return item;
-        //API CALLING TO UPDATE QUANTITY//PATCH
+      } else {
+        return item;
       }
     });
-    // setCart(updatedCart);
     //console.log(updatedCart);
   };
 

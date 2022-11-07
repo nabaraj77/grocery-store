@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import parse from "html-react-parser";
 function Single({ singleItemProduct, addToCart }) {
   //console.log(singleItemProduct);
   return (
@@ -17,8 +17,7 @@ function Single({ singleItemProduct, addToCart }) {
           </ul>
         </div>
       </div>
-      {/* <!-- //products-breadcrumb -->
-<!-- banner --> */}
+
       <div className="banner">
         <div className="w3l_banner_nav_right">
           <div className="agileinfo_single">
@@ -56,7 +55,7 @@ function Single({ singleItemProduct, addToCart }) {
                 <h4>Description :</h4>
 
                 {singleItemProduct.description ? (
-                  <p>{singleItemProduct.description}</p>
+                  <p>{parse(singleItemProduct.description)}</p>
                 ) : (
                   <p>
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -67,10 +66,7 @@ function Single({ singleItemProduct, addToCart }) {
               </div>
               <div className="snipcart-item block">
                 <div className="snipcart-thumb agileinfo_single_right_snipcart">
-                  <h4>
-                    $ {singleItemProduct.unitPrice[0].newPrice}
-                    <span> $ {singleItemProduct.unitPrice[0].oldPrice}</span>
-                  </h4>
+                  <h4>$ {singleItemProduct.unitPrice[0].sellingPrice}</h4>
                 </div>
                 <div className="snipcart-details agileinfo_single_right_details">
                   <div className="snipcart-details ">

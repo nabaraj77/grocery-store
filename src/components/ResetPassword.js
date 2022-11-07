@@ -60,7 +60,6 @@ const ResetPassword = () => {
               </div>
             </div>
           </div>
-          {/* <!-- //login --> */}
         </div>
         <div className="clearfix"></div>
       </div>

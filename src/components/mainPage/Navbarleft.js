@@ -27,24 +27,24 @@ function Navbarleft() {
   //console.log(categories);
   return (
     <div>
-      <div class="w3l_banner_nav_left">
-        <nav class="navbar nav_bottom">
-          <div class="navbar-header nav_2">
+      <div className="w3l_banner_nav_left">
+        <nav className="navbar nav_bottom">
+          <div className="navbar-header nav_2">
             <button
               type="button"
-              class="navbar-toggle collapsed navbar-toggle1"
+              className="navbar-toggle collapsed navbar-toggle1"
               data-toggle="collapse"
               data-target="#bs-megadropdown-tabs"
             >
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
             </button>
           </div>
 
-          <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-            <ul class="nav navbar-nav nav_1">
+          <div className="collapse navbar-collapse" id="bs-megadropdown-tabs">
+            <ul className="nav navbar-nav nav_1">
               {/* CATEGORIES LISTING FROM API CALL DATA */}
               {categories.map((categoryList) => {
                 return (
@@ -56,17 +56,17 @@ function Navbarleft() {
                         </Link>
                       </li>
                     ) : (
-                      <li class="dropdown mega-dropdown active">
+                      <li className="dropdown mega-dropdown active">
                         <a
                           href="#"
-                          class="dropdown-toggle"
+                          className="dropdown-toggle"
                           data-toggle="dropdown"
                         >
                           {categoryList.title}
-                          <span class="caret"></span>
+                          <span className="caret"></span>
                         </a>
-                        <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-                          <div class="w3ls_vegetables">
+                        <div className="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+                          <div className="w3ls_vegetables">
                             <ul>
                               <li>
                                 {categoryList.subcategories.map(
@@ -98,25 +98,25 @@ function Navbarleft() {
     </div>
 
     // <div>
-    //   <div class="w3l_banner_nav_left">
-    //     <nav class="navbar nav_bottom">
+    //   <div className="w3l_banner_nav_left">
+    //     <nav className="navbar nav_bottom">
     //       {/* <!-- Brand and toggle get grouped for better mobile display --> */}
-    //       <div class="navbar-header nav_2">
+    //       <div className="navbar-header nav_2">
     //         <button
     //           type="button"
-    //           class="navbar-toggle collapsed navbar-toggle1"
+    //           className="navbar-toggle collapsed navbar-toggle1"
     //           data-toggle="collapse"
     //           data-target="#bs-megadropdown-tabs"
     //         >
-    //           <span class="sr-only">Toggle navigation</span>
-    //           <span class="icon-bar"></span>
-    //           <span class="icon-bar"></span>
-    //           <span class="icon-bar"></span>
+    //           <span className="sr-only">Toggle navigation</span>
+    //           <span className="icon-bar"></span>
+    //           <span className="icon-bar"></span>
+    //           <span className="icon-bar"></span>
     //         </button>
     //       </div>
     //       {/* <!-- Collect the nav links, forms, and other content for toggling --> */}
-    //       <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">
-    //         <ul class="nav navbar-nav nav_1">
+    //       <div className="collapse navbar-collapse" id="bs-megadropdown-tabs">
+    //         <ul className="nav navbar-nav nav_1">
     //           {/* <li><a href="products.html">Branded Foods</a></li> */}
     //           <li>
     //             <Link to="/products">Branded Foods</Link>
@@ -128,12 +128,12 @@ function Navbarleft() {
     //           <li>
     //             <Link to="/household">Households</Link>
     //           </li>
-    //           <li class="dropdown mega-dropdown active">
-    //             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    //               Veggies & Fruits<span class="caret"></span>
+    //           <li className="dropdown mega-dropdown active">
+    //             <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+    //               Veggies & Fruits<span className="caret"></span>
     //             </a>
-    //             <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-    //               <div class="w3ls_vegetables">
+    //             <div className="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+    //               <div className="w3ls_vegetables">
     //                 <ul>
     //                   <li>
     //                     {/* <a href="vegetables.html">Vegetables</a>
@@ -158,12 +158,12 @@ function Navbarleft() {
     //             {/* <a href="short-codes.html">Short Codes</a> */}
     //             <Link to="/short-codes">Short Codes</Link>
     //           </li>
-    //           <li class="dropdown">
-    //             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    //               Beverages<span class="caret"></span>
+    //           <li className="dropdown">
+    //             <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+    //               Beverages<span className="caret"></span>
     //             </a>
-    //             <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-    //               <div class="w3ls_vegetables">
+    //             <div className="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+    //               <div className="w3ls_vegetables">
     //                 <ul>
     //                   <li>
     //                     {/* <a href="drinks.html">Soft Drinks</a> */}
@@ -181,12 +181,12 @@ function Navbarleft() {
     //             {/* <a href="pet.html">Pet Food</a> */}
     //             <Link to="/pet">Pet Food</Link>
     //           </li>
-    //           <li class="dropdown">
-    //             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    //               Frozen Foods<span class="caret"></span>
+    //           <li className="dropdown">
+    //             <a href="#" className="dropdown-toggle" data-toggle="dropdown">
+    //               Frozen Foods<span className="caret"></span>
     //             </a>
-    //             <div class="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
-    //               <div class="w3ls_vegetables">
+    //             <div className="dropdown-menu mega-dropdown-menu w3ls_vegetables_menu">
+    //               <div className="w3ls_vegetables">
     //                 <ul>
     //                   <li>
     //                     {/* <a href="frozen.html">Frozen Snacks</a> */}

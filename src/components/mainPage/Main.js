@@ -163,57 +163,12 @@ function Main({ addToCart, items, singleItem }) {
           </div>
         </div>
       </div>
-      {/* <!-- //top-brands -->
-<!-- fresh-vegetables --> */}
+
       <div className="fresh-vegetables">
         <div className="container">
           <h3>Top Products</h3>
           <div className="w3l_fresh_vegetables_grids">
             <div className="col-md-3 w3l_fresh_vegetables_grid w3l_fresh_vegetables_grid_left">
-              {/* <div className="w3l_fresh_vegetables_grid2">
-                <ul>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="products.html">All Brands</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="vegetables.html">Vegetables</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="vegetables.html">Fruits</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="drinks.html">Juices</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="pet.html">Pet Food</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="bread.html">Bread & Bakery</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="household.html">Cleaning</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="products.html">Spices</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="products.html">Dry Fruits</a>
-                  </li>
-                  <li>
-                    <i className="fa fa-check" aria-hidden="true"></i>
-                    <a href="products.html">Dairy Products</a>
-                  </li>
-                </ul>
-              </div> */}
               <p className="infoAboutSite">
                 Grocery Store is an online delivery business that connects local
                 farmers and producers with consumers by building meaningful and
