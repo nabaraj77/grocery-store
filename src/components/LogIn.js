@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import "./Mail.css";
 import axios from "axios";
 import toast from "react-hot-toast";
+import { axiosData } from "./api/axios";
 
 const LogIn = () => {
   const navigate = useNavigate();
@@ -19,27 +20,20 @@ const LogIn = () => {
     mode: "onTouched",
   });
   const onSubmit = (data) => {
+    let datas = {
+      username: data.username,
+      password: data.password,
+      client_id: 2,
+      client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
+      grant_type: "password",
+    };
     const loginAPI = async () => {
       try {
-        const response = await axios({
-          method: "post",
-          url: "https://uat.ordering-farmshop.ekbana.net/api/v4/auth/login",
-          data: {
-            username: data.username,
-            password: data.password,
-            client_id: 2,
-            client_secret: "2TJrcyMbXT6gDQXVqeSlRbOKvtTfMsuxfuK6vpey",
-            grant_type: "password",
-          },
-        });
-
-        if (response.status === 200) {
-          localStorage.setItem("accessToken", response.data.access_token);
-          toast.success("Login Successful");
-          navigate("/");
-        }
+        const response = await axiosData.post("api/v4/auth/login", datas);
+        localStorage.setItem("accessToken", response.data.access_token);
+        toast.success("Login Successful");
+        navigate("/");
       } catch (err) {
-        console.log(err.response.data.errors[0].message);
         toast.error(`Error: ${err.response.data.errors[0].message}`);
       }
     };
